@@ -12,27 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ingenieria_id')->textInput() ?>
-
-    <?= $form->field($model, 'kardex')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'constancia_ingles')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'constancia_servicio_social')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'constancia_creditos_complementarios')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'estado_registro_id')->textInput() ?>
+    <?= $form->field($model, 'estado_registro_id')->dropDownList($model->getEstadoRegistroNombreList(), ['prompt' => 'Seleccione un estado']) ?>
 
     <?= $form->field($model, 'comentario')->textarea(['rows' => 6]) ?>
 
