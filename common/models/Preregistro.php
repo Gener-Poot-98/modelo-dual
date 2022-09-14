@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "preregistro".
@@ -26,6 +29,7 @@ use Yii;
  */
 class Preregistro extends \yii\db\ActiveRecord
 {
+    public $archivoKardex, $archivoConstancia_ingles, $archivoConstancia_servicio_social, $archivoConstancia_creditos_complementarios;
     /**
      * {@inheritdoc}
      */
@@ -40,16 +44,29 @@ class Preregistro extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'matricula', 'email', 'ingenieria_id', 'kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios', 'created_at', 'updated_at'], 'required'],
+            [['nombre', 'matricula', 'email', 'ingenieria_id'], 'required'],
             [['ingenieria_id', 'estado_registro_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['comentario'], 'string'],
             [['nombre', 'matricula', 'email'], 'string', 'max' => 45],
-            [['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
+            //[['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
+            [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf'],
             [['email'], 'unique'],
             [['matricula'], 'unique'],
             [['estado_registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoRegistro::class, 'targetAttribute' => ['estado_registro_id' => 'id']],
             [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -63,14 +80,14 @@ class Preregistro extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'matricula' => 'Matricula',
             'email' => 'Email',
-            'ingenieria_id' => 'Ingenieria ID',
+            'ingenieria_id' => 'Ingenieria',
             'kardex' => 'Kardex',
-            'constancia_ingles' => 'Constancia Ingles',
-            'constancia_servicio_social' => 'Constancia Servicio Social',
-            'constancia_creditos_complementarios' => 'Constancia Creditos Complementarios',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'estado_registro_id' => 'Estado Registro ID',
+            'constancia_ingles' => 'Constancia de Ingles',
+            'constancia_servicio_social' => 'Constancia de Servicio Social',
+            'constancia_creditos_complementarios' => 'Constancia de Creditos Complementarios',
+            'created_at' => 'Fecha de creación',
+            'updated_at' => 'Última actualización',
+            'estado_registro_id' => 'Estado',
             'comentario' => 'Comentario',
         ];
     }
@@ -93,5 +110,34 @@ class Preregistro extends \yii\db\ActiveRecord
     public function getIngenieria()
     {
         return $this->hasOne(Ingenieria::class, ['id' => 'ingenieria_id']);
+    }
+
+    public function getIngenieriasList()
+    {
+        $ingenierias = Ingenieria::find()->all();
+
+        $ingenieriasList = ArrayHelper::map($ingenierias, 'id', 'nombre');
+
+        return $ingenieriasList;
+    }
+
+    public function getIngenieriaNombre() 
+    { 
+        return $this->ingenieria->nombre; 
+    }
+
+
+    public function getEstadoRegistroNombreList()
+    {
+        $estadoRegistro = EstadoRegistro::find()->all();
+
+        $estadoRegistroNombreList = ArrayHelper::map($estadoRegistro, 'id', 'nombre');
+
+        return $estadoRegistroNombreList;
+    }
+
+    public function getEstadoRegistroNombre() 
+    { 
+        return $this->estadoRegistro->nombre; 
     }
 }

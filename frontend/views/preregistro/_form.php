@@ -6,6 +6,32 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$this->registerCss("
+    
+    .preregistro-form{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+        border-radius: 5px;
+        
+    }
+    label, .preregistro-form {
+        font-size:20px;
+        
+    }
+
+    .help-block{
+        color: #fd5c70;
+    }    
+    
+    .form-control {
+        font-size:20px;
+    }
+    
+    ");
+
 ?>
 
 <div class="preregistro-form">
@@ -18,26 +44,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ingenieria_id')->textInput() ?>
+    <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione su Ingeniería']) ?>
 
-    <?= $form->field($model, 'kardex')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'archivoKardex')->fileInput() ?>
 
-    <?= $form->field($model, 'constancia_ingles')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'archivoConstancia_ingles')->fileInput() ?>
 
-    <?= $form->field($model, 'constancia_servicio_social')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'archivoConstancia_servicio_social')->fileInput() ?>
 
-    <?= $form->field($model, 'constancia_creditos_complementarios')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'estado_registro_id')->textInput() ?>
-
-    <?= $form->field($model, 'comentario')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-info btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

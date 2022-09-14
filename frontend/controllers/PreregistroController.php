@@ -7,6 +7,8 @@ use frontend\models\search\PreregistroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use Yii;
 
 /**
  * PreregistroController implements the CRUD actions for Preregistro model.
@@ -69,13 +71,7 @@ class PreregistroController extends Controller
     {
         $model = new Preregistro();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+        $this->subirArchivo($model);
 
         return $this->render('create', [
             'model' => $model,
@@ -130,5 +126,57 @@ class PreregistroController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function subirArchivo(Preregistro $model)
+    {
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+
+                $model->archivoKardex = UploadedFile::getInstance($model,'archivoKardex');
+                $model->archivoConstancia_ingles = UploadedFile::getInstance($model,'archivoConstancia_ingles');
+                $model->archivoConstancia_servicio_social = UploadedFile::getInstance($model,'archivoConstancia_servicio_social');
+                $model->archivoConstancia_creditos_complementarios = UploadedFile::getInstance($model,'archivoConstancia_creditos_complementarios');
+
+
+                if($model->validate())
+                {
+                    if(($model->archivoKardex) && ($model->archivoConstancia_ingles) && ($model->archivoConstancia_servicio_social) && ($model->archivoConstancia_creditos_complementarios))
+                    {
+                        $rutaArchivoKardex = "uploads/kardex/".time()."_".$model->archivoKardex->basename.".".$model->archivoKardex->extension;
+                        $rutaArchivoConstancia_ingles = "uploads/ingles/".time()."_".$model->archivoConstancia_ingles->basename.".".$model->archivoConstancia_ingles->extension;
+                        $rutaArchivoConstancia_servicio_social = "uploads/servicio_social/".time()."_".$model->archivoConstancia_servicio_social->basename.".".$model->archivoConstancia_servicio_social->extension;
+                        $rutaArchivoConstancia_creditos_complementarios = "uploads/creditos_complementarios/".time()."_".$model->archivoConstancia_creditos_complementarios->basename.".".$model->archivoConstancia_creditos_complementarios->extension;
+
+
+                        if(($model->archivoKardex->saveAs($rutaArchivoKardex)) && ($model->archivoConstancia_ingles->saveAs($rutaArchivoConstancia_ingles)) && ($model->archivoConstancia_servicio_social->saveAs($rutaArchivoConstancia_servicio_social)) && ($model->archivoConstancia_creditos_complementarios->saveAs($rutaArchivoConstancia_creditos_complementarios)))
+                        {
+                            $model->kardex = $rutaArchivoKardex;
+                            $model->constancia_ingles = $rutaArchivoConstancia_ingles;
+                            $model->constancia_servicio_social = $rutaArchivoConstancia_servicio_social;
+                            $model->constancia_creditos_complementarios = $rutaArchivoConstancia_creditos_complementarios;
+                        }
+                    }
+                }
+
+                if($model->save(false))
+                {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+    }
+
+    public function actionDownload($filename)
+    {
+        $path = Yii::getAlias('@frontend') . '/web/' . $filename;
+        if(file_exists($path))
+        {
+            return Yii::$app->response->sendFile($path);
+        }
     }
 }

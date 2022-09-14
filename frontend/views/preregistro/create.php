@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $model */
 
-$this->title = 'Create Preregistro';
+$this->title = 'Pre-Registro al Modelo Dual';
 $this->params['breadcrumbs'][] = ['label' => 'Preregistros', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
