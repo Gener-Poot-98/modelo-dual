@@ -74,13 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(basename($model->constancia_creditos_complementarios), ['download', 'filename' => $model -> constancia_creditos_complementarios]);
                 }
             ],
-            'created_at',
-            'updated_at',
             //'estado_registro_id',
             [ 'label' => 'Estado', 'value' => function ($searchModel) 
             { 
                 return $searchModel->estadoRegistro->nombre; 
             } ],
+            'created_at',
+            'updated_at',
             'comentario:ntext',
         ],
     ]) ?>
