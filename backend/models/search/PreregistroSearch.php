@@ -11,6 +11,8 @@ use common\models\Preregistro;
  */
 class PreregistroSearch extends Preregistro
 {
+    public $ingenieriaNombre;
+    public $estadoRegistroNombre;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class PreregistroSearch extends Preregistro
     {
         return [
             [['id', 'ingenieria_id', 'estado_registro_id'], 'integer'],
-            [['nombre', 'matricula', 'email', 'kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios', 'created_at', 'updated_at', 'comentario'], 'safe'],
+            [['nombre', 'matricula', 'email', 'kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios', 'created_at', 'updated_at', 'comentario', 'ingenieriaNombre','estadoRegistroNombre'], 'safe'],
         ];
     }
 
@@ -48,6 +50,20 @@ class PreregistroSearch extends Preregistro
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([ 
+            'attributes' => [ 
+                'nombre', 
+                'matricula', 
+                'email', 
+                'ingenieriaNombre' => [ 
+                    'asc' => ['ingenieria.nombre' => SORT_ASC], 
+                    'desc' => ['ingenieria.nombre' => SORT_DESC], 
+                    'label' => 'Ingeniería' ], 
+                'estadoRegistroNombre' => [ 
+                    'asc' => ['estadoRegistro.nombre' => SORT_ASC], 
+                    'desc' => ['estadoRegistro.nombre' => SORT_DESC], 
+                    'label' => 'Estado' ], ] ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -73,6 +89,14 @@ class PreregistroSearch extends Preregistro
             ->andFilterWhere(['like', 'constancia_servicio_social', $this->constancia_servicio_social])
             ->andFilterWhere(['like', 'constancia_creditos_complementarios', $this->constancia_creditos_complementarios])
             ->andFilterWhere(['like', 'comentario', $this->comentario]);
+        
+        $query->joinWith(['ingenieria' => function ($q) {
+            $q->andFilterWhere(['=', 'ingenieria.id', $this->ingenieriaNombre]);
+            }]);
+
+        $query->joinWith(['estadoRegistro' => function ($q) {
+            $q->andFilterWhere(['=', 'estado_registro.id', $this->estadoRegistroNombre]);
+            }]);
 
         return $dataProvider;
     }

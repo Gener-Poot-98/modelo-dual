@@ -33,7 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'matricula',
             'email:email',
-            'ingenieria_id',
+            //'ingenieria_id',
+            [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
             //'kardex',
             //'constancia_ingles',
             //'constancia_servicio_social',
@@ -41,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
             //'estado_registro_id',
+            [ 'label' => 'Estado','attribute' => 'estadoRegistroNombre', 'filter' => $searchModel->getEstadoRegistroNombreList() ],
             //'comentario:ntext',
             [
                 'class' => ActionColumn::className(),
