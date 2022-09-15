@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="preregistro-create">
 
-    <h1 style="text-align:center;"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-primary text-gradient mb-0" style="text-align:center;"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -100,12 +100,12 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-                            echo '<li class="nav-item"> '
+                            echo '<li class="nav-item" style ="padding: 10px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Consulta'),
                                 ['/preregistro/consulta'],
-                                ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                                ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
                             )
                             . '</li>';
 
