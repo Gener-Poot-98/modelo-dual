@@ -30,7 +30,6 @@ $this->registerCss("
     .form-control {
         font-size:18px;
     }
-    
     ");
 
 ?>

@@ -19,11 +19,13 @@ $this -> registerCss ("
     opacity: 0.8;
 }
 
-
-
 .navbar.navbar-transparent .navbar-collapse.show {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
+}
+
+.text-gradient.text-primary {
+    background-image: linear-gradient(310deg, blue, black);
 }
 
 ");
@@ -116,7 +118,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Usuario (' . Yii::$app->user->identity->username . ' <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-          )'),
+        )'),
                                 ['/perfil/view'],
                                 ['class' => 'pull-right', 'style' => 'padding-right:10px;']
                             )
@@ -214,12 +216,7 @@ $baseUrl = $asset->baseUrl;
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link pe-1" href="#">
-                                    <i class="fab fa-dribbble text-lg opacity-8"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link pe-1" href="#">
-                                    <i class="fab fa-github text-lg opacity-8"></i>
+                                    <i class="fab fa-instagram text-lg opacity-8"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
