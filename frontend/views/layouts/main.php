@@ -76,7 +76,14 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-
+                            echo '<li class="nav-item"> '
+                            . Html::a(
+                                "<i class=\"fa fa-icon\"></i> "
+                                    . Yii::t('app', 'Consulta'),
+                                ['/site/consulta'],
+                                ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                            )
+                            . '</li>';
 
                         echo '<li class="nav-item">'
 

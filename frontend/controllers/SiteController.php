@@ -11,10 +11,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Preregistro;
+use common\models\BuscarPreregistro;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -144,6 +147,45 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Displays a single Preregistro model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionConsulta()
+    {
+        $model = new BuscarPreregistro();
+        $preregistro = new Preregistro();
+
+        if ($model->load(Yii::$app->request->post())) {
+            //return $this->goBack();
+            return $this->render('/preregistro/view', [
+                'model' => $this->findModel($model->matricula),
+            ]);
+        }
+
+        return $this->render('consulta', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Finds the Preregistro model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param String $matricula ID
+     * @return Preregistro the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function findModel($matricula)
+    {
+        if (($model = Preregistro::findOne(['matricula' => $matricula])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('Aún no has hecho tu Preregistro');
     }
 
     /**

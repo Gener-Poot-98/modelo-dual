@@ -119,7 +119,7 @@ class PreregistroController extends Controller
      * @return Preregistro the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Preregistro::findOne(['id' => $id])) !== null) {
             return $model;

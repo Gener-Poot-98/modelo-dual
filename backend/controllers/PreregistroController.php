@@ -7,6 +7,7 @@ use backend\models\search\PreregistroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * PreregistroController implements the CRUD actions for Preregistro model.
@@ -130,5 +131,14 @@ class PreregistroController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDownload($filename)
+    {
+        $path = Yii::getAlias('@frontend') . '/web/' . $filename;
+        if(file_exists($path))
+        {
+            return Yii::$app->response->sendFile($path);
+        }
     }
 }

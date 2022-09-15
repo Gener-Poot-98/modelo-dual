@@ -140,4 +140,9 @@ class Preregistro extends \yii\db\ActiveRecord
     { 
         return $this->estadoRegistro->nombre; 
     }
+
+    public static function findByMatricula($matricula)
+    {
+        return static::findOne(['matricula' => $matricula]);
+    }
 }
