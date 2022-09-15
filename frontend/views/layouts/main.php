@@ -6,6 +6,30 @@
 
 use yii\helpers\Html;
 
+$this -> registerCss ("
+    
+.mask {
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    opacity: 0.8;
+}
+
+.navbar.navbar-transparent .navbar-collapse.show {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.text-gradient.text-primary {
+    background-image: linear-gradient(310deg, blue, black);
+}
+
+");
+
 $asset = frontend\assets\AppAsset::register($this);
 $baseUrl = $asset->baseUrl;
 
@@ -29,7 +53,7 @@ $baseUrl = $asset->baseUrl;
     <!-- Navbar Transparent -->
     <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ms-auto">
         <div class="container">
-            <a style="font-size: 20px;" class="navbar-brand  text-white" href="https://valladolid.tecnm.mx/site/contenido/80?seccion_id=4" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+            <a style="font-size: 20px; " class="navbar-brand  text-white" href="https://valladolid.tecnm.mx/site/contenido/80?seccion_id=4" >
                 Eduación Dual
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,17 +63,17 @@ $baseUrl = $asset->baseUrl;
                     <span class="navbar-toggler-bar bar3"></span>
                 </span>
             </button>
-            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
-                <ul class="navbar-nav navbar-nav-hover w-100 text-black" style="font-size:18px ;">
+            <div class="collapse navbar-collapse  " id="navigation">
+                <ul class="navbar-nav navbar-nav-hover w-100 text-black" style="font-size:18px ; ">
                     <?php
 
 
-                    echo '<li class="nav-item"> '
+                    echo '<li class="nav-item" style ="padding: 10px; "> '
                         . Html::a(
                             "<i class=\"fa fa-icon\"></i> "
                                 . Yii::t('app', 'Home <i class="fa fa-home" aria-hidden="true"></i>'),
                             ['/site/index'],
-                            ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                            ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
                         )
                         . '</li>';
 
@@ -57,22 +81,22 @@ $baseUrl = $asset->baseUrl;
 
                     if (Yii::$app->user->isGuest) {
 
-                        echo '<li class="nav-item"> '
+                        echo '<li class="nav-item" style ="padding: 10px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Registrate'),
                                 ['/site/signup'],
-                                ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                                ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
                             )
                             . '</li>';
 
 
-                            echo '<li class="nav-item"> '
+                            echo '<li class="nav-item" style ="padding: 10px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Quiero ser Dual'),
                                 ['/preregistro/create'],
-                                ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                                ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
                             )
                             . '</li>';
 
@@ -85,13 +109,13 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-                        echo '<li class="nav-item">'
+                        echo '<li class="nav-item" >'
 
                             . Html::beginForm(['/site/login'], 'post')
                             . Html::submitButton(
                                 'Iniciar sesion',
 
-                                ['class' => 'btn btn-primary', 'style' => 'padding-top:5px;']
+                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px;']
                             )
                             . Html::endForm()
                             . '</li>';
@@ -101,7 +125,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Usuario (' . Yii::$app->user->identity->username . ' <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-          )'),
+        )'),
                                 ['/perfil/view'],
                                 ['class' => 'pull-right', 'style' => 'padding-right:10px;']
                             )
@@ -199,12 +223,7 @@ $baseUrl = $asset->baseUrl;
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link pe-1" href="#">
-                                    <i class="fab fa-dribbble text-lg opacity-8"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link pe-1" href="#">
-                                    <i class="fab fa-github text-lg opacity-8"></i>
+                                    <i class="fab fa-instagram text-lg opacity-8"></i>
                                 </a>
                             </li>
                             <li class="nav-item">

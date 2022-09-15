@@ -3,7 +3,10 @@
 namespace common\models;
 
 use Yii;
-
+use yii\db\Expression;
+use yii\helpers\ArrayHelper;
+use common\models\Departamento;
+use common\models\Ingenieria;
 /**
  * This is the model class for table "proyecto".
  *
@@ -94,6 +97,20 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(Departamento::class, ['id' => 'departamento_id']);
     }
 
+    public function getDepartamentoList()
+    {
+        $departamento = Departamento::find()->all();
+
+        $departamentoList = ArrayHelper::map($departamento, 'id', 'nombre');
+
+        return $departamentoList;
+    }
+
+    public function getDepartamentoNombre() 
+    { 
+        return $this->departamento->nombre; 
+    }
+
     /**
      * Gets query for [[Empresa]].
      *
@@ -122,6 +139,20 @@ class Proyecto extends \yii\db\ActiveRecord
     public function getIngenieria()
     {
         return $this->hasOne(Ingenieria::class, ['id' => 'ingenieria_id']);
+    }
+
+    public function getIngenieriasList()
+    {
+        $ingenierias = Ingenieria::find()->all();
+
+        $ingenieriasList = ArrayHelper::map($ingenierias, 'id', 'nombre');
+
+        return $ingenieriasList;
+    }
+
+    public function getIngenieriaNombre() 
+    { 
+        return $this->ingenieria->nombre; 
     }
 
     /**

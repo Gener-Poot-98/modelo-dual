@@ -31,12 +31,35 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
-            'departamento_id',
-            'ingenieria_id',
-            'perfil_estudiante_id',
-            'empresa_id',
-            'asesor_externo_id',
-            'estado_proyecto_id',
+            [ 'label' => 'Departamento', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->departamento->nombre; 
+            } ],
+            //'departamento_id',
+            [ 'label' => 'Ingenieria', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->ingenieria->nombre; 
+            } ],
+            //'ingenieria_id',
+            [ 'label' => 'PerfilEstudiante', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->perfilEstudiante->nombre; 
+            } ],
+            //'perfil_estudiante_id',
+            [ 'label' => 'Empresa', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->empresa->nombre; 
+            } ],
+            //'empresa_id',
+            [ 'label' => 'AsesorExterno', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->asesorExterno->nombre; 
+            } ],
+            //'asesor_externo_id',
+            [ 'label' => 'EstadoProyecto', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->estadoProyecto->nombre; 
+            } ],
             'created_at',
             'updated_at',
         ],

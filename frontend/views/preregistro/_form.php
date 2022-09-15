@@ -12,13 +12,14 @@ $this->registerCss("
     .preregistro-form{
         width: 90%;
         display: flex;
+        align-items: center;
         justify-content: center;
         flex-flow: column wrap;
         border-radius: 5px;
         
     }
     label, .preregistro-form {
-        font-size:20px;
+        font-size:18px;
         
     }
 
@@ -27,9 +28,8 @@ $this->registerCss("
     }    
     
     .form-control {
-        font-size:20px;
+        font-size:18px;
     }
-    
     ");
 
 ?>
