@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
+
 /** @var yii\web\View $this */
 /** @var backend\models\search\ProyectoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -31,8 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'nombre',
-            'departamento_id',
-            'ingenieria_id',
+             //'departamento_id',
+            ['label' => 'Departamento','attribute' => 'departamentoNombre', 'filter' => $searchModel->getDepartamentoList() ],
+
+             //'ingenieria_id',
+            [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
             'perfil_estudiante_id',
             //'empresa_id',
             //'asesor_externo_id',
@@ -43,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
