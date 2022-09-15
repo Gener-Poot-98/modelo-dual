@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Preregistro;
+use common\models\BuscarPreregistro;
 use frontend\models\search\PreregistroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -89,9 +90,7 @@ class PreregistroController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $this->subirArchivo($model);
 
         return $this->render('update', [
             'model' => $model,
@@ -107,9 +106,19 @@ class PreregistroController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        if(file_exists($model->kardex) && file_exists($model->constancia_ingles) && file_exists($model->constancia_servicio_social) && file_exists($model->constancia_creditos_complementarios))
+        {
+            unlink($model->kardex);
+            unlink($model->constancia_ingles);
+            unlink($model->constancia_servicio_social);
+            unlink($model->constancia_creditos_complementarios);
+        }
+
+        $model->delete();
+
+        return $this->redirect(['site/index']);
     }
 
     /**
@@ -141,21 +150,65 @@ class PreregistroController extends Controller
 
                 if($model->validate())
                 {
-                    if(($model->archivoKardex) && ($model->archivoConstancia_ingles) && ($model->archivoConstancia_servicio_social) && ($model->archivoConstancia_creditos_complementarios))
+                    if(($model->archivoKardex))
                     {
+                        if(file_exists($model->kardex))
+                        {
+                            unlink($model->kardex);
+                        }
+
                         $rutaArchivoKardex = "uploads/kardex/".time()."_".$model->archivoKardex->basename.".".$model->archivoKardex->extension;
-                        $rutaArchivoConstancia_ingles = "uploads/ingles/".time()."_".$model->archivoConstancia_ingles->basename.".".$model->archivoConstancia_ingles->extension;
-                        $rutaArchivoConstancia_servicio_social = "uploads/servicio_social/".time()."_".$model->archivoConstancia_servicio_social->basename.".".$model->archivoConstancia_servicio_social->extension;
-                        $rutaArchivoConstancia_creditos_complementarios = "uploads/creditos_complementarios/".time()."_".$model->archivoConstancia_creditos_complementarios->basename.".".$model->archivoConstancia_creditos_complementarios->extension;
 
-
-                        if(($model->archivoKardex->saveAs($rutaArchivoKardex)) && ($model->archivoConstancia_ingles->saveAs($rutaArchivoConstancia_ingles)) && ($model->archivoConstancia_servicio_social->saveAs($rutaArchivoConstancia_servicio_social)) && ($model->archivoConstancia_creditos_complementarios->saveAs($rutaArchivoConstancia_creditos_complementarios)))
+                        if(($model->archivoKardex->saveAs($rutaArchivoKardex)))
                         {
                             $model->kardex = $rutaArchivoKardex;
+                        }
+                    }
+
+                    if(($model->archivoConstancia_ingles))
+                    {
+                        if(file_exists($model->constancia_ingles) )
+                        {
+                            unlink($model->constancia_ingles);
+                        }
+
+                        $rutaArchivoConstancia_ingles = "uploads/ingles/".time()."_".$model->archivoConstancia_ingles->basename.".".$model->archivoConstancia_ingles->extension;
+
+                        if(($model->archivoConstancia_ingles->saveAs($rutaArchivoConstancia_ingles)))
+                        {
                             $model->constancia_ingles = $rutaArchivoConstancia_ingles;
+                        }
+                    }
+
+                    if(($model->archivoConstancia_servicio_social))
+                    {
+                        if(file_exists($model->constancia_servicio_social) )
+                        {
+                            unlink($model->constancia_servicio_social);
+                        }
+
+                        $rutaArchivoConstancia_servicio_social = "uploads/servicio_social/".time()."_".$model->archivoConstancia_servicio_social->basename.".".$model->archivoConstancia_servicio_social->extension;
+
+                        if(($model->archivoConstancia_servicio_social->saveAs($rutaArchivoConstancia_servicio_social)))
+                        {
                             $model->constancia_servicio_social = $rutaArchivoConstancia_servicio_social;
+                        }
+                    }
+
+                    if(($model->archivoConstancia_creditos_complementarios))
+                    {
+                        if(file_exists($model->constancia_creditos_complementarios) )
+                        {
+                            unlink($model->constancia_creditos_complementarios);
+                        }
+                        
+                        $rutaArchivoConstancia_creditos_complementarios = "uploads/creditos_complementarios/".time()."_".$model->archivoConstancia_creditos_complementarios->basename.".".$model->archivoConstancia_creditos_complementarios->extension;
+
+                        if(($model->archivoConstancia_creditos_complementarios->saveAs($rutaArchivoConstancia_creditos_complementarios)))
+                        {
                             $model->constancia_creditos_complementarios = $rutaArchivoConstancia_creditos_complementarios;
                         }
+
                     }
                 }
 
@@ -178,5 +231,44 @@ class PreregistroController extends Controller
         {
             return Yii::$app->response->sendFile($path);
         }
+    }
+
+    /**
+     * Displays a single Preregistro model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionConsulta()
+    {
+        $model = new BuscarPreregistro();
+        $preregistro = new Preregistro();
+
+        if ($model->load(Yii::$app->request->post())) {
+            //return $this->goBack();
+            return $this->render('/preregistro/view', [
+                'model' => $this->findModelByMatricula($model->matricula),
+            ]);
+        }
+
+        return $this->render('consulta', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Finds the Preregistro model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param String $matricula ID
+     * @return Preregistro the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function findModelByMatricula($matricula)
+    {
+        if (($model = Preregistro::findOne(['matricula' => $matricula])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('Aún no has hecho tu Preregistro');
     }
 }

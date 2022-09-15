@@ -104,7 +104,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Consulta'),
-                                ['/site/consulta'],
+                                ['/preregistro/consulta'],
                                 ['class' => 'pull-right', 'style' => 'padding-right:10px;']
                             )
                             . '</li>';
