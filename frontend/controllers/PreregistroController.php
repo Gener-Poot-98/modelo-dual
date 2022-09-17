@@ -72,7 +72,10 @@ class PreregistroController extends Controller
     {
         $model = new Preregistro();
 
-        $this->subirArchivo($model);
+        if($this->subirArchivo($model))
+        {
+            $this->sendEmail($model);
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -214,7 +217,7 @@ class PreregistroController extends Controller
 
                 if($model->save(false))
                 {
-                    return $this->redirect(['view', 'id' => $model->id]) && $this->sendEmail($model);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
                 
             }
