@@ -51,8 +51,10 @@ class Preregistro extends \yii\db\ActiveRecord
             [['nombre', 'matricula', 'email'], 'string', 'max' => 45],
             //[['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
             [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf'],
-            [['email'], 'unique'],
-            [['matricula'], 'unique'],
+            //[['email'], 'unique'],
+            ['email', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'This email has already been taken.'],
+            //[['matricula'], 'unique'],
+            ['matricula', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'This matricula has already been taken.'],
             [['estado_registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoRegistro::class, 'targetAttribute' => ['estado_registro_id' => 'id']],
             [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
         ];
