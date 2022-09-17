@@ -2,17 +2,16 @@
 
 namespace backend\controllers;
 
-use common\models\Proyecto;
-use backend\models\search\ProyectoSearch;
+use common\models\Docente;
+use backend\models\search\DocenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\search\ProyectoDocenteSearch;
 
 /**
- * ProyectoController implements the CRUD actions for Proyecto model.
+ * DocenteController implements the CRUD actions for Docente model.
  */
-class ProyectoController extends Controller
+class DocenteController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Lists all Proyecto models.
+     * Lists all Docente models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProyectoSearch();
+        $searchModel = new DocenteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,31 +48,26 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Displays a single Proyecto model.
+     * Displays a single Docente model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $searchModel = new ProyectoDocenteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new Proyecto model.
+     * Creates a new Docente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Proyecto();
+        $model = new Docente();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -89,7 +83,7 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Updates an existing Proyecto model.
+     * Updates an existing Docente model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -109,7 +103,7 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Deletes an existing Proyecto model.
+     * Deletes an existing Docente model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -123,15 +117,15 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Finds the Proyecto model based on its primary key value.
+     * Finds the Docente model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Proyecto the loaded model
+     * @return Docente the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Proyecto::findOne(['id' => $id])) !== null) {
+        if (($model = Docente::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

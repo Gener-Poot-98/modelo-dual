@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use common\models\ProyectoDocente;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
 
 /** @var yii\web\View $this */
 /** @var common\models\Proyecto $model */
@@ -66,3 +70,23 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+<h5>Docentes</h5>
+<div >
+<?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+           // 'proyecto_id',
+            //'docente_id',
+            ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
+
+            ['class' => 'yii\grid\ActionColumn', 'controller' => 'proyecto-docente'],
+
+        ],
+    ]); ?>
+
+</div>
+
