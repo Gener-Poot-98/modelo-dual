@@ -3,28 +3,25 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\User $user */
+/** @var common\models\Preregistro $preregistro */
 
-$verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'token' => $user->verification_token]);
+$consultaLink = Yii::$app->urlManager->createAbsoluteUrl(['/preregistro/consulta']);
+
 ?>
 <div class="verify-email">
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    Hola <?= Html::encode($user->username) ?>,</p>
+    Hola <?= Html::encode($preregistro->nombre) ?>,</p>
 
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    Su cuenta en <?= Html::encode(Yii::$app->name) ?>, ha sido creada.</p>
+    Te informamos que tu Pre-reregistro en el <?= Html::encode(Yii::$app->name) ?> ha sido creado de manera exitosa.</p>
 
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    Para completar el registro, por favor haga clic en el siguiente enlace: 
+    Puedes consultar el estado de tu Pre-registro en el siguiente enlace:
     </p>
 
-    <p><?= Html::a(Html::encode($verifyLink), $verifyLink) ?></p>
+    <p><?= Html::a(Html::encode($consultaLink), $consultaLink) ?></p>
 
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
     Si tiene problemas, por favor, pegue la dirección URL en su navegador web.
-    </p>
-
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    PD: Si ha recibido este correo electrónico por error, simplemente elimínelo. 
     </p>
 </div>

@@ -157,7 +157,7 @@ class PreregistroController extends Controller
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($preregistro->email)
-            ->setSubject('El estado de tu Pre-registro ha cambiado')
+            ->setSubject('El estado de tu Pre-registro para el ' . Yii::$app->name . ' ha cambiado')
             ->send();
     }
 }

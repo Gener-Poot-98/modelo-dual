@@ -20,7 +20,7 @@ $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 't
     <p><?= Html::a(Html::encode($resetLink), $resetLink) ?></p>
 
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    Si tiene problemas, por favor, pegue la siguiente dirección URL en su navegador web.</p>
+    Si tiene problemas, por favor, pegue la dirección URL en su navegador web.</p>
 
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
     Si no realizó esta solicitud, puede ignorar este correo electrónico.</p>
