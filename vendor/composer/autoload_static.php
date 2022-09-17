@@ -16,8 +16,8 @@ class ComposerStaticInit70a93bd9abf21e040d4578cbc0657875
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'e3b2795a8a512b6083af088fb53afe6c' => __DIR__ . '/..' . '/codeception/codeception/functions.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
@@ -40,6 +40,31 @@ class ComposerStaticInit70a93bd9abf21e040d4578cbc0657875
         'm' => 
         array (
             'mdm\\admin\\' => 10,
+        ),
+        'k' => 
+        array (
+            'kartik\\widgets\\' => 15,
+            'kartik\\typeahead\\' => 17,
+            'kartik\\touchspin\\' => 17,
+            'kartik\\time\\' => 12,
+            'kartik\\switchinput\\' => 19,
+            'kartik\\spinner\\' => 15,
+            'kartik\\sidenav\\' => 15,
+            'kartik\\select2\\' => 15,
+            'kartik\\rating\\' => 14,
+            'kartik\\range\\' => 13,
+            'kartik\\plugins\\fileinput\\' => 25,
+            'kartik\\plugins\\depdrop\\' => 23,
+            'kartik\\growl\\' => 13,
+            'kartik\\form\\' => 12,
+            'kartik\\file\\' => 12,
+            'kartik\\depdrop\\' => 15,
+            'kartik\\datetime\\' => 16,
+            'kartik\\date\\' => 12,
+            'kartik\\color\\' => 13,
+            'kartik\\base\\' => 12,
+            'kartik\\alert\\' => 13,
+            'kartik\\affix\\' => 13,
         ),
         'c' => 
         array (
@@ -131,6 +156,94 @@ class ComposerStaticInit70a93bd9abf21e040d4578cbc0657875
         'mdm\\admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/mdmsoft/yii2-admin',
+        ),
+        'kartik\\widgets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widgets/src',
+        ),
+        'kartik\\typeahead\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-typeahead/src',
+        ),
+        'kartik\\touchspin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-touchspin/src',
+        ),
+        'kartik\\time\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-timepicker/src',
+        ),
+        'kartik\\switchinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-switchinput',
+        ),
+        'kartik\\spinner\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-spinner/src',
+        ),
+        'kartik\\sidenav\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-sidenav',
+        ),
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
+        ),
+        'kartik\\rating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-rating/src',
+        ),
+        'kartik\\range\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-rangeinput/src',
+        ),
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
+        'kartik\\plugins\\depdrop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/dependent-dropdown',
+        ),
+        'kartik\\growl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-growl/src',
+        ),
+        'kartik\\form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-activeform/src',
+        ),
+        'kartik\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput/src',
+        ),
+        'kartik\\depdrop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-depdrop/src',
+        ),
+        'kartik\\datetime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker/src',
+        ),
+        'kartik\\date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
+        ),
+        'kartik\\color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-colorinput/src',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base/src',
+        ),
+        'kartik\\alert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-alert/src',
+        ),
+        'kartik\\affix\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-affix',
         ),
         'cebe\\markdown\\' => 
         array (
@@ -259,9 +372,9 @@ class ComposerStaticInit70a93bd9abf21e040d4578cbc0657875
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/stub/src',
-            1 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
-            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            1 => __DIR__ . '/..' . '/codeception/stub/src',
+            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
     );
 
