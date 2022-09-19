@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Proyecto;
+use common\models\PerfilEstudiante;
 use backend\models\search\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -10,6 +11,7 @@ use yii\filters\VerbFilter;
 use backend\models\search\ProyectoDocenteSearch;
 use yii\db\Query;
 use yii\helpers\Json;
+use Yii;
 
 
 /**
@@ -93,19 +95,21 @@ class ProyectoController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Proyecto();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post())) {
+            $perfil_estudiante = PerfilEstudiante::findByNombre($model->nombreEstudiante);
+            $model->perfil_estudiante_id = $perfil_estudiante->id;
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
