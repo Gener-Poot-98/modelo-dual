@@ -31,6 +31,7 @@ use common\models\Ingenieria;
  */
 class Proyecto extends \yii\db\ActiveRecord
 {
+    public $nombreEstudiante;
     /**
      * {@inheritdoc}
      */
@@ -45,7 +46,8 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'departamento_id', 'ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id', 'created_at', 'updated_at'], 'required'],
+            [['nombre', 'departamento_id', 'ingenieria_id', 'nombreEstudiante','perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id', 'created_at', 'updated_at'], 'required'],
+            [['nombreEstudiante'], 'string'],
             [['departamento_id', 'ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 2500],

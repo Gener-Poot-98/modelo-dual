@@ -33,6 +33,7 @@
         "mdmsoft/yii2-admin": "~2.0"
     },
     "config": {
+        "bsVersion" : "4.x",
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
@@ -44,4 +45,7 @@
             "url": "https://asset-packagist.org"
         }
     ]
+
+    
+
 }

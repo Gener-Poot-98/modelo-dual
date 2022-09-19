@@ -104,4 +104,10 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Proyecto::class, ['perfil_estudiante_id' => 'id']);
     }
+
+    public static function findByNombre($nombre)
+    {
+        return static::findOne(['nombre' => $nombre]);
+    }
+
 }

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\Typeahead;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\Proyecto $model */
@@ -18,7 +20,24 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ingenieria_id')->textInput() ?>
 
-    <?= $form->field($model, 'perfil_estudiante_id')->textInput() ?>
+    <?php
+    echo $form->field($model, 'nombreEstudiante')->widget(Typeahead::classname(), [
+        'options' => ['placeholder' => 'Nombre del estudiante ...'],
+        'pluginOptions' => ['highlight' => true],
+        'dataset' => [
+            [
+                'datumTokenizer' =>
+                "Bloodhound.tokenizers.obj.whitespace('value')",
+                'display' => 'value',
+                'remote' => [
+                    'url' => Url::to(['proyecto/nombre-list']), 
+                        '?q=%QUERY',
+                    'wildcard' => '%QUERY'
+                ]
+            ]
+        ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'empresa_id')->textInput() ?>
 
@@ -37,3 +56,5 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+

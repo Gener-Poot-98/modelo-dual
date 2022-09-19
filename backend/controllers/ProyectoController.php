@@ -8,6 +8,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\search\ProyectoDocenteSearch;
+use yii\db\Query;
+use yii\helpers\Json;
+
 
 /**
  * ProyectoController implements the CRUD actions for Proyecto model.
@@ -31,6 +34,23 @@ class ProyectoController extends Controller
             ]
         );
     }
+
+    public function actionNombreList($q = null) {
+        $query = new Query;
+        
+        $query->select('nombre')
+        ->from('perfil_estudiante')
+            ->where('nombre LIKE "%' . $q .'%"')
+        ->orderBy('nombre');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['nombre']];
+        }
+        echo Json::encode($out);
+        }
+        
 
     /**
      * Lists all Proyecto models.
