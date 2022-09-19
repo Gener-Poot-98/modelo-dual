@@ -72,7 +72,10 @@ class PreregistroController extends Controller
     {
         $model = new Preregistro();
 
-        $this->subirArchivo($model);
+        if($this->subirArchivo($model))
+        {
+            $this->sendEmail($model);
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -270,5 +273,24 @@ class PreregistroController extends Controller
         }
 
         throw new NotFoundHttpException('Aún no has hecho tu Preregistro');
+    }
+
+    /**
+     * Sends confirmation email to user
+     * @param Preregistro $preregistro preregistro model to with email should be send
+     * @return bool whether the email was sent
+     */
+    protected function sendEmail($preregistro)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'registro-preregistro-html'],
+                ['preregistro' => $preregistro]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($preregistro->email)
+            ->setSubject('Te has Pre-registrado para el ' . Yii::$app->name)
+            ->send();
     }
 }

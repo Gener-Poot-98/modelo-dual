@@ -49,14 +49,26 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            //'enablePrettyUrl' => true,
+            //'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
+        'urlManagerFrontEnd' => [
+
+            'enablePrettyUrl' => false,
+
+			'class' => 'yii\web\UrlManager',
+
+			'showScriptName'=>false,
+
+			'hostInfo' => 'http://localhost/',
+
+			'baseUrl' => 'http://localhost/modelo-dual/frontend/web',
+        ],
     ],
 
     'as access' => [

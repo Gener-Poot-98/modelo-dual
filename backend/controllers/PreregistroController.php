@@ -95,7 +95,7 @@ class PreregistroController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]) && $this->sendEmail($model);
         }
 
         return $this->render('update', [
@@ -140,5 +140,24 @@ class PreregistroController extends Controller
         {
             return Yii::$app->response->sendFile($path);
         }
+    }
+
+    /**
+     * Sends confirmation email to user
+     * @param Preregistro $preregistro preregistro model to with email should be send
+     * @return bool whether the email was sent
+     */
+    protected function sendEmail($preregistro)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'cambioEstado-html'],
+                ['preregistro' => $preregistro]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($preregistro->email)
+            ->setSubject('El estado de tu Pre-registro para el ' . Yii::$app->name . ' ha cambiado')
+            ->send();
     }
 }
