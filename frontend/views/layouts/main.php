@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 
+
 $this -> registerCss ("
     
 .mask {
@@ -51,7 +52,7 @@ $baseUrl = $asset->baseUrl;
 
     <!-- Navbar -->
     <!-- Navbar Transparent -->
-    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ms-auto">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto fixed-top">
         <div class="container">
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">
@@ -61,7 +62,7 @@ $baseUrl = $asset->baseUrl;
                 </span>
             </button>
             <div class="collapse navbar-collapse  " id="navigation">
-                <ul class="navbar-nav navbar-nav-hover w-100 text-black" style="font-size:18px ; ">
+                <ul class="navbar-nav navbar-nav-hover mx-auto" style="font-size:18px ; ">
                     <?php
 
 
@@ -74,8 +75,7 @@ $baseUrl = $asset->baseUrl;
                         )
                         . '</li>';
 
-
-
+                        
                     if (Yii::$app->user->isGuest) {
 
                         echo '<li class="nav-item" style ="padding: 10px;"> '
@@ -106,16 +106,18 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-                        echo '<li class="nav-item" >'
+                            echo '<li class="nav-item" >'
 
                             . Html::beginForm(['/site/login'], 'post')
                             . Html::submitButton(
                                 'Iniciar sesion',
 
-                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px;']
+                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; ']
                             )
                             . Html::endForm()
                             . '</li>';
+
+                
                     } else {
 
                         echo '<li class="nav-item"> '

@@ -31,6 +31,9 @@ $this->registerCss("
     }
     
     ");
+
+    $this->title = 'Consulta';
+
 ?>
 
 <div class="site-consulta">
