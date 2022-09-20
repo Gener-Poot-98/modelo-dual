@@ -52,7 +52,7 @@ $baseUrl = $asset->baseUrl;
 
     <!-- Navbar -->
     <!-- Navbar Transparent -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto ">
         <div class="container">
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">
@@ -71,7 +71,7 @@ $baseUrl = $asset->baseUrl;
                             "<i class=\"fa fa-icon\"></i> "
                                 . Yii::t('app', 'Home <i class="fa fa-home" aria-hidden="true"></i>'),
                             ['/site/index'],
-                            ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
+                            ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white; margin-right:250px']
                         )
                         . '</li>';
 
@@ -112,7 +112,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::submitButton(
                                 'Iniciar sesion',
 
-                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; ']
+                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; margin-left:250px; ']
                             )
                             . Html::endForm()
                             . '</li>';
