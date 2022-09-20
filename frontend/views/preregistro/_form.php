@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $model */
@@ -46,13 +47,25 @@ $this->registerCss("
 
     <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione su Ingeniería']) ?>
 
-    <?= $form->field($model, 'archivoKardex')->fileInput() ?>
+    <?= $form->field($model, 'archivoKardex')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'file/*'],
+        'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
+                        'showUpload' => false]]) ?>
 
-    <?= $form->field($model, 'archivoConstancia_ingles')->fileInput() ?>
+    <?= $form->field($model, 'archivoConstancia_ingles')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'file/*'],
+            'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
+                            'showUpload' => false]]) ?>
 
-    <?= $form->field($model, 'archivoConstancia_servicio_social')->fileInput() ?>
+    <?= $form->field($model, 'archivoConstancia_servicio_social')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'file/*'],
+                'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
+                                'showUpload' => false]]) ?>
 
-    <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->fileInput() ?>
+    <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->widget(FileInput::classname(), [
+                    'options' => ['accept' => 'file/*'],
+                    'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
+                                    'showUpload' => false]]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-info btn-lg btn-block']) ?>

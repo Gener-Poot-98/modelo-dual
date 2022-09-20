@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fdac21e4bf5d8450178bc1e0e9a74b9",
+    "content-hash": "f1162dc3d922e41130e4def3a52f1f88",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -973,7 +973,7 @@
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
-            "version": "v1.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
@@ -989,6 +989,7 @@
                 "kartik-v/bootstrap-fileinput": ">=5.5.0",
                 "kartik-v/yii2-krajee-base": ">=3.0.5"
             },
+            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -6632,7 +6633,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-widget-fileinput": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

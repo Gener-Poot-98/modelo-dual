@@ -1894,8 +1894,8 @@
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
-            "version": "v1.1.1",
-            "version_normalized": "1.1.1.0",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
@@ -1912,6 +1912,7 @@
                 "kartik-v/yii2-krajee-base": ">=3.0.5"
             },
             "time": "2022-06-28T04:31:04+00:00",
+            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {

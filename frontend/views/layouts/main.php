@@ -52,7 +52,7 @@ $baseUrl = $asset->baseUrl;
 
     <!-- Navbar -->
     <!-- Navbar Transparent -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto">
         <div class="container">
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">

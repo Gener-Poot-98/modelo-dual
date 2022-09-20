@@ -50,7 +50,7 @@ class Preregistro extends \yii\db\ActiveRecord
             [['comentario'], 'string'],
             [['nombre', 'matricula', 'email'], 'string', 'max' => 45],
             //[['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
-            [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf'],
+            [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf', 'maxFiles' => '1'],
             //[['email'], 'unique'],
             ['email', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'This email has already been taken.'],
             //[['matricula'], 'unique'],
