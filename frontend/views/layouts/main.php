@@ -71,7 +71,7 @@ $baseUrl = $asset->baseUrl;
                             "<i class=\"fa fa-icon\"></i> "
                                 . Yii::t('app', 'Home <i class="fa fa-home" aria-hidden="true"></i>'),
                             ['/site/index'],
-                            ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
+                            ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white; margin-right:250px']
                         )
                         . '</li>';
 
@@ -112,7 +112,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::submitButton(
                                 'Iniciar sesion',
 
-                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; ']
+                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; margin-left:250px; ']
                             )
                             . Html::endForm()
                             . '</li>';
