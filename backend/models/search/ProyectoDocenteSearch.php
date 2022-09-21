@@ -11,7 +11,9 @@ use common\models\ProyectoDocente;
  */
 class ProyectoDocenteSearch extends ProyectoDocente
 {
+    public $proyectoNombre;
     public $docenteNombre;
+    
 
     /**
      * {@inheritdoc}
@@ -20,7 +22,7 @@ class ProyectoDocenteSearch extends ProyectoDocente
     {
         return [
             [['id', 'proyecto_id', 'docente_id'], 'integer'],
-            [['docenteNombre'], 'safe'],
+            [['docenteNombre','proyectoNombre'], 'safe'],
 
         ];
     }
@@ -53,13 +55,6 @@ class ProyectoDocenteSearch extends ProyectoDocente
             'query' => $query,
         ]);
 
-        $dataProvider->setSort([ 
-            'attributes' => [ 
-                'proyecto_id', 
-                'DocenteNombre' => [ 
-                    'asc' => ['docente.nombre' => SORT_ASC], 
-                    'desc' => ['docente.nombre' => SORT_DESC], 
-                    'label' => 'Docente' ], ] ]);
 
         $this->load($params);
 
@@ -69,6 +64,27 @@ class ProyectoDocenteSearch extends ProyectoDocente
             return $dataProvider;
         }
 
+        $query->innerJoin('docente','docente.id = proyecto_docente.docente_id');
+        $query->innerJoin('proyecto','proyecto.id = proyecto_docente.proyecto_id');
+
+        $dataProvider->setSort([
+            'defaultOrder' => [
+                'proyectoNombre' => SORT_ASC
+            ],
+            'attributes' => [
+                'proyecto_id',
+                'docente_id',
+                'proyectoNombre' => [
+                    'asc' => ['proyecto.nombre' => SORT_ASC],
+                    'desc' => ['proyecto.nombre' => SORT_DESC],
+                ], 
+                'docenteNombre' => [
+                    'asc' => ['docente.nombre' => SORT_ASC],
+                    'desc' => ['docente.nombre' => SORT_DESC],
+                ],    
+            ]
+        ]);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -76,9 +92,23 @@ class ProyectoDocenteSearch extends ProyectoDocente
             'docente_id' => $this->docente_id,
         ]);
 
-        $query->joinWith(['docente' => function ($q) {
-            $q->andFilterWhere(['=', 'docente.id', $this->docenteNombre]);
-            }]);
+        $query->andFilterWhere([
+            'proyecto_docente.id' => $this->id,
+            'proyecto_docente.proyecto_id' => $this->proyecto_id,
+            'proyecto_docente.docente_id' => $this->docente_id,
+        ]);  
+
+
+        $query->andFilterWhere([
+            'LIKE','proyecto.nombre', $this->proyectoNombre,
+            ]); 
+        $query->andFilterWhere([
+            'LIKE','docente.nombre', $this->docenteNombre,
+            ]);
+
+
+
+        
 
         return $dataProvider;
     }
