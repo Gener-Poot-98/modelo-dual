@@ -12,23 +12,23 @@ $asset = frontend\assets\AppAsset::register($this);
 $baseUrl = $asset->baseUrl;
 ?>
 
-    <?php if (Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success">
-            <?= Yii::$app->session->getFlash('success'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success">
+        <?= Yii::$app->session->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (Yii::$app->session->hasFlash('warning')): ?>
-        <div class="alert alert-warning">
-            <?= Yii::$app->session->getFlash('warning'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('warning')) : ?>
+    <div class="alert alert-warning">
+        <?= Yii::$app->session->getFlash('warning'); ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (Yii::$app->session->hasFlash('error')): ?>
-        <div class="alert alert-danger">
-            <?= Yii::$app->session->getFlash('error'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger">
+        <?= Yii::$app->session->getFlash('error'); ?>
+    </div>
+<?php endif; ?>
 
 <section class="py-5">
     <div class="container">
@@ -42,6 +42,7 @@ $baseUrl = $asset->baseUrl;
             </div>
         </div>
     </div>
+    <hr>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8">
@@ -49,54 +50,59 @@ $baseUrl = $asset->baseUrl;
                     <div class="col-md-6">
 
                         <div class="card move-on-hover">
-                            <img class="w-100" src="https://www.admin-dashboards.com/content/images/2021/06/now-ui-design-system-pro-about-us.jpg" alt="">
+                            <img class="w-100" src=<?php echo Url::to('@web/archivos/admin.png', true); ?> alt="">
                         </div>
                         <div class="mt-2 ms-2">
                             <a href="#">
-                                <h6 class="mb-0">Establecimientos</h6>
+                                <h6 class="mb-0">Ing en Administración</h6>
                             </a>
                         </div>
-
                     </div>
+
                     <div class="col-md-6 mt-md-0 mt-5">
-
                         <div class="card move-on-hover">
-                            <img class="w-100" src="https://i.ytimg.com/vi/1X2rvHKoqH4/maxresdefault.jpg" alt="">
+                            <img class="w-100" src=<?php echo Url::to('@web/archivos/industrial.png', true); ?> alt="">
                         </div>
                         <div class="mt-2 ms-2">
                             <a href="#">
-                                <h6 class="mb-0">Pedidos</h6>
+                                <h6 class="mb-0">Ing Industrial</h6>
                             </a>
                         </div>
-
                     </div>
+
                     <div class="col-md-6 mt-md-0 mt-6">
-
-
                         <div class="card move-on-hover">
-                            <img class="w-100" src=<?php echo Url::to('@web/archivos/about.png', true); ?> alt="">
+                            <img class="w-100" src=<?php echo Url::to('@web/archivos/sistemas.png', true); ?> alt="">
                         </div>
                         <div class="mt-2 ms-2">
                             <h6>
-                                <?php echo Html::a('Nosotros', ['site/about'], ['class' => 'mb-0']); ?>
+                                Ing en Sistemas Computacionales.
                         </div>
                         </h6>
-
-
                     </div>
-                    <div class="col-md-6 mt-md-0 mt-6">
 
+                    <div class="col-md-6 mt-md-0 mt-6">
                         <div class="card move-on-hover">
-                            <img class="w-100" src=<?php echo Url::to('@web/archivos/contact.png', true); ?> alt="">
+                            <img class="w-100" src=<?php echo Url::to('@web/archivos/ambiental.png', true); ?> alt="">
                         </div>
                         <div class="mt-2 ms-2">
                             <h6>
-                                <?php echo Html::a('Contactanos', ['site/contact'], ['class' => 'mb-0']); ?>
+                                Ing Ambiental.
+                        </div>
+                        </h6>
+                    </div>
 
+                    <div class="col-md-6 mt-md-0 mt-6">
+                        <div class="card move-on-hover">
+                            <img class="w-100" style="width:100%;;" src=<?php echo Url::to('@web/archivos/civil.jpg', true); ?> alt="">
+                        </div>
+                        <div class="mt-2 ms-2">
+                            <h6>
+                                Ing Civil
                             </h6>
                         </div>
-
                     </div>
+
                 </div>
             </div>
             <div class="col-md-3 mx-auto mt-md-0 mt-5">
@@ -122,7 +128,7 @@ $baseUrl = $asset->baseUrl;
                 <a href="https://twitter.com" class="btn btn-info mb-0 me-2" target="_blank">
                     <i class="fab fa-twitter me-1"></i> Tweet
                 </a>
-                <a href="https://www.facebook.com" class="btn btn-primary mb-0 me-2" target="_blank">
+                <a href="https://www.facebook.com/TecNMCampusValladolid" class="btn btn-primary mb-0 me-2" target="_blank">
                     <i class="fab fa-facebook-square me-1"></i> facebook
                 </a>
             </div>
