@@ -19,6 +19,7 @@ use common\models\Docente;
  */
 class ProyectoDocente extends \yii\db\ActiveRecord
 {
+    public $docenteArray;
     /**
      * {@inheritdoc}
      */
@@ -33,7 +34,7 @@ class ProyectoDocente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['proyecto_id', 'docente_id'], 'required'],
+            [['proyecto_id', 'docenteArray'], 'required'],
             [['proyecto_id', 'docente_id'], 'integer'],
             [['docente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Docente::class, 'targetAttribute' => ['docente_id' => 'id']],
             [['proyecto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::class, 'targetAttribute' => ['proyecto_id' => 'id']],
@@ -47,8 +48,9 @@ class ProyectoDocente extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'proyecto_id' => 'Proyecto ID',
-            'docente_id' => 'Docente ID',
+            'proyecto_id' => 'Proyecto ',
+            'docente_id' => 'Docente ',
+            'docenteArray' => Yii::t('app', 'Docentes'),
         ];
     }
 
@@ -71,9 +73,9 @@ class ProyectoDocente extends \yii\db\ActiveRecord
         return $departamentoList;
     }
 
-    public function getDocenteNombre() 
-    { 
-        return $this->docente->nombre; 
+    public function getDocenteNombre()
+    {
+        return $this->docente->nombre;
     }
 
     /**
@@ -85,4 +87,29 @@ class ProyectoDocente extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Proyecto::class, ['id' => 'proyecto_id']);
     }
+
+    public function saveDocenteArray()
+        {
+            ProyectoDocente::deleteAll(['proyecto_id' => $this->proyecto_id]);
+            foreach ($this->docenteArray as $value) {
+                $model = new ProyectoDocente();
+                $model->proyecto_id = $this->proyecto_id;
+                $model->docente_id = $value;
+                $model->docenteArray = $this->docenteArray;
+                if (!$model->save()) {
+                    $this->addErrors($model->getErrors());
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        public function getArrayValue(){
+
+            $this->docenteArray = array_column(Yii::$app->db->createCommand('SELECT docente_id  
+                                FROM proyecto_docente 
+                                WHERE proyecto_id = "'.$this->proyecto_id.'" 
+                                ')
+                                ->queryAll(),'docente_id');
+        }
 }

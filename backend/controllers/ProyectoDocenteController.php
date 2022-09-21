@@ -7,6 +7,7 @@ use backend\models\search\ProyectoDocenteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ProyectoDocenteController implements the CRUD actions for ProyectoDocente model.
@@ -70,15 +71,9 @@ class ProyectoDocenteController extends Controller
     public function actionCreate()
     {
         $model = new ProyectoDocente();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'proyecto_id' => $model->proyecto_id, 'docente_id' => $model->docente_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->saveDocenteArray()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -93,14 +88,13 @@ class ProyectoDocenteController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id, $proyecto_id, $docente_id)
+    public function actionUpdate($id,$proyecto_id,$docente_id)
     {
-        $model = $this->findModel($id, $proyecto_id, $docente_id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'proyecto_id' => $model->proyecto_id, 'docente_id' => $model->docente_id]);
+        $model = $this->findModel($id,$proyecto_id,$docente_id);
+        $model->getArrayValue();  // En caso de que no se ponga el afterfind y utilicemos la otra variante
+        if ($model->load(Yii::$app->request->post()) && $model->saveDocenteArray()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
