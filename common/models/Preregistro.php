@@ -52,9 +52,9 @@ class Preregistro extends \yii\db\ActiveRecord
             //[['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
             [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf', 'maxFiles' => '1'],
             //[['email'], 'unique'],
-            ['email', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'This email has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'Este correo electronico ya esta en uso.'],
             //[['matricula'], 'unique'],
-            ['matricula', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'This matricula has already been taken.'],
+            ['matricula', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'Esta matrícula ya ha sido pre-registrada'],
             [['estado_registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoRegistro::class, 'targetAttribute' => ['estado_registro_id' => 'id']],
             [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
         ];
@@ -83,14 +83,15 @@ class Preregistro extends \yii\db\ActiveRecord
             'matricula' => 'Matricula',
             'email' => 'Email',
             'ingenieria_id' => 'Ingenieria',
-            'kardex' => 'Kardex',
-            'constancia_ingles' => 'Constancia de Ingles',
-            'constancia_servicio_social' => 'Constancia de Servicio Social',
-            'constancia_creditos_complementarios' => 'Constancia de Creditos Complementarios',
+            'archivoKardex' => 'Kardex',
+            'archivoConstancia_ingles' => 'Constancia de Ingles',
+            'archivoConstancia_servicio_social' => 'Constancia de Servicio Social',
+            'archivoConstancia_creditos_complementarios' => 'Constancia de Creditos Complementarios',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Última actualización',
             'estado_registro_id' => 'Estado',
             'comentario' => 'Comentario',
+
         ];
     }
 

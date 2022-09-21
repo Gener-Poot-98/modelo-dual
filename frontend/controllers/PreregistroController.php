@@ -121,6 +121,8 @@ class PreregistroController extends Controller
 
         $model->delete();
 
+        Yii::$app->session->setFlash('warning', 'Tu Pre-registro ha sido eliminado');
+
         return $this->redirect(['site/index']);
     }
 
@@ -215,7 +217,12 @@ class PreregistroController extends Controller
                     }
                 }
 
-                if($model->save(false))
+                $model->archivoKardex = null;
+                $model->archivoConstancia_ingles = null;
+                $model->archivoConstancia_servicio_social = null;
+                $model->archivoConstancia_creditos_complementarios = null;
+
+                if($model->save())
                 {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
