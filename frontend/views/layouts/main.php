@@ -52,7 +52,7 @@ $baseUrl = $asset->baseUrl;
 
     <!-- Navbar -->
     <!-- Navbar Transparent -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2  navbar-transparent ms-auto">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark z-index-2 py-2 ms-auto">
         <div class="container">
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">
@@ -66,7 +66,7 @@ $baseUrl = $asset->baseUrl;
                     <?php
 
 
-                    echo '<li class="nav-item" style ="padding: 10px; "> '
+                    echo '<li class="nav-item" style ="padding: 8px; "> '
                         . Html::a(
                             "<i class=\"fa fa-icon\"></i> "
                                 . Yii::t('app', 'Home <i class="fa fa-home" aria-hidden="true"></i>'),
@@ -78,7 +78,7 @@ $baseUrl = $asset->baseUrl;
                         
                     if (Yii::$app->user->isGuest) {
 
-                        echo '<li class="nav-item" style ="padding: 10px;"> '
+                        echo '<li class="nav-item" style ="padding: 8px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Registrate'),
@@ -88,7 +88,7 @@ $baseUrl = $asset->baseUrl;
                             . '</li>';
 
 
-                            echo '<li class="nav-item" style ="padding: 10px;"> '
+                            echo '<li class="nav-item" style ="padding: 8px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Quiero ser Dual'),
@@ -97,7 +97,7 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-                            echo '<li class="nav-item" style ="padding: 10px;"> '
+                            echo '<li class="nav-item" style ="padding: 8px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Consulta'),
@@ -106,13 +106,13 @@ $baseUrl = $asset->baseUrl;
                             )
                             . '</li>';
 
-                            echo '<li class="nav-item" >'
+                            echo '<li class="nav-item" style ="padding-left: 8px;">'
 
                             . Html::beginForm(['/site/login'], 'post')
                             . Html::submitButton(
                                 'Iniciar sesion',
 
-                                ['class' => 'btn btn-info', 'style' => 'padding-top:5px; margin-left:250px; ']
+                                ['class' => 'btn btn-info', 'style' => 'color: white;']
                             )
                             . Html::endForm()
                             . '</li>';
@@ -120,13 +120,13 @@ $baseUrl = $asset->baseUrl;
                 
                     } else {
 
-                        echo '<li class="nav-item"> '
+                        echo '<li class="nav-item" style ="padding: 8px;"> '
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Usuario (' . Yii::$app->user->identity->username . ' <i class="fa fa-user-circle-o" aria-hidden="true"></i>
         )'),
                                 ['/perfil/view'],
-                                ['class' => 'pull-right', 'style' => 'padding-right:10px;']
+                                ['class' => 'pull-right', 'style' => 'color: white; margin-right:25px;']
                             )
                             . '</li>';
 
@@ -137,7 +137,7 @@ $baseUrl = $asset->baseUrl;
                                 'Cerrar sesion <i class="fa fa-sign-in" aria-hidden="true"></i>
                     ',
 
-                                ['class' => 'btn btn-primary', 'style' => 'padding-top:5px;']
+                                ['class' => 'btn btn-primary', 'style' => 'color: white;']
                             )
                             . Html::endForm()
                             . '</li>';
