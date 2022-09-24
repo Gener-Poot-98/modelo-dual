@@ -12,12 +12,6 @@ use yii\widgets\Pjax;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this -> registerCss("
-.btn-warning {
-    color: #212529;
-    background-color: red;
-    border-color: #ffc107;
-}
-
 .text-dark {
     color: white !important;
 }
@@ -28,6 +22,20 @@ $this -> registerCss("
     border-color: green;
 }
 
+td.kv-group-even {
+    background-color: #f0f1ff !important;
+    font-size: 20px;
+    text-align: justify;
+    font-weight: bold; 
+}
+.bg-info {
+    background-color: #212F3C !important;
+}
+
+.border-info {
+    border-color: black !important;
+}
+
 ");
 
 $this->title = 'Ingenierias';
@@ -35,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ingenieria-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
 <?php Pjax::begin();?>
 

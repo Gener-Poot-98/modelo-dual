@@ -29,6 +29,13 @@ td.kv-group-even {
     text-align: justify;
     font-weight: bold; 
 }
+.bg-info {
+    background-color: #212F3C !important;
+}
+
+.border-info {
+    border-color: black !important;
+}
 
 ");
 $this->title = 'Proyecto Docentes';
@@ -36,8 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="proyecto-docente-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+ 
 <?php Pjax::begin();?>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
