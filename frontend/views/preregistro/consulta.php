@@ -45,7 +45,7 @@ $this->registerCss("
         <?= $form->field($model, 'matricula') ?>
     
         <div class="form-group">
-            <?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Consultar', ['class' => 'btn bg-gradient-info ']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 

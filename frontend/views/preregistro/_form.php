@@ -99,7 +99,7 @@ $this->registerCss("
                                     'showUpload' => false]]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-success btn-lg btn-block']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
