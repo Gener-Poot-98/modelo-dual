@@ -29,6 +29,13 @@ td.kv-group-even {
     text-align: justify;
     font-weight: bold; 
 }
+
+.btn-warning {
+    color: white;
+    background-color: #C0392B;
+    border-color: #922B21;
+}
+
 .bg-info {
     background-color: #212F3C !important;
 }
