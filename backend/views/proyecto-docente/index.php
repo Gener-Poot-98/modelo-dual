@@ -23,6 +23,13 @@ $this -> registerCss("
     border-color: #dc3545;
 }
 
+td.kv-group-even {
+    background-color: #f0f1ff !important;
+    font-size: 20px;
+    text-align: justify;
+    font-weight: bold; 
+}
+
 ");
 $this->title = 'Proyecto Docentes';
 $this->params['breadcrumbs'][] = $this->title;
@@ -76,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading'=>$this->title,
             'type'=>'info',
-            'before'=>Html::a(Yii::t('app', 'Create ProyectoDocente'), ['create'], ['class' => 'btn btn-danger']),
+            'before'=>Html::a(Yii::t('app', 'Crear ProyectoDocente'), ['create'], ['class' => 'btn btn-danger']),
             'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
             'footer'=>false
         ],
