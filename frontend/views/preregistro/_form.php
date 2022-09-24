@@ -9,15 +9,22 @@ use kartik\file\FileInput;
 /** @var yii\widgets\ActiveForm $form */
 
 $this->registerCss("
+
     
     .preregistro-form{
-        width: 90%;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-flow: column wrap;
         border-radius: 5px;
+        padding:20px;
         
+    }
+
+    #w0{
+
+        width: 65%;
     }
     label, .preregistro-form {
         font-size:18px;
