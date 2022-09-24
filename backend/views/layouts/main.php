@@ -6,10 +6,10 @@
 use backend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
-use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-
+use yii\helpers\Url;
+use yii\helpers\Html;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -18,20 +18,25 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="web/css/main.css">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="d-flex flex-column h-100">
+<body >
+
 <?php $this->beginBody() ?>
 
+<header align = "center">
+<img id="banner" src=<?php echo Url::to('@web/archivos/cabecera.png', true); ?> alt="">
+</header>
 <header>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            'class' => 'navbar navbar-expand-md navbar-dark bg-dark',
         ],
     ]);
     $menuItems = [
