@@ -57,7 +57,13 @@ AppAsset::register($this);
 
 
     if ( Yii::$app->user->can('sa') || Yii::$app->user->can('admin') ){
-        $menuItems[] = ['label' => 'Admin', 'url' => ['/admin']];
+        $menuItems[] = ['label' => 'Admin', 
+            'items' => [ 
+                ['label' => 'Gestión de usuarios', 'url' => ['/admin']], 
+                ['label' => 'Ingenierías', 'url' => ['/ingenieria']],
+                ['label' => 'Docentes', 'url' => ['/docente']],
+                ]  
+            ];
     }
 
     echo Nav::widget([
