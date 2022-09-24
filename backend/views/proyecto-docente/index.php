@@ -20,7 +20,7 @@ $this -> registerCss("
 .btn-danger {
     color: #fff;
     background-color:green;
-    border-color: #dc3545;
+    border-color: green;
 }
 
 td.kv-group-even {
