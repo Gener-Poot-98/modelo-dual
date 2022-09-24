@@ -42,19 +42,6 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-            . Html::submitButton(
-                'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-
 
     if ( Yii::$app->user->can('sa') || Yii::$app->user->can('admin') ){
         $menuItems[] = ['label' => 'Admin', 
@@ -64,6 +51,20 @@ AppAsset::register($this);
                 ['label' => 'Docentes', 'url' => ['/docente']],
                 ]  
             ];
+    }
+
+
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+            . Html::submitButton(
+                'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout', 'style' => 'margin-left:600px']
+            )
+            . Html::endForm()
+            . '</li>';
     }
 
     echo Nav::widget([
