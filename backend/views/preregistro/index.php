@@ -16,12 +16,6 @@ $this -> registerCss("
     color: white !important;
 }
 
-.btn-danger {
-    color: #fff;
-    background-color:green;
-    border-color: green;
-}
-
 td.kv-group-even {
     background-color: #f0f1ff !important;
     font-size: 20px;
@@ -101,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading'=>$this->title,
             'type'=>'info',
-            'before'=>Html::a(Yii::t('app', 'Crear Preregistro'), ['create'], ['class' => 'btn btn-danger']),
+            'before'=>Html::a(Yii::t('app', 'Crear Preregistro'), ['create'], ['class' => 'btn btn-outline-success']),
             'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
             'footer'=>false
         ],
