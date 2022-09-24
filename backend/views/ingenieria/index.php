@@ -25,7 +25,7 @@ td.kv-group-even {
 
 .btn-warning {
     color: white;
-    background-color: #C0392B;
+    background-color: #C0392B !important;
     border-color: #922B21;
 }
 

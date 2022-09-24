@@ -37,6 +37,13 @@ $this->registerCss("
     .form-control {
         font-size:18px;
     }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #03459a !important;
+        border-color: #cb0c9f;
+    }
+    
     ");
 
 ?>
@@ -92,7 +99,7 @@ $this->registerCss("
                                     'showUpload' => false]]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-info btn-lg btn-block']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-success btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
