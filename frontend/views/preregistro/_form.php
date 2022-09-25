@@ -24,7 +24,7 @@ $this->registerCss("
 
     #w0{
 
-        width: 65%;
+        width: 75%;
     }
     label, .preregistro-form {
         font-size:18px;
