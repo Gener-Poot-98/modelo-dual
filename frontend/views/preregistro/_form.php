@@ -43,60 +43,97 @@ $this->registerCss("
         background-color: #03459a !important;
         border-color: #cb0c9f;
     }
+
+    .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu), .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        font-size:12px;
+    }
     
     ");
 
 ?>
 
-<?php if (Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success">
-            <?= Yii::$app->session->getFlash('success'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success">
+        <?= Yii::$app->session->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (Yii::$app->session->hasFlash('warning')): ?>
-        <div class="alert alert-warning">
-            <?= Yii::$app->session->getFlash('warning'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('warning')) : ?>
+    <div class="alert alert-warning">
+        <?= Yii::$app->session->getFlash('warning'); ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (Yii::$app->session->hasFlash('error')): ?>
-        <div class="alert alert-danger">
-            <?= Yii::$app->session->getFlash('error'); ?>
-        </div>
-    <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger">
+        <?= Yii::$app->session->getFlash('error'); ?>
+    </div>
+<?php endif; ?>
 
 <div class="preregistro-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione su Ingeniería']) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'archivoKardex')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'file/*'],
-        'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
-                        'showUpload' => false]]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione su Ingeniería']) ?>
+        </div>
 
-    <?= $form->field($model, 'archivoConstancia_ingles')->widget(FileInput::classname(), [
-            'options' => ['accept' => 'file/*'],
-            'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
-                            'showUpload' => false]]) ?>
-
-    <?= $form->field($model, 'archivoConstancia_servicio_social')->widget(FileInput::classname(), [
+        <div class="col-md-6">
+            <?= $form->field($model, 'archivoKardex')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'file/*'],
-                'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
-                                'showUpload' => false]]) ?>
+                'pluginOptions' => [
+                    'allowedFileExtensions' => ['pdf'],
+                    'showUpload' => false
+                ]
+            ]) ?>
+        </div>
 
-    <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->widget(FileInput::classname(), [
-                    'options' => ['accept' => 'file/*'],
-                    'pluginOptions'=>['allowedFileExtensions'=>['pdf'],
-                                    'showUpload' => false]]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'archivoConstancia_ingles')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'file/*'],
+                'pluginOptions' => [
+                    'allowedFileExtensions' => ['pdf'],
+                    'showUpload' => false
+                ]
+            ]) ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'archivoConstancia_servicio_social')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'file/*'],
+                'pluginOptions' => [
+                    'allowedFileExtensions' => ['pdf'],
+                    'showUpload' => false
+                ]
+            ]) ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'file/*'],
+                'pluginOptions' => [
+                    'allowedFileExtensions' => ['pdf'],
+                    'showUpload' => false
+                ]
+            ]) ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>
