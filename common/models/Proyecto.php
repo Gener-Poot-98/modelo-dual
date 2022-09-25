@@ -7,6 +7,8 @@ use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use common\models\Departamento;
 use common\models\Ingenieria;
+use common\models\EstadoProyecto;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "proyecto".
  *
@@ -31,7 +33,7 @@ use common\models\Ingenieria;
  */
 class Proyecto extends \yii\db\ActiveRecord
 {
-    public $nombreEstudiante;
+    public $nombreEstudiante, $nombreEmpresa, $nombreAsesorExterno;
     /**
      * {@inheritdoc}
      */
@@ -46,7 +48,7 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'departamento_id', 'ingenieria_id', 'nombreEstudiante','perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id', 'created_at', 'updated_at'], 'required'],
+            [['nombre', 'departamento_id', 'ingenieria_id', 'nombreEstudiante','perfil_estudiante_id', 'empresa_id', 'nombreEmpresa', 'asesor_externo_id', 'nombreAsesorExterno', 'estado_proyecto_id'], 'required'],
             [['nombreEstudiante'], 'string'],
             [['departamento_id', 'ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -60,6 +62,18 @@ class Proyecto extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -68,12 +82,12 @@ class Proyecto extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'departamento_id' => 'Departamento ID',
-            'ingenieria_id' => 'Ingenieria ID',
-            'perfil_estudiante_id' => 'Perfil Estudiante ID',
-            'empresa_id' => 'Empresa ID',
-            'asesor_externo_id' => 'Asesor Externo ID',
-            'estado_proyecto_id' => 'Estado Proyecto ID',
+            'departamento_id' => 'Departamento',
+            'ingenieria_id' => 'Ingeniería',
+            'perfil_estudiante_id' => 'Estudiante',
+            'empresa_id' => 'Empresa',
+            'asesor_externo_id' => 'Asesor Externo',
+            'estado_proyecto_id' => 'Estado del Proyecto',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -131,6 +145,15 @@ class Proyecto extends \yii\db\ActiveRecord
     public function getEstadoProyecto()
     {
         return $this->hasOne(EstadoProyecto::class, ['id' => 'estado_proyecto_id']);
+    }
+
+    public function getEstadoProyectosList()
+    {
+        $estadoProyectos = EstadoProyecto::find()->all();
+
+        $estadoProyectosList = ArrayHelper::map($estadoProyectos, 'id', 'nombre');
+
+        return $estadoProyectosList;
     }
 
     /**

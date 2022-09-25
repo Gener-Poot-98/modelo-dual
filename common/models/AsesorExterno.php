@@ -53,4 +53,9 @@ class AsesorExterno extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Proyecto::class, ['asesor_externo_id' => 'id']);
     }
+
+    public static function findByNombre($nombre)
+    {
+        return static::findOne(['nombre' => $nombre]);
+    }
 }

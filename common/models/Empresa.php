@@ -53,4 +53,9 @@ class Empresa extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Proyecto::class, ['empresa_id' => 'id']);
     }
+
+    public static function findByNombre($nombre)
+    {
+        return static::findOne(['nombre' => $nombre]);
+    }
 }

@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\Proyecto;
 use common\models\PerfilEstudiante;
+use common\models\Empresa;
+use common\models\AsesorExterno;
 use backend\models\search\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -51,8 +53,39 @@ class ProyectoController extends Controller
             $out[] = ['value' => $d['nombre']];
         }
         echo Json::encode($out);
-        }
+    }
+
+    public function actionEmpresaList($q = null) {
+        $query = new Query;
         
+        $query->select('nombre')
+        ->from('empresa')
+            ->where('nombre LIKE "%' . $q .'%"')
+        ->orderBy('nombre');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['nombre']];
+        }
+        echo Json::encode($out);
+    }
+
+    public function actionAsesorExternoList($q = null) {
+        $query = new Query;
+        
+        $query->select('nombre')
+        ->from('asesor_externo')
+            ->where('nombre LIKE "%' . $q .'%"')
+        ->orderBy('nombre');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['nombre']];
+        }
+        echo Json::encode($out);
+    }
 
     /**
      * Lists all Proyecto models.
@@ -101,6 +134,12 @@ class ProyectoController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $perfil_estudiante = PerfilEstudiante::findByNombre($model->nombreEstudiante);
             $model->perfil_estudiante_id = $perfil_estudiante->id;
+
+            $empresa = Empresa::findByNombre($model->nombreEmpresa);
+            $model->empresa_id = $empresa->id;
+
+            $asesor_externo = AsesorExterno::findByNombre($model->nombreAsesorExterno);
+            $model->asesor_externo_id = $asesor_externo->id;
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
