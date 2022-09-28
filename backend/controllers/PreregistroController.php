@@ -99,14 +99,18 @@ class PreregistroController extends Controller
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
             if($model->estado_registro_id == 4)
-                {
-                    $this->insertarUsuario($id);
-                    $idEstudiante = $this->getEstudianteId($model->matricula);
-                    $this->asignarRolEstudiante($idEstudiante);
-                    $this->insertarPerfilEstudiante($id, $idEstudiante);
-                }
+            {
+                $this->insertarUsuario($id);
+                $idEstudiante = $this->getEstudianteId($model->matricula);
+                $this->asignarRolEstudiante($idEstudiante);
+                $this->insertarPerfilEstudiante($id, $idEstudiante);
+            }else{
 
-            return $this->redirect(['view', 'id' => $model->id]) && $this->sendEmail($model);
+                $this->sendEmail($model);
+            }
+
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -178,11 +182,13 @@ class PreregistroController extends Controller
         $user = new User();
         $user->username = $model->matricula;
         $user->email = $model->email;
-        $user->setPassword($model->matricula);
+        $bytes = openssl_random_pseudo_bytes(4);
+        $pass = bin2hex($bytes);
+        $user->setPassword($pass);
         $user->generateAuthKey();
         $user->status = 10;
 
-        return $user->save() && $this->sendEmailNewUser($user);
+        return $user->save() && $this->sendEmailNewUser($user, $model, $pass);
     }
 
     public function asignarRolEstudiante($id)
@@ -217,13 +223,13 @@ class PreregistroController extends Controller
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    protected function sendEmailNewUser($user)
+    protected function sendEmailNewUser($user, $preregistro, $pass)
     {
         return Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'nuevo-estudiante-html'],
-                ['user' => $user]
+                ['user' => $user, 'preregistro' => $preregistro, 'pass' => $pass]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($user->email)

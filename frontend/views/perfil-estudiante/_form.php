@@ -12,21 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ingenieria_id')->textInput() ?>
+    <?= $form->field($model, 'ingenieria_id')->dropDownList($model->ingenieriaLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
 
-    <?= $form->field($model, 'genero_id')->textInput() ?>
+    <?= $form->field($model, 'genero_id')->dropDownList($model->generoLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
 
-    <?= $form->field($model, 'especialidad_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'especialidad_id')->dropDownList($model->especialidadLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

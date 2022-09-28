@@ -2,11 +2,14 @@
 
 namespace frontend\controllers;
 
+use Yii;
 use common\models\PerfilEstudiante;
 use frontend\models\search\PerfilEstudianteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\PermisosHelpers;
+use common\models\RegistrosHelpers;
 
 /**
  * PerfilEstudianteController implements the CRUD actions for PerfilEstudiante model.
@@ -18,17 +21,26 @@ class PerfilEstudianteController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+            return [
+                'access' => [
+                    'class' => \yii\filters\AccessControl::className(),
+                    'only' => ['index', 'view','create', 'update', 'delete'],
+                    'rules' => [
+                            [
+                            'actions' => ['index', 'view','create', 'update', 'delete'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                            ],
+                        
+                        ],
                     ],
-                ],
-            ]
-        );
+                'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                        ],
+                    ],
+            ];
     }
 
     /**
@@ -38,13 +50,14 @@ class PerfilEstudianteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PerfilEstudianteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if ($ya_existe = RegistrosHelpers::userTiene('perfil_estudiante')) {
+            return $this->render('view', [
+                'model' => $this->findModel($ya_existe),
+            ]);
+        } else {
+            return $this->redirect(['create']);
+        }
     }
 
     /**
@@ -53,11 +66,15 @@ class PerfilEstudianteController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if ($ya_existe = RegistrosHelpers::userTiene('perfil_estudiante')) {
+            return $this->render('view', [
+                'model' => $this->findModel($ya_existe),
+            ]);
+        } else {
+            return $this->redirect(['create']);
+        }
     }
 
     /**
@@ -67,19 +84,30 @@ class PerfilEstudianteController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PerfilEstudiante();
+        $model = new PerfilEstudiante;
+            
+        $model->user_id = \Yii::$app->user->identity->id;      
+        
+        if ($ya_existe = RegistrosHelpers::userTiene('perfil_estudiante')) {
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+            return $this->render('view', [
+
+                    'model' => $this->findModel($ya_existe),
+
+                ]);
+        
+        } elseif ($model->load(Yii::$app->request->post()) && $model->save()){
+                            
+            return $this->redirect(['view']);
+                            
         } else {
-            $model->loadDefaultValues();
-        }
+                    
+            return $this->render('create', [
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+                    'model' => $model,
+
+                    ]);
+        }
     }
 
     /**
@@ -89,17 +117,28 @@ class PerfilEstudianteController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            
+        if($model =  PerfilEstudiante::find()->where(['user_id' => 
+            Yii::$app->user->identity->id])->one()) {
+            
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                
+                return $this->redirect(['view']);
+            
+            } else {
+                
+            return $this->render('update', [
+                    'model' => $model, 
+                ]);
+            }
+        
+        } else {
+                
+            throw new NotFoundHttpException('No Existe el Perfil.');
+                
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -109,11 +148,14 @@ class PerfilEstudianteController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+            
+        $model =  Perfil::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
+                
+        $this->findModel($model->id)->delete();
+            
+        return $this->redirect(['site/index']);
     }
 
     /**

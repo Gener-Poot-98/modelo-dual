@@ -44,7 +44,7 @@ class Ingenieria extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombre',
+            'nombre' => 'Ingeniería',
         ];
     }
 

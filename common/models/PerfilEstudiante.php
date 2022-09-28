@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "perfil_estudiante".
@@ -71,11 +72,11 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'nombre' => 'Nombre',
             'matricula' => 'Matricula',
-            'ingenieria_id' => 'Ingenieria ID',
-            'genero_id' => 'Genero ID',
-            'especialidad_id' => 'Especialidad ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'ingenieria_id' => 'Ingeniería',
+            'genero_id' => 'Genero',
+            'especialidad_id' => 'Especialidad',
+            'created_at' => 'Fecha de creación',
+            'updated_at' => 'Ultima Actualización',
         ];
     }
 
@@ -124,4 +125,21 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
         return static::findOne(['nombre' => $nombre]);
     }
 
+    public static function getGeneroLista()
+    {
+        $droptions = Genero::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'id', 'nombre');
+    }
+
+    public static function getEspecialidadLista()
+    {
+        $droptions = Especialidad::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'id', 'nombre');
+    }
+
+    public static function getIngenieriaLista()
+    {
+        $droptions = Ingenieria::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'id', 'nombre');
+    }
 }

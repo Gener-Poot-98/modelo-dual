@@ -125,7 +125,7 @@ $baseUrl = $asset->baseUrl;
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Usuario (' . Yii::$app->user->identity->username . ' <i class="fa fa-user-circle-o" aria-hidden="true"></i>
         )'),
-                                ['/perfil/view'],
+                                ['/perfil-estudiante/index'],
                                 ['class' => 'pull-right', 'style' => 'color: white; margin-right:25px;']
                             )
                             . '</li>';
