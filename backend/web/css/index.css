@@ -1,4 +1,8 @@
 
+h1{
+    text-align: center;
+}
+
 h2{
     text-align: center;
 }
@@ -49,5 +53,6 @@ p{
     width: 100%;
     position: relative;
     justify-content: center;
+    padding: 25px;
 
 }

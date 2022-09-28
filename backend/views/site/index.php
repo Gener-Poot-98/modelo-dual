@@ -14,7 +14,7 @@ $this->title = 'My Yii Application';
 </head>
 <form class="forma">
     <div class="site-index">
-        <h2 class="text-primary text-gradient mb-0">Administra las diferentes secciones</h2>
+        <h1 class="text-primary text-gradient mb-0">Administra las diferentes secciones</h2>
         <br>
 
         <div class="form">
