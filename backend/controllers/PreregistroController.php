@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use common\models\Preregistro;
+use common\models\User;
+use common\models\PerfilEstudiante;
 use backend\models\search\PreregistroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,6 +97,15 @@ class PreregistroController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            if($model->estado_registro_id == 4)
+                {
+                    $this->insertarUsuario($id);
+                    $idEstudiante = $this->getEstudianteId($model->matricula);
+                    $this->asignarRolEstudiante($idEstudiante);
+                    $this->insertarPerfilEstudiante($id, $idEstudiante);
+                }
+
             return $this->redirect(['view', 'id' => $model->id]) && $this->sendEmail($model);
         }
 
@@ -158,6 +169,65 @@ class PreregistroController extends Controller
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($preregistro->email)
             ->setSubject('El estado de tu Pre-registro para el ' . Yii::$app->name . ' ha cambiado')
+            ->send();
+    }
+
+    public function insertarUsuario($id)
+    {
+        $model = $this->findModel($id);
+        $user = new User();
+        $user->username = $model->matricula;
+        $user->email = $model->email;
+        $user->setPassword($model->matricula);
+        $user->generateAuthKey();
+        $user->status = 10;
+
+        return $user->save() && $this->sendEmailNewUser($user);
+    }
+
+    public function asignarRolEstudiante($id)
+    {
+        $auth = \Yii::$app->authManager;
+        $authorRole = $auth->getRole('estudiante');
+        $auth->assign($authorRole, $id);
+    }
+
+    public function insertarPerfilEstudiante($id, $idEstudiante)
+    {
+        $model = $this->findModel($id);
+        $perfil_estudiante = new PerfilEstudiante();
+        $perfil_estudiante->user_id = $idEstudiante;
+        $perfil_estudiante->nombre = $model->nombre;
+        $perfil_estudiante->matricula = $model->matricula;
+        $perfil_estudiante->ingenieria_id = $model->ingenieria_id;
+
+        return $perfil_estudiante->save();
+    }
+
+    public static function getEstudianteId($matricula)
+    {
+        $user = User::find('id')
+        ->where(['username' => $matricula])
+        ->one();
+        return isset($user->id) ? $user->id : false;
+    }
+
+    /**
+     * Sends confirmation email to user
+     * @param User $user user model to with email should be send
+     * @return bool whether the email was sent
+     */
+    protected function sendEmailNewUser($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'nuevo-estudiante-html'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($user->email)
+            ->setSubject('Bienvenido a ' . Yii::$app->name)
             ->send();
     }
 }
