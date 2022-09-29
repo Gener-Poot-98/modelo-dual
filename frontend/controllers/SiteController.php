@@ -151,6 +151,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays about page.
+     *
+     * @return mixed
+     */
+    public function actionDual()
+    {
+        return $this->render('dual');
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed

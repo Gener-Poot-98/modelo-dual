@@ -92,16 +92,7 @@ $baseUrl = $asset->baseUrl;
                             . Html::a(
                                 "<i class=\"fa fa-icon\"></i> "
                                     . Yii::t('app', 'Quiero ser Dual'),
-                                ['/preregistro/create'],
-                                ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
-                            )
-                            . '</li>';
-
-                            echo '<li class="nav-item" style ="padding: 8px;"> '
-                            . Html::a(
-                                "<i class=\"fa fa-icon\"></i> "
-                                    . Yii::t('app', 'Consulta'),
-                                ['/preregistro/consulta'],
+                                ['/site/dual'],
                                 ['class' => 'pull-right', 'style' => 'padding-right:1px; color: white;']
                             )
                             . '</li>';
@@ -336,7 +327,7 @@ $baseUrl = $asset->baseUrl;
                         <p class="my-4 text-sm">
                             Reservados todos los derechos. Copyright © <script>
                                 document.write(new Date().getFullYear())
-                            </script> FF MANAGEMENT <a href="#"></a>
+                            </script> SISTEMA DUAL <a href="#"></a>
                         </p>
                     </div>
                 </div>
