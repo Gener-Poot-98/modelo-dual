@@ -2,43 +2,39 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\PermisosHelpers;
-use common\models\Genero;
 
 /** @var yii\web\View $this */
 /** @var common\models\PerfilEstudiante $model */
 
-$this->title = $model->matricula;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Perfil Estudiantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="perfil-estudiante-view">
 
-    <h1>Perfil</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?Php
-
-        //esto no es necesario pero está aquí como ejemplo
-
-        if (PermisosHelpers::userDebeSerPropietario('perfil_estudiante', $model->id)) {
-
-            echo Html::a('Actualizar', ['update', 'id' => $model->id],
-                ['class' => 'btn btn-primary']);
-        } ?>
-
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
+            'id',
             //'user_id',
             'nombre',
             'matricula',
             'ingenieria.nombre',
-            //'genero_id',
+            'user.email:email',
             'genero.nombre',
             'especialidad.nombre',
             'created_at',

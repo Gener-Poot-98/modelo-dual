@@ -91,6 +91,16 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    /**
      * Gets query for [[Genero]].
      *
      * @return \yii\db\ActiveQuery
@@ -141,5 +151,19 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     {
         $droptions = Ingenieria::find()->asArray()->all();
         return ArrayHelper::map($droptions, 'id', 'nombre');
+    }
+
+    public function getIngenieriasList()
+    {
+        $ingenierias = Ingenieria::find()->all();
+
+        $ingenieriasList = ArrayHelper::map($ingenierias, 'id', 'nombre');
+
+        return $ingenieriasList;
+    }
+
+    public function getIngenieriaNombre() 
+    { 
+        return $this->ingenieria->nombre; 
     }
 }

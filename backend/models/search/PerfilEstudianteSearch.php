@@ -4,23 +4,22 @@ namespace backend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Preregistro;
+use common\models\PerfilEstudiante;
 
 /**
- * PreregistroSearch represents the model behind the search form of `common\models\Preregistro`.
+ * PerfilEstudianteSearch represents the model behind the search form of `common\models\PerfilEstudiante`.
  */
-class PreregistroSearch extends Preregistro
+class PerfilEstudianteSearch extends PerfilEstudiante
 {
     public $ingenieriaNombre;
-    public $estadoRegistroNombre;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'ingenieria_id', 'estado_registro_id'], 'integer'],
-            [['nombre', 'matricula', 'email', 'kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios', 'created_at', 'updated_at', 'comentario', 'ingenieriaNombre','estadoRegistroNombre'], 'safe'],
+            [['id', 'user_id', 'ingenieria_id', 'genero_id', 'especialidad_id'], 'integer'],
+            [['nombre', 'matricula', 'created_at', 'updated_at', 'ingenieriaNombre'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class PreregistroSearch extends Preregistro
      */
     public function search($params)
     {
-        $query = Preregistro::find();
+        $query = PerfilEstudiante::find();
 
         // add conditions that should always apply here
 
@@ -54,15 +53,10 @@ class PreregistroSearch extends Preregistro
             'attributes' => [ 
                 'nombre', 
                 'matricula', 
-                'email', 
                 'ingenieriaNombre' => [ 
                     'asc' => ['ingenieria.nombre' => SORT_ASC], 
                     'desc' => ['ingenieria.nombre' => SORT_DESC], 
-                    'label' => 'Ingeniería' ], 
-                'estadoRegistroNombre' => [ 
-                    'asc' => ['estadoRegistro.nombre' => SORT_ASC], 
-                    'desc' => ['estadoRegistro.nombre' => SORT_DESC], 
-                    'label' => 'Estado' ], ] ]);
+                    'label' => 'Ingeniería' ], ] ]);
 
         $this->load($params);
 
@@ -75,27 +69,19 @@ class PreregistroSearch extends Preregistro
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'ingenieria_id' => $this->ingenieria_id,
+            'genero_id' => $this->genero_id,
+            'especialidad_id' => $this->especialidad_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'estado_registro_id' => $this->estado_registro_id,
         ]);
 
-        $query->andFilterWhere(['like', 'preregistro.nombre', $this->nombre])
-            ->andFilterWhere(['like', 'matricula', $this->matricula])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'kardex', $this->kardex])
-            ->andFilterWhere(['like', 'constancia_ingles', $this->constancia_ingles])
-            ->andFilterWhere(['like', 'constancia_servicio_social', $this->constancia_servicio_social])
-            ->andFilterWhere(['like', 'constancia_creditos_complementarios', $this->constancia_creditos_complementarios])
-            ->andFilterWhere(['like', 'comentario', $this->comentario]);
-        
+        $query->andFilterWhere(['like', 'perfil_estudiante.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'matricula', $this->matricula]);
+
         $query->joinWith(['ingenieria' => function ($q) {
             $q->andFilterWhere(['=', 'ingenieria.id', $this->ingenieriaNombre]);
-            }]);
-
-        $query->joinWith(['estadoRegistro' => function ($q) {
-            $q->andFilterWhere(['=', 'estado_registro.id', $this->estadoRegistroNombre]);
             }]);
 
         return $dataProvider;

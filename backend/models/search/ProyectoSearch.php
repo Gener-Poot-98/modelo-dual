@@ -84,7 +84,7 @@ class ProyectoSearch extends Proyecto
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        $query->andFilterWhere(['like', 'proyecto.nombre', $this->nombre]);
 
         $query->joinWith(['departamento' => function ($q) {
             $q->andFilterWhere(['=', 'departamento.id', $this->departamentoNombre]);
