@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Preregistro;
 use common\models\User;
 use common\models\PerfilEstudiante;
+use common\models\Expediente;
 use backend\models\search\PreregistroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -104,6 +105,8 @@ class PreregistroController extends Controller
                 $idEstudiante = $this->getEstudianteId($model->matricula);
                 $this->asignarRolEstudiante($idEstudiante);
                 $this->insertarPerfilEstudiante($id, $idEstudiante);
+                $idPerfilEstudiante = $this->getPerfilEstudianteId($model->matricula);
+                $this->crearExpediente($idPerfilEstudiante);
             }else{
 
                 $this->sendEmail($model);
@@ -210,12 +213,28 @@ class PreregistroController extends Controller
         return $perfil_estudiante->save();
     }
 
+    public function crearExpediente($idPerfilEstudiante)
+    {
+        $expediente = new Expediente();
+        $expediente->perfil_estudiante_id = $idPerfilEstudiante;
+
+        return $expediente->save();
+    }
+
     public static function getEstudianteId($matricula)
     {
         $user = User::find('id')
         ->where(['username' => $matricula])
         ->one();
         return isset($user->id) ? $user->id : false;
+    }
+
+    public static function getPerfilEstudianteId($matricula)
+    {
+        $perfilEstudiante = PerfilEstudiante::find('id')
+        ->where(['matricula' => $matricula])
+        ->one();
+        return isset($perfilEstudiante->id) ? $perfilEstudiante->id : false;
     }
 
     /**
