@@ -35,12 +35,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
-            'plan_estudios_id',
+            //'plan_estudios_id',
+            [ 'label' => 'PlanEstudios', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->planEstudios->nombre; 
+            } ],
+
             [ 'label' => 'Departamento', 'value' => function ($searchModel) 
             { 
                 return $searchModel->departamento->nombre; 
             } ],
-            'asesor_interno_id',
+            //'asesor_interno_id',
+            [ 'label' => 'AsesorInterno', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->asesorInterno->nombre; 
+            } ],
             //'departamento_id',
             [ 'label' => 'Ingenieria', 'value' => function ($searchModel) 
             { 
@@ -62,7 +71,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->asesorExterno->nombre; 
             } ],
             //'asesor_externo_id',
-            'periodo_id',
+            //'periodo_id',
+            [ 'label' => 'Periodo', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->periodo->nombre; 
+            } ],
             'horas_totales',
             [ 'label' => 'EstadoProyecto', 'value' => function ($searchModel) 
             { 

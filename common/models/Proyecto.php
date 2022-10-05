@@ -229,6 +229,11 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(PlanEstudios::class, ['id' => 'plan_estudios_id']);
     }
 
+    public function getPlanEstudiosNombre() 
+    { 
+        return $this->planEstudios->nombre; 
+    }
+
     /**
      * Gets query for [[PerfilEstudiante]].
      *
