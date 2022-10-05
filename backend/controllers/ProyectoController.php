@@ -150,7 +150,6 @@ class ProyectoController extends Controller
             ]);
         }
     }
-
     /**
      * Updates an existing Proyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -162,13 +161,24 @@ class ProyectoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $perfil_estudiante = PerfilEstudiante::findByNombre($model->nombreEstudiante);
+            $model->perfil_estudiante_id = $perfil_estudiante->id;
+
+            $empresa = Empresa::findByNombre($model->nombreEmpresa);
+            $model->empresa_id = $empresa->id;
+
+            $asesor_externo = AsesorExterno::findByNombre($model->nombreAsesorExterno);
+            $model->asesor_externo_id = $asesor_externo->id;
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

@@ -16,7 +16,11 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'plan_estudios_id')->textInput() ?>
+
     <?= $form->field($model, 'departamento_id')->dropDownList($model->getDepartamentoList(), ['prompt' => 'Seleccione el departamento']) ?>
+
+    <?= $form->field($model, 'asesor_interno_id')->textInput() ?>
 
     <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione la Ingeniería']) ?>
 
@@ -77,7 +81,14 @@ use yii\helpers\Url;
     ]);
     ?>
 
+    <?= $form->field($model, 'periodo_id')->textInput() ?>
+
+    <?= $form->field($model, 'horas_totales')->textInput() ?>
+
     <?= $form->field($model, 'estado_proyecto_id')->dropDownList($model->getEstadoProyectosList(), ['prompt' => 'Seleccione el estado del proyecto']) ?>
+
+    <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

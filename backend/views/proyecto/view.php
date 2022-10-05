@@ -35,10 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
+            'plan_estudios_id',
             [ 'label' => 'Departamento', 'value' => function ($searchModel) 
             { 
                 return $searchModel->departamento->nombre; 
             } ],
+            'asesor_interno_id',
             //'departamento_id',
             [ 'label' => 'Ingenieria', 'value' => function ($searchModel) 
             { 
@@ -60,33 +62,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->asesorExterno->nombre; 
             } ],
             //'asesor_externo_id',
+            'periodo_id',
+            'horas_totales',
             [ 'label' => 'EstadoProyecto', 'value' => function ($searchModel) 
             { 
                 return $searchModel->estadoProyecto->nombre; 
             } ],
             'created_at',
             'updated_at',
+            'descripcion',
         ],
     ]) ?>
 
 </div>
-<h5>Docentes</h5>
-<div >
-<?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-           // 'proyecto_id',
-            //'docente_id',
-            ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
 
-            ['class' => 'yii\grid\ActionColumn', 'controller' => 'proyecto-docente'],
-
-        ],
-    ]); ?>
-
-</div>
 

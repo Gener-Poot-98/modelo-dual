@@ -154,9 +154,6 @@ $baseUrl = $asset->baseUrl;
                         <h1 class="text-white">Sistema de Educación Dual</h1>
                         <p class="lead mb-4 text-white opacity-8">Registrate y observa los documentos que te hacen falta!</p>
 
-                        <?php
-                        echo Html::a('Comienza Ahora', ['/preregistro/create'], ['class' => 'btn bg-white text-dark']);
-                        ?>
                         <h6 class="text-white mb-2 mt-5">Encuentranos en</h6>
                         <div class="d-flex justify-content-center">
                             <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
