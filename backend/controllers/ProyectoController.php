@@ -112,7 +112,7 @@ class ProyectoController extends Controller
     public function actionView($id)
     {
         $searchModel = new AsignaturaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams, $id);
 
         return $this->render('view', [
             'model' => $this->findModel($id),

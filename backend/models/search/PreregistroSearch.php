@@ -60,8 +60,8 @@ class PreregistroSearch extends Preregistro
                     'desc' => ['ingenieria.nombre' => SORT_DESC], 
                     'label' => 'Ingeniería' ], 
                 'estadoRegistroNombre' => [ 
-                    'asc' => ['estadoRegistro.nombre' => SORT_ASC], 
-                    'desc' => ['estadoRegistro.nombre' => SORT_DESC], 
+                    'asc' => ['estado_registro.nombre' => SORT_ASC], 
+                    'desc' => ['estado_registro.nombre' => SORT_DESC], 
                     'label' => 'Estado' ], ] ]);
 
         $this->load($params);

@@ -19,4 +19,19 @@ class RegistrosHelpers
             return $resultado['id'];
         }
     }
+
+    public static function buscarExpediente()
+    {
+        $conexion = \Yii::$app->db;
+        $userid = Yii::$app->user->identity->id;
+        $sql = "SELECT id FROM expediente WHERE perfil_estudiante_id = (SELECT id FROM perfil_estudiante WHERE user_id=:userid)";
+        $comando = $conexion->createCommand($sql);
+        $comando->bindValue(":userid", $userid);
+        $resultado = $comando->queryOne();
+        if ($resultado == null) {
+            return false;
+        } else {
+            return $resultado['id'];
+        }
+    }
 }
