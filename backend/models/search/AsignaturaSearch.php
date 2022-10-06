@@ -10,7 +10,7 @@ use common\models\Asignatura;
  * AsignaturaSearch represents the model behind the search form of `common\models\Asignatura`.
  */
 class AsignaturaSearch extends Asignatura
-{
+{  public $docenteNombre;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +18,7 @@ class AsignaturaSearch extends Asignatura
     {
         return [
             [['id', 'docente_id', 'horas_dedicadas', 'semestre_id'], 'integer'],
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'periodo_desarrollo', 'periodo_acreditacion'], 'safe'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docenteNombre','periodo_desarrollo', 'periodo_acreditacion'], 'safe'],
         ];
     }
 
@@ -38,9 +38,12 @@ class AsignaturaSearch extends Asignatura
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $proyecto_id= null)
     {
-        $query = Asignatura::find();
+        if ($proyecto_id) 
+            $query = Asignatura::find()->where(['proyecto_id' => $proyecto_id]); 
+        else 
+            $query = Asignatura::find();
 
         // add conditions that should always apply here
 
@@ -56,6 +59,14 @@ class AsignaturaSearch extends Asignatura
             return $dataProvider;
         }
 
+        $dataProvider->setSort([ 
+            'attributes' => [ 
+                'nombre', 
+                'docenteNombre' => [
+                    'asc' => ['docente.nombre' => SORT_ASC],
+                    'desc' => ['docente.nombre' => SORT_DESC],
+                    'label' => 'Docente'], ] ]);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -70,6 +81,10 @@ class AsignaturaSearch extends Asignatura
             ->andFilterWhere(['like', 'competencia_disciplinar', $this->competencia_disciplinar])
             ->andFilterWhere(['like', 'periodo_desarrollo', $this->periodo_desarrollo])
             ->andFilterWhere(['like', 'periodo_acreditacion', $this->periodo_acreditacion]);
+
+        $query->joinWith(['docente' => function ($q) {
+            $q->andFilterWhere(['=', 'docente.id', $this->docenteNombre]);
+            }]);
 
         return $dataProvider;
     }

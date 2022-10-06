@@ -34,11 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'clave',
             'creditos',
             'competencia_disciplinar:ntext',
-            'docente_id',
+            //'docente_id',
+            [ 'label' => 'Docente', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->docente->nombre; 
+            } ],
             'horas_dedicadas',
             'periodo_desarrollo',
             'periodo_acreditacion',
-            'semestre_id',
+            //'semestre_id',
+            [ 'label' => 'Semestre', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->semestre->nombre; 
+            } ],
         ],
     ]) ?>
 

@@ -10,7 +10,7 @@ use backend\models\search\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\search\ProyectoDocenteSearch;
+use backend\models\search\AsignaturaSearch;
 use yii\db\Query;
 use yii\helpers\Json;
 use Yii;
@@ -111,7 +111,7 @@ class ProyectoController extends Controller
      */
     public function actionView($id)
     {
-        $searchModel = new ProyectoDocenteSearch();
+        $searchModel = new AsignaturaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('view', [

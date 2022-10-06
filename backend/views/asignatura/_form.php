@@ -12,26 +12,46 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'clave')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'creditos')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'clave')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 6]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'creditos')->textInput(['maxlength' => true]) ?>
+        </div>
+        
+        <div class="col-md-6">
+            <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 1]) ?>
+        </div>
 
-    <?= $form->field($model, 'docente_id')->textInput() ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'docente_id')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'horas_dedicadas')->textInput() ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'horas_dedicadas')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'periodo_desarrollo')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'periodo_desarrollo')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'periodo_acreditacion')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'periodo_acreditacion')->textInput(['maxlength' => true]) ?>
+        </div>
+
+    </div>
 
     <?= $form->field($model, 'semestre_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

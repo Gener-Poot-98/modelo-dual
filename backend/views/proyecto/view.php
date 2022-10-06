@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
-use common\models\ProyectoDocente;
+use common\models\Asignatura;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 
@@ -86,6 +86,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
         ],
     ]) ?>
+
+<?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            'nombre',
+            'clave',
+            'creditos',
+            'competencia_disciplinar:ntext',
+            //'docente_id',
+            ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
+            //'horas_dedicadas',
+            //'periodo_desarrollo',
+            //'periodo_acreditacion',
+            //'semestre_id',
+            ['class' => 'yii\grid\ActionColumn', 'controller' => 'asignatura'],
+        ],
+    ]); ?>
 
 </div>
 
