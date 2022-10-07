@@ -122,6 +122,20 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(AsesorInterno::class, ['id' => 'asesor_interno_id']);
     }
 
+    public function getAsesorInternoList()
+    {
+        $asesorInterno = AsesorInterno::find()->all();
+
+        $asesorInternoList = ArrayHelper::map($asesorInterno, 'id', 'nombre');
+
+        return $asesorInternoList;
+    }
+
+    public function getAsesorInternoNombre() 
+    { 
+        return $this->asesorInterno->nombre; 
+    }
+
     /**
      * Gets query for [[AsesorExterno]].
      *
@@ -229,6 +243,15 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(PlanEstudios::class, ['id' => 'plan_estudios_id']);
     }
 
+    public function getPlanEstudiosList()
+    {
+        $estudios = PlanEstudios::find()->all();
+
+        $estudiosList = ArrayHelper::map($estudios, 'id', 'nombre');
+
+        return $estudiosList;
+    }
+
     public function getPlanEstudiosNombre() 
     { 
         return $this->planEstudios->nombre; 
@@ -244,6 +267,7 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(Periodo::class, ['id' => 'periodo_id']);
     }
 
+    
     /**
      * Gets query for [[ProyectoDocentes]].
      *

@@ -11,6 +11,8 @@ use common\models\ProyectoAsignatura;
  */
 class ProyectoAsignaturaSearch extends ProyectoAsignatura
 {
+    public $proyectoNombre;
+    public $asignaturaNombre;
     /**
      * {@inheritdoc}
      */
@@ -18,6 +20,8 @@ class ProyectoAsignaturaSearch extends ProyectoAsignatura
     {
         return [
             [['id', 'proyecto_id', 'asignatura_id'], 'integer'],
+            [['proyectoNombre','asignaturaNombre'], 'safe'],
+
         ];
     }
 
@@ -54,6 +58,26 @@ class ProyectoAsignaturaSearch extends ProyectoAsignatura
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->innerJoin('proyecto','proyecto.id = proyecto_asignatura.proyecto_id');
+        $query->innerJoin('asignatura','asignatura.id = proyecto_asignatura.asignatura_id');
+
+        $dataProvider->setSort([
+            'defaultOrder' => [
+                'proyectoNombre' => SORT_ASC
+            ],
+            'attributes' => [
+                'proyecto_id',
+                'asignatura_id',
+                'proyectoNombre' => [
+                    'asc' => ['proyecto.nombre' => SORT_ASC],
+                    'desc' => ['proyecto.nombre' => SORT_DESC],
+                ], 
+                'asignaturaNombre' => [
+                    'asc' => ['asignatura.nombre' => SORT_ASC],
+                    'desc' => ['asignatura.nombre' => SORT_DESC],
+                ],    
+            ]
+        ]);
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -61,6 +85,20 @@ class ProyectoAsignaturaSearch extends ProyectoAsignatura
             'proyecto_id' => $this->proyecto_id,
             'asignatura_id' => $this->asignatura_id,
         ]);
+
+        $query->andFilterWhere([
+            'proyecto_asignatura.id' => $this->id,
+            'proyecto_asignatura.proyecto_id' => $this->proyecto_id,
+            'proyecto_asignatura.asignatura_id' => $this->asignatura_id,
+        ]);  
+
+
+        $query->andFilterWhere([
+            'LIKE','proyecto.nombre', $this->proyectoNombre,
+            ]); 
+        $query->andFilterWhere([
+            'LIKE','asignatura.nombre', $this->asignaturaNombre,
+            ]);
 
         return $dataProvider;
     }

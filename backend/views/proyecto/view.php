@@ -9,7 +9,6 @@ use yii\grid\ActionColumn;
 
 /** @var yii\web\View $this */
 /** @var common\models\Proyecto $model */
-
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -86,25 +85,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
         ],
     ]) ?>
-
+    <p>
+    <?= Html::a('Asignar Asignatura', ['proyecto-asignatura/create', 'proyecto_id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+<h2>Asignaturas</h2>
+<br>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nombre',
             'clave',
+            'nombre',
             'creditos',
             'competencia_disciplinar:ntext',
             //'docente_id',
             ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
-            //'horas_dedicadas',
-            //'periodo_desarrollo',
-            //'periodo_acreditacion',
+            'horas_dedicadas',
+            'periodo_desarrollo',
+            'periodo_acreditacion',
             //'semestre_id',
+
             ['class' => 'yii\grid\ActionColumn', 'controller' => 'asignatura'],
+
+            
         ],
     ]); ?>
 
