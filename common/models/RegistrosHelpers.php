@@ -34,4 +34,17 @@ class RegistrosHelpers
             return $resultado['id'];
         }
     }
+
+    public static function validarFecha($fecha_inicio, $fecha_cierre, $fecha_actual)
+    {
+        $fecha_inicio = strtotime($fecha_inicio);
+        $fecha_cierre = strtotime($fecha_cierre);
+        $fecha_actual = strtotime($fecha_actual);
+        if (($fecha_actual >= $fecha_inicio) && ($fecha_actual <= $fecha_cierre))
+        {
+            return true;
+        } else{
+            return false;
+        }
+    }
 }

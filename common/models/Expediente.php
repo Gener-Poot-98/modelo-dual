@@ -62,11 +62,11 @@ class Expediente extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'perfil_estudiante_id' => 'Perfil Estudiante ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'perfil_estudiante_id' => 'Estudiante',
+            'created_at' => 'Fecha de creación',
+            'updated_at' => 'Última actualización',
             'fecha_cierre' => 'Fecha Cierre',
-            'estado_expediente_id' => 'Estado Expediente ID',
+            'estado_expediente_id' => 'Estado',
         ];
     }
 

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $model */
 
-$this->title = $model->id;
+$this->title = $model->matricula;
 $this->params['breadcrumbs'][] = ['label' => 'Preregistros', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'nombre',
             'matricula',
             'email:email',
@@ -79,8 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
             { 
                 return $searchModel->estadoRegistro->nombre; 
             } ],
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'comentario:ntext',
         ],
     ]) ?>

@@ -22,6 +22,15 @@ return [
         ]
     ],
     'components' => [
+
+        'formatter' => [
+
+            'dateFormat' => 'dd-MM-yyyy',
+
+            'datetimeFormat' => 'php:d-m-Y H:i',
+
+        ],
+
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],

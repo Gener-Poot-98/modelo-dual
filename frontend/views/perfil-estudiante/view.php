@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'genero_id',
             'genero.nombre',
             'especialidad.nombre',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

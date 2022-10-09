@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\DateTimePicker;
+use kartik\widgets\DatePicker;
 
 /** @var yii\web\View $this */
 /** @var common\models\Documento $model */
@@ -20,32 +20,32 @@ use kartik\widgets\DateTimePicker;
     <div class="row">
         <div class="col-md-6">
             <?php echo $form->field($model,'fecha_inicio')->
-                    widget(DateTimePicker::className(),[
-                        'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                    widget(DatePicker::className(),[
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
                         'layout' => '{picker}{input}{remove}',
                         'pluginOptions' => [
-                            'showMeridian' => true,
                             'autoclose' => true,
-                            'todayBtn' => true
+                            'todayHighlight' => true,
+                            'todayBtn' => true,
+                            'format' => 'yyyy-mm-dd',
                         ]
                 ]) ?>
         </div>
 
         <div class="col-md-6">
             <?php echo $form->field($model,'fecha_cierre')->
-                        widget(DateTimePicker::className(),[
-                            'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                        widget(DatePicker::className(),[
+                            'type' => DatePicker::TYPE_COMPONENT_APPEND,
                             'layout' => '{picker}{input}{remove}',
                             'pluginOptions' => [
-                                'showMeridian' => true,
                                 'autoclose' => true,
-                                'todayBtn' => true
+                                'todayHighlight' => true,
+                                'todayBtn' => true,
+                                'format' => 'yyyy-mm-dd',
                             ]
                 ]) ?>
         </div>
     </div>
-
-    <?= $form->field($model, 'estado_documento_id')->dropDownList($model->estadoDocumentoNombreList, ['prompt' => 'Por favor Seleccione Uno' ]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

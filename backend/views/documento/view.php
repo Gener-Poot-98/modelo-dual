@@ -32,14 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre',
             'descripcion:ntext',
-            'fecha_inicio',
-            'fecha_cierre',
-            [ 'label' => 'Estado', 'value' => function ($searchModel) 
-            { 
-                return $searchModel->estadoDocumento->nombre; 
-            } ],
-            'created_at',
-            'updated_at',
+            'fecha_inicio:date',
+            'fecha_cierre:date',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

@@ -30,7 +30,89 @@ $baseUrl = $asset->baseUrl;
     </div>
 <?php endif; ?>
 
-<section class="py-5">
+<?php
+if ( Yii::$app->user->can('estudiante')){ ?>
+
+<div class="site-index">
+
+<h1 style="text-align:center;" class="text-primary text-gradient mb-0">Gestor de expediente</h2>
+<br><br>
+
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col mb-4">
+        <!-- Card -->
+        <div class="card">
+
+        <!--Card image-->
+        <div class="view overlay">
+            <img class="card-img-top" src=<?php echo Url::to('@web/archivos/expediente.jpg', true); ?>
+            alt="Card image cap">
+            <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!--Card content-->
+        <div class="card-body">
+
+            <!--Title-->
+            <h4 class="card-title">Expediente</h4>
+            <!--Text-->
+            <hr>
+            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+            <p>
+                <?php
+                    if (!Yii::$app->user->isGuest) {
+                        echo Html::a('Acceder', ['expediente/view'], ['class' => 'btn btn-outline-primary']);
+                    }
+                ?>
+            </p>
+
+        </div>
+
+        </div>
+        <!-- Card -->
+    </div>
+    <div class="col mb-4">
+        <!-- Card -->
+        <div class="card">
+
+        <!--Card image-->
+        <div class="view overlay">
+            <img class="card-img-top" src=<?php echo Url::to('@web/archivos/documento.webp', true); ?>
+            alt="Card image cap">
+            <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!--Card content-->
+        <div class="card-body">
+
+            <!--Title-->
+            <h4 class="card-title">Documentos pendientes</h4>
+            <!--Text-->
+            <hr>
+            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+            <p>
+                <?php
+                    if (!Yii::$app->user->isGuest) {
+                        echo Html::a('Acceder', ['documento/index'], ['class' => 'btn btn-outline-primary']);
+                    }
+                ?>
+            </p>
+
+        </div>
+
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<?php } else { ?>
+
+    <section class="py-5">
     <div class="container">
         <div class="row">
             <div class="row text-center my-sm-5 mt-5">
@@ -114,8 +196,6 @@ $baseUrl = $asset->baseUrl;
         </div>
 </section>
 
-
-
 <!-- -------   START PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
 <div class="pt-5">
     <div class="container">
@@ -135,3 +215,6 @@ $baseUrl = $asset->baseUrl;
         </div>
     </div>
 </div>
+
+<?php }
+?>

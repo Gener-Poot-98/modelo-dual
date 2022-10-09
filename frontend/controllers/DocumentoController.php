@@ -2,19 +2,17 @@
 
 namespace frontend\controllers;
 
-use common\models\Expediente;
-use frontend\models\search\ExpedienteSearch;
+use common\models\Documento;
+use frontend\models\search\DocumentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\RegistrosHelpers;
-use frontend\models\search\DocumentoExpedienteSearch;
-use Yii;
 
 /**
- * ExpedienteController implements the CRUD actions for Expediente model.
+ * DocumentoController implements the CRUD actions for Documento model.
  */
-class ExpedienteController extends Controller
+class DocumentoController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,14 +33,15 @@ class ExpedienteController extends Controller
     }
 
     /**
-     * Lists all Expediente models.
+     * Lists all Documento models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ExpedienteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $ya_existe = RegistrosHelpers::buscarExpediente();
+        $searchModel = new DocumentoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams, $ya_existe);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -51,35 +50,26 @@ class ExpedienteController extends Controller
     }
 
     /**
-     * Displays a single Expediente model.
+     * Displays a single Documento model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-
-    public function actionView()
+    public function actionView($id)
     {
-        if ($ya_existe = RegistrosHelpers::buscarExpediente()) {
-            $searchModel = new DocumentoExpedienteSearch(); 
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $ya_existe);
-            return $this->render('view', [
-                'model' => $this->findModel($ya_existe),
-                'searchModel' => $searchModel, 
-                'dataProvider' => $dataProvider,
-            ]);
-        } else {
-            return $this->redirect(['create']);
-        }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
-     * Creates a new Expediente model.
+     * Creates a new Documento model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Expediente();
+        $model = new Documento();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -89,13 +79,15 @@ class ExpedienteController extends Controller
             $model->loadDefaultValues();
         }
 
+
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Expediente model.
+     * Updates an existing Documento model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -115,7 +107,7 @@ class ExpedienteController extends Controller
     }
 
     /**
-     * Deletes an existing Expediente model.
+     * Deletes an existing Documento model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -129,27 +121,19 @@ class ExpedienteController extends Controller
     }
 
     /**
-     * Finds the Expediente model based on its primary key value.
+     * Finds the Documento model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Expediente the loaded model
+     * @return Documento the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Expediente::findOne(['id' => $id])) !== null) {
+        if (($model = Documento::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionDownload($filename)
-    {
-        $path = Yii::getAlias('@frontend') . '/web/' . $filename;
-        if(file_exists($path))
-        {
-            return Yii::$app->response->sendFile($path);
-        }
-    }
 }

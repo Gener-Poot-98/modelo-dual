@@ -1,17 +1,17 @@
 <?php
 
-namespace backend\models\search;
+namespace frontend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Documento;
+use common\models\DocumentoExpediente;
 
 /**
  * DocumentoSearch represents the model behind the search form of `common\models\Documento`.
  */
 class DocumentoSearch extends Documento
 {
-    public $estadoDocumentoNombre;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +19,7 @@ class DocumentoSearch extends Documento
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'descripcion', 'fecha_inicio', 'fecha_cierre', 'created_at', 'updated_at', 'estadoDocumentoNombre'], 'safe'],
+            [['nombre', 'descripcion', 'fecha_inicio', 'fecha_cierre', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -39,25 +39,23 @@ class DocumentoSearch extends Documento
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $expediente_id=null)
     {
-        $query = Documento::find();
+        $subQuery = (new \yii\db\Query())
+        ->select(['documento_id'])
+        ->from('documento_expediente')
+        ->where(['expediente_id' => $expediente_id]);
+
+        if ($expediente_id)
+            $query = Documento::find()->where(['not in','id', $subQuery]);
+        else
+            $query = Documento::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->setSort([ 
-            'attributes' => [ 
-                'nombre', 
-                'fecha_inicio', 
-                'fecha_cierre', 
-                'estadoDocumentoNombre' => [ 
-                    'asc' => ['estado_documento.nombre' => SORT_ASC], 
-                    'desc' => ['estado_documento.nombre' => SORT_DESC], 
-                    'label' => 'Estado' ], ] ]);
 
         $this->load($params);
 
@@ -76,7 +74,7 @@ class DocumentoSearch extends Documento
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'documento.nombre', $this->nombre])
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;

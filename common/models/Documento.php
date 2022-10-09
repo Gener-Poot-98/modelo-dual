@@ -15,13 +15,11 @@ use yii\helpers\ArrayHelper;
  * @property string|null $descripcion
  * @property string $fecha_inicio
  * @property string $fecha_cierre
- * @property int $estado_documento_id
  * @property string $created_at
  * @property string $updated_at
  *
- * @property Archivo[] $archivos
- * @property DocumentoArchivo[] $documentoArchivos
- * @property EstadoDocumento $estadoDocumento
+ * @property DocumentoExpediente[] $documentoExpedientes
+ * @property Expediente[] $expedientes
  */
 class Documento extends \yii\db\ActiveRecord
 {
@@ -39,12 +37,10 @@ class Documento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'fecha_inicio', 'fecha_cierre', 'estado_documento_id'], 'required'],
+            [['nombre', 'fecha_inicio', 'fecha_cierre'], 'required'],
             [['descripcion'], 'string'],
             [['fecha_inicio', 'fecha_cierre', 'created_at', 'updated_at'], 'safe'],
-            [['estado_documento_id'], 'integer'],
             [['nombre'], 'string', 'max' => 255],
-            [['estado_documento_id'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoDocumento::class, 'targetAttribute' => ['estado_documento_id' => 'id']],
         ];
     }
 
@@ -71,53 +67,28 @@ class Documento extends \yii\db\ActiveRecord
             'descripcion' => 'Descripcion',
             'fecha_inicio' => 'Fecha de Inicio',
             'fecha_cierre' => 'Fecha de Cierre',
-            'estado_documento_id' => 'Estado',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Última Actualización',
         ];
     }
 
     /**
-     * Gets query for [[Archivos]].
+     * Gets query for [[DocumentoExpedientes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getArchivos()
+    public function getDocumentoExpedientes()
     {
-        return $this->hasMany(Archivo::class, ['id' => 'archivo_id'])->viaTable('documento_archivo', ['documento_id' => 'id']);
+        return $this->hasMany(DocumentoExpediente::class, ['documento_id' => 'id']);
     }
 
     /**
-     * Gets query for [[DocumentoArchivos]].
+     * Gets query for [[Expedientes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDocumentoArchivos()
+    public function getExpedientes()
     {
-        return $this->hasMany(DocumentoArchivo::class, ['documento_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[EstadoDocumento]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEstadoDocumento()
-    {
-        return $this->hasOne(EstadoDocumento::class, ['id' => 'estado_documento_id']);
-    }
-
-    public function getEstadoDocumentoNombreList()
-    {
-        $estadosDocumento = EstadoDocumento::find()->all();
-
-        $estadosDocumentoList = ArrayHelper::map($estadosDocumento, 'id', 'nombre');
-
-        return $estadosDocumentoList;
-    }
-
-    public function getEstadoDocumentoNombre() 
-    { 
-        return $this->estadoDocumento->nombre; 
+        return $this->hasMany(Expediente::class, ['id' => 'expediente_id'])->viaTable('documento_expediente', ['documento_id' => 'id']);
     }
 }

@@ -7,19 +7,15 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\search\DocumentoSearch $searchModel */
+/** @var frontend\models\search\DocumentoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Documentos';
+$this->title = 'Documentos pendientes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="documento-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Documento', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -29,14 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nombre',
-            'fecha_inicio',
-            'fecha_cierre',
+            //'descripcion:ntext',
+            'fecha_inicio:date',
+            'fecha_cierre:date',
+            //'estado_documento_id',
             //'created_at',
             //'updated_at',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::className(),'template'=>'{view}',
                 'urlCreator' => function ($action, Documento $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
