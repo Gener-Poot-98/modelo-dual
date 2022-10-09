@@ -56,14 +56,14 @@ class Asignatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombre',
+            'nombre' => 'Asignatura',
             'clave' => 'Clave',
             'creditos' => 'Creditos',
             'competencia_disciplinar' => 'Competencia Disciplinar',
             'docente_id' => 'Docente ID',
-            'horas_dedicadas' => 'Horas Dedicadas',
-            'periodo_desarrollo' => 'Periodo Desarrollo',
-            'periodo_acreditacion' => 'Periodo Acreditacion',
+            'horas_dedicadas' => 'Horas',
+            'periodo_desarrollo' => 'P. Desarrollo',
+            'periodo_acreditacion' => 'P. Acreditacion',
             'semestre_id' => 'Semestre ID',
         ];
     }

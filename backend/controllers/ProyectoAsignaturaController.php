@@ -7,6 +7,7 @@ use backend\models\search\ProyectoAsignaturaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ProyectoAsignaturaController implements the CRUD actions for ProyectoAsignatura model.
@@ -67,18 +68,13 @@ class ProyectoAsignaturaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($proyecto_id)
     {
         $model = new ProyectoAsignatura();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'proyecto_id' => $model->proyecto_id, 'asignatura_id' => $model->asignatura_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        $model -> proyecto_id = $proyecto_id;
+        if ($model->load(Yii::$app->request->post()) && $model->saveAsignaturaArray()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -95,12 +91,11 @@ class ProyectoAsignaturaController extends Controller
      */
     public function actionUpdate($id, $proyecto_id, $asignatura_id)
     {
-        $model = $this->findModel($id, $proyecto_id, $asignatura_id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'proyecto_id' => $model->proyecto_id, 'asignatura_id' => $model->asignatura_id]);
+        $model = $this->findModel($id,$proyecto_id,$asignatura_id);
+        $model->getArrayValue();  // En caso de que no se ponga el afterfind y utilicemos la otra variante
+        if ($model->load(Yii::$app->request->post()) && $model->saveAsignaturaArray()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

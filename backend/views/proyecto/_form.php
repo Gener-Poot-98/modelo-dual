@@ -16,11 +16,11 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'plan_estudios_id')->textInput() ?>
+    <?= $form->field($model, 'plan_estudios_id')->dropDownList($model->getPlanEstudiosList(), ['prompt' => 'Seleccione el plan de estudio']) ?>
 
     <?= $form->field($model, 'departamento_id')->dropDownList($model->getDepartamentoList(), ['prompt' => 'Seleccione el departamento']) ?>
 
-    <?= $form->field($model, 'asesor_interno_id')->textInput() ?>
+    <?= $form->field($model, 'asesor_interno_id')->dropDownList($model->getAsesorInternoList(), ['prompt' => 'Seleccione el asesor interno']) ?>
 
     <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione la Ingeniería']) ?>
 

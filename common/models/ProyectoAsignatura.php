@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use common\models\Asignatura;
 
 /**
  * This is the model class for table "proyecto_asignatura".
@@ -13,6 +15,8 @@ use Yii;
  */
 class ProyectoAsignatura extends \yii\db\ActiveRecord
 {
+    public $asignaturaArray;
+
     /**
      * {@inheritdoc}
      */
@@ -27,8 +31,10 @@ class ProyectoAsignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['proyecto_id', 'asignatura_id'], 'required'],
+            [['proyecto_id', 'asignaturaArray'], 'required'],
             [['proyecto_id', 'asignatura_id'], 'integer'],
+            [['asignatura_id'], 'exist', 'skipOnError' => true, 'targetClass' => Asignatura::class, 'targetAttribute' => ['asignatura_id' => 'id']],
+            [['proyecto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::class, 'targetAttribute' => ['proyecto_id' => 'id']],
         ];
     }
 
@@ -39,8 +45,60 @@ class ProyectoAsignatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'proyecto_id' => 'Proyecto ID',
-            'asignatura_id' => 'Asignatura ID',
+            'proyecto_id' => 'Proyecto',
+            'asignatura_id' => 'Asignatura',
+            'asignaturaArray' => Yii::t('app', 'Asignaturas'),
+
         ];
+    }
+
+    /**
+     * Gets query for [[Docente]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAsignatura()
+    {
+        return $this->hasOne(Asignatura::class, ['id' => 'asignatura_id']);
+    }
+
+    public function getAsignaturaNombre()
+    {
+        return $this->asignatura->nombre;
+    }
+
+    /**
+     * Gets query for [[Proyecto]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProyecto()
+    {
+        return $this->hasOne(Proyecto::class, ['id' => 'proyecto_id']);
+    }
+
+    public function saveAsignaturaArray()
+        {
+            ProyectoAsignatura::deleteAll(['proyecto_id' => $this->proyecto_id]);
+            foreach ($this->asignaturaArray as $value) {
+                $model = new ProyectoAsignatura();
+                $model->proyecto_id = $this->proyecto_id;
+                $model->asignatura_id = $value;
+                $model->asignaturaArray = $this->asignaturaArray;
+                if (!$model->save()) {
+                    $this->addErrors($model->getErrors());
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    public function getArrayValue(){
+
+        $this->asignaturaArray = array_column(Yii::$app->db->createCommand('SELECT asignatura_id  
+                            FROM proyecto_asignatura
+                            WHERE proyecto_id = "'.$this->proyecto_id.'" 
+                            ')
+                            ->queryAll(),'asignatura_id');
     }
 }
