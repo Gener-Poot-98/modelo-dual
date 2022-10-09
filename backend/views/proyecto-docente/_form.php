@@ -3,7 +3,7 @@
 use common\models\Docente;
 use common\models\Proyecto;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 
