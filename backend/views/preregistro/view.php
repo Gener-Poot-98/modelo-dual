@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->kardex), ['download', 'filename' => $model -> kardex]);
+                    return Html::a(basename($model->kardex), ['file', 'filename' => $model -> kardex]);
                 }
             ],
             //'constancia_ingles',
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->constancia_ingles), ['download', 'filename' => $model -> constancia_ingles]);
+                    return Html::a(basename($model->constancia_ingles), ['file', 'filename' => $model -> constancia_ingles]);
                 }
             ],
             //'constancia_servicio_social',
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->constancia_servicio_social), ['download', 'filename' => $model -> constancia_servicio_social]);
+                    return Html::a(basename($model->constancia_servicio_social), ['file', 'filename' => $model -> constancia_servicio_social]);
                 }
             ],
             //'constancia_creditos_complementarios',
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->constancia_creditos_complementarios), ['download', 'filename' => $model -> constancia_creditos_complementarios]);
+                    return Html::a(basename($model->constancia_creditos_complementarios), ['file', 'filename' => $model -> constancia_creditos_complementarios]);
                 }
             ],
             //'estado_registro_id',

@@ -1,15 +1,15 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use common\models\Expediente;
-use frontend\models\search\ExpedienteSearch;
+use backend\models\search\ExpedienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\RegistrosHelpers;
 use frontend\models\search\DocumentoExpedienteSearch;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * ExpedienteController implements the CRUD actions for Expediente model.
@@ -56,20 +56,15 @@ class ExpedienteController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-
-    public function actionView()
+    public function actionView($id)
     {
-        if ($ya_existe = RegistrosHelpers::buscarExpediente()) {
-            $searchModel = new DocumentoExpedienteSearch(); 
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $ya_existe);
-            return $this->render('view', [
-                'model' => $this->findModel($ya_existe),
-                'searchModel' => $searchModel, 
-                'dataProvider' => $dataProvider,
-            ]);
-        } else {
-            return $this->redirect(['create']);
-        }
+        $searchModel = new DocumentoExpedienteSearch(); 
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+            'searchModel' => $searchModel, 
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -149,7 +144,7 @@ class ExpedienteController extends Controller
         $path = Yii::getAlias('@frontend') . '/web/' . $filename;
         if(file_exists($path))
         {
-            return $this->redirect(Yii::$app->urlManager->baseUrl . '/' . $filename);
+            return $this->redirect(Yii::$app->urlManagerFrontEnd->baseUrl . '/' . $filename);
         }
     }
 }

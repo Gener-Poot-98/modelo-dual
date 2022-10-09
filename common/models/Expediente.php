@@ -16,7 +16,6 @@ use yii\db\Expression;
  * @property string|null $fecha_cierre
  * @property int $estado_expediente_id
  *
- * @property Archivo[] $archivos
  * @property EstadoExpediente $estadoExpediente
  * @property PerfilEstudiante $perfilEstudiante
  */
@@ -68,16 +67,6 @@ class Expediente extends \yii\db\ActiveRecord
             'fecha_cierre' => 'Fecha Cierre',
             'estado_expediente_id' => 'Estado',
         ];
-    }
-
-    /**
-     * Gets query for [[Archivos]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getArchivos()
-    {
-        return $this->hasMany(Archivo::class, ['expediente_id' => 'id']);
     }
 
     /**

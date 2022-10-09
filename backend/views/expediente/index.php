@@ -1,21 +1,25 @@
 <?php
 
-use common\models\PerfilEstudiante;
+use common\models\Expediente;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\search\PerfilEstudianteSearch $searchModel */
+/** @var backend\models\search\ExpedienteSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Estudiantes Duales';
+$this->title = 'Expedientes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="perfil-estudiante-index">
+<div class="expediente-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Create Expediente', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,20 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            //'user_id',
-            'nombre',
-            'matricula',
-            [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
-            ['attribute'=>'expedienteLink', 'format'=>'raw'],
-            //'genero_id',
-            //'especialidad_id',
-            //'created_at',
-            //'updated_at',
+            'perfil_estudiante_id',
+            'created_at',
+            'updated_at',
+            'fecha_cierre',
+            //'estado_expediente_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, PerfilEstudiante $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Expediente $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                }
+                 }
             ],
         ],
     ]); ?>

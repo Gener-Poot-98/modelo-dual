@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->ruta), ['download', 'filename' => $model -> ruta]);
+                    return Html::a(basename($model->ruta), ['file', 'filename' => $model -> ruta]);
                 }
             ],
             'created_at:datetime',

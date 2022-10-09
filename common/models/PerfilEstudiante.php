@@ -6,6 +6,9 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use common\models\Expediente;
+use yii\helpers\Url;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "perfil_estudiante".
@@ -77,6 +80,9 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
             'especialidad_id' => 'Especialidad',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Ultima Actualización',
+            'expedienteLink' => Yii::t('app', 'Expediente'),
+            'expedienteId' => Yii::t('app', 'Expediente'),
+            'expedienteIdLink' => Yii::t('app', 'Expediente'),
         ];
     }
 
@@ -98,6 +104,11 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getExpediente()
+    {
+    return $this->hasOne(Expediente::className(), ['perfil_estudiante_id' => 'id']);
     }
 
     /**
@@ -165,5 +176,17 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     public function getIngenieriaNombre() 
     { 
         return $this->ingenieria->nombre; 
+    }
+
+    public function getExpedienteId()
+    {
+        return $this->expediente ? $this->expediente->id : 'ninguno';
+    }
+
+    public function getExpedienteLink()
+    {
+        $url = Url::to(['expediente/view', 'id'=>$this->expedienteId]);
+        $opciones = [];
+        return Html::a($this->expediente ? 'Expediente' : 'Sin expediente', $url, $opciones);
     }
 }
