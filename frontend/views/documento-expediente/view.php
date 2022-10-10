@@ -16,14 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Modificar archivo', ['update', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

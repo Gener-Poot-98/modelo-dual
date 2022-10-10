@@ -17,19 +17,6 @@ use common\models\Proyecto;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    
-    <?= $form->field($model, 'proyecto_id')->widget(Select2::classname(), [
-
-        'data' => ArrayHelper::map(Proyecto::find()->all(), 'id', 'nombre'),
-        'theme' => Select2::THEME_BOOTSTRAP,
-        'size' => Select2::LARGE,
-        'options' => ['placeholder' => Yii::t('app', 'Select...')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-        ]);
-    ?>
-
     <?= $form->field($model, 'asignaturaArray')->widget(Select2::classname(), [
 
         'data' => ArrayHelper::map(Asignatura::find()->all(), 'id', 'nombre'),

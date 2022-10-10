@@ -96,9 +96,7 @@ class DocumentoExpedienteController extends Controller
     {
         $model = $this->findModel($documento_id, $expediente_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id]);
-        }
+        $this->subirArchivo($model);
 
         return $this->render('update', [
             'model' => $model,

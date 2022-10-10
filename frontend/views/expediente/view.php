@@ -44,7 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'documento_id',
+            //'documento_id',
+            [ 'label' => 'Documento', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->documento->nombre; 
+            } ],
             //'expediente_id',
             [
                 'attribute' => 'ruta',
@@ -57,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             'updated_at:datetime',
             //'comentario:ntext',
-            ['class' => 'yii\grid\ActionColumn', 'controller' => 'documento-expediente'],
+            ['class' => 'yii\grid\ActionColumn', 'controller' => 'documento-expediente', 'template'=>'{view},{update}'],
         ],
     ]); ?>
 

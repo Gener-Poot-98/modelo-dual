@@ -73,7 +73,7 @@ class ProyectoAsignaturaController extends Controller
         $model = new ProyectoAsignatura();
         $model -> proyecto_id = $proyecto_id;
         if ($model->load(Yii::$app->request->post()) && $model->saveAsignaturaArray()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['proyecto/view', 'id' => $proyecto_id]);
         }
         return $this->render('create', [
             'model' => $model,
@@ -89,16 +89,25 @@ class ProyectoAsignaturaController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id, $proyecto_id, $asignatura_id)
+    public function actionUpdate($proyecto_id)
     {
-        $model = $this->findModel($id,$proyecto_id,$asignatura_id);
-        $model->getArrayValue();  // En caso de que no se ponga el afterfind y utilicemos la otra variante
-        if ($model->load(Yii::$app->request->post()) && $model->saveAsignaturaArray()) {
-            return $this->redirect(['index']);
+        $model = $this->findModel($proyecto_id);
+
+        if ($model !== null) {
+            
+            $model->getArrayValue();  // En caso de que no se ponga el afterfind y utilicemos la otra variante
+            if ($model->load(Yii::$app->request->post()) && $model->saveAsignaturaArray()) {
+                return $this->redirect(['proyecto/view', 'id' => $proyecto_id]);
+            }
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+
+        } else {
+
+            return $this->redirect(['create', 'proyecto_id' => $proyecto_id]);
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        
     }
 
     /**
@@ -126,12 +135,12 @@ class ProyectoAsignaturaController extends Controller
      * @return ProyectoAsignatura the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $proyecto_id, $asignatura_id)
+    protected function findModel($proyecto_id)
     {
-        if (($model = ProyectoAsignatura::findOne(['id' => $id, 'proyecto_id' => $proyecto_id, 'asignatura_id' => $asignatura_id])) !== null) {
+        if (($model = ProyectoAsignatura::findOne(['proyecto_id' => $proyecto_id])) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        
     }
 }

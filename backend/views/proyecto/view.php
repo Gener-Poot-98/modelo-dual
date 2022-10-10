@@ -85,11 +85,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
         ],
     ]) ?>
-    <p>
-    <?= Html::a('Asignar Asignatura', ['proyecto-asignatura/create', 'proyecto_id' => $model->id], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 <h2>Asignaturas</h2>
-<br>
+<p>
+    <?= Html::a('Asignar/Quitar Asignatura', ['proyecto-asignatura/update', 'proyecto_id' => $model->id], ['class' => 'btn btn-success']) ?>
+</p>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -106,8 +106,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'periodo_desarrollo',
             'periodo_acreditacion',
             //'semestre_id',
-
-            ['class' => 'yii\grid\ActionColumn', 'controller' => 'asignatura'],
 
             
         ],
