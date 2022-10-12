@@ -12,15 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'perfil_estudiante_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_cierre')->textInput() ?>
-
-    <?= $form->field($model, 'estado_expediente_id')->textInput() ?>
+    <?= $form->field($model, 'motivo_cierre_id')->dropDownList($model->getMotivoCierreList(), ['prompt' => 'Seleccione el motivo']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

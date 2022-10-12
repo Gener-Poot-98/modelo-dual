@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use frontend\models\search\DocumentoExpedienteSearch;
 use Yii;
 use yii\helpers\Url;
+use yii\db\Expression;
 
 /**
  * ExpedienteController implements the CRUD actions for Expediente model.
@@ -99,14 +100,37 @@ class ExpedienteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->estado_expediente_id = 2;
+        $model->fecha_cierre = new Expression('NOW()');
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $this->completado($id);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionReabrir($id)
+    {
+        $model = $this->findModel($id);
+        $model->estado_expediente_id = 1;
+        $model->fecha_cierre = NULL;
+        $model->motivo_cierre_id = NULL;
+
+        return $model->save() && $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    public function completado($id)
+    {
+        $model = $this->findModel($id);
+        if($model->motivo_cierre_id == 1)
+        {
+            $model->estado_expediente_id = 3;
+        }
+
+        return $model->save() && $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

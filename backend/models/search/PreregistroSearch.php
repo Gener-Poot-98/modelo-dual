@@ -20,7 +20,7 @@ class PreregistroSearch extends Preregistro
     {
         return [
             [['id', 'ingenieria_id', 'estado_registro_id'], 'integer'],
-            [['nombre', 'matricula', 'email', 'kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios', 'created_at', 'updated_at', 'comentario', 'ingenieriaNombre','estadoRegistroNombre'], 'safe'],
+            [['nombre', 'matricula', 'email', 'kardex', 'constancia_ingles', 'cv', 'constancia_creditos_complementarios', 'created_at', 'updated_at', 'comentario', 'ingenieriaNombre','estadoRegistroNombre'], 'safe'],
         ];
     }
 
@@ -86,7 +86,7 @@ class PreregistroSearch extends Preregistro
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'kardex', $this->kardex])
             ->andFilterWhere(['like', 'constancia_ingles', $this->constancia_ingles])
-            ->andFilterWhere(['like', 'constancia_servicio_social', $this->constancia_servicio_social])
+            ->andFilterWhere(['like', 'cv', $this->cv])
             ->andFilterWhere(['like', 'constancia_creditos_complementarios', $this->constancia_creditos_complementarios])
             ->andFilterWhere(['like', 'comentario', $this->comentario]);
         

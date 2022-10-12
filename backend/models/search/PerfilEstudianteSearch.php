@@ -12,6 +12,7 @@ use common\models\PerfilEstudiante;
 class PerfilEstudianteSearch extends PerfilEstudiante
 {
     public $ingenieriaNombre;
+    public $estadoExpedienteNombre;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +20,7 @@ class PerfilEstudianteSearch extends PerfilEstudiante
     {
         return [
             [['id', 'user_id', 'ingenieria_id', 'genero_id', 'especialidad_id'], 'integer'],
-            [['nombre', 'matricula', 'created_at', 'updated_at', 'ingenieriaNombre'], 'safe'],
+            [['nombre', 'matricula', 'created_at', 'updated_at', 'ingenieriaNombre', 'estadoExpedienteNombre'], 'safe'],
         ];
     }
 
@@ -56,7 +57,11 @@ class PerfilEstudianteSearch extends PerfilEstudiante
                 'ingenieriaNombre' => [ 
                     'asc' => ['ingenieria.nombre' => SORT_ASC], 
                     'desc' => ['ingenieria.nombre' => SORT_DESC], 
-                    'label' => 'Ingeniería' ], ] ]);
+                    'label' => 'Ingeniería' ],
+                'estadoExpedienteNombre' => [ 
+                    'asc' => ['estado_expediente.nombre' => SORT_ASC], 
+                    'desc' => ['estado_expediente.nombre' => SORT_DESC], 
+                    'label' => 'Estado Expediente' ], ] ]);
 
         $this->load($params);
 
@@ -82,6 +87,10 @@ class PerfilEstudianteSearch extends PerfilEstudiante
 
         $query->joinWith(['ingenieria' => function ($q) {
             $q->andFilterWhere(['=', 'ingenieria.id', $this->ingenieriaNombre]);
+            }]);
+
+        $query->joinWith(['expediente' => function ($q) {
+            $q->andFilterWhere(['=', 'estado_expediente.id', $this->estadoExpedienteNombre]);
             }]);
 
         return $dataProvider;

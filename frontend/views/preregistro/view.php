@@ -58,11 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'constancia_servicio_social',
             [
-                'attribute' => 'constancia_servicio_social',
+                'attribute' => 'cv',
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return Html::a(basename($model->constancia_servicio_social), ['download', 'filename' => $model -> constancia_servicio_social]);
+                    return Html::a(basename($model->cv), ['download', 'filename' => $model -> cv]);
                 }
             ],
             //'constancia_creditos_complementarios',

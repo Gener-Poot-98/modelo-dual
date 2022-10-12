@@ -74,6 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class' => ActionColumn::className(),
+                    'template'=>'{view}',
                     'urlCreator' => function ($action, Preregistro $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
@@ -95,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading'=>$this->title,
             'type'=>'info',
-            'before'=>Html::a(Yii::t('app', 'Crear Preregistro'), ['create'], ['class' => 'btn btn-outline-success']),
+            //'before'=>Html::a(Yii::t('app', 'Crear Preregistro'), ['create'], ['class' => 'btn btn-outline-success']),
             'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
             'footer'=>false
         ],

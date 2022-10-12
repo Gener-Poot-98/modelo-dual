@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $model */
 
-$this->title = $model->id;
+$this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Preregistros', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -15,21 +15,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php
+    if($model->estado_registro_id == 4)
+    {
+        echo '<div class="alert alert-success">Este alumno ya fue aprobado</div>';
+    } else
+    {?>
+
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Actualizar estado', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
+
+    <?php
+    }
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'nombre',
             'matricula',
             'email:email',
@@ -56,15 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(basename($model->constancia_ingles), ['file', 'filename' => $model -> constancia_ingles]);
                 }
             ],
-            //'constancia_servicio_social',
-            [
-                'attribute' => 'constancia_servicio_social',
-                'format' => 'html',
-                'value' => function($model)
-                {
-                    return Html::a(basename($model->constancia_servicio_social), ['file', 'filename' => $model -> constancia_servicio_social]);
-                }
-            ],
             //'constancia_creditos_complementarios',
             [
                 'attribute' => 'constancia_creditos_complementarios',
@@ -72,6 +67,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model)
                 {
                     return Html::a(basename($model->constancia_creditos_complementarios), ['file', 'filename' => $model -> constancia_creditos_complementarios]);
+                }
+            ],
+            //'constancia_servicio_social',
+            [
+                'attribute' => 'cv',
+                'format' => 'html',
+                'value' => function($model)
+                {
+                    return Html::a(basename($model->cv), ['file', 'filename' => $model -> cv]);
                 }
             ],
             //'estado_registro_id',

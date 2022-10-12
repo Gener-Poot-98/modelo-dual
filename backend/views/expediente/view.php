@@ -9,37 +9,108 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var common\models\Expediente $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Expedientes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Expediente: ' . $model->perfilEstudiante->nombre;
+//$this->params['breadcrumbs'][] = ['label' => 'Expedientes', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="expediente-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if($model->estado_expediente_id == 1)
+    { ?>
+
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Cerrar expediente', ['update', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro que desea cerrar el expediente?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
+    <?php
+    } else if ($model->estado_expediente_id == 2)
+    { ?>
+    
+    <p>
+        <?= Html::a('Reabrir expediente', ['reabrir', 'id' => $model->id], [
+            'class' => 'btn btn-success',
+            'data' => [
+                'confirm' => '¿Está seguro que desea volver a abrir el expediente?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
+    <?php
+    } else if($model->estado_expediente_id == 3)
+    { 
+
+        echo '<div class="alert alert-success">Este expediente ha completado todo el proceso del Modelo Dual</div>';
+        ?>
+        <p>
+            <?= Html::a('Reabrir expediente', ['reabrir', 'id' => $model->id], [
+                'class' => 'btn btn-success',
+                'data' => [
+                    'confirm' => '¿Está seguro que desea volver a abrir el expediente?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+        <?php
+    }
+
+    ?>
+
+    <?php if($model->estado_expediente_id == 1)
+    {?>
+
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'perfil_estudiante_id',
-            'created_at',
-            'updated_at',
-            'fecha_cierre',
-            'estado_expediente_id',
-        ],
-    ]) ?>
+            'model' => $model,
+            'attributes' => [
+                //'id',
+                [ 'label' => 'Estado', 'value' => function ($searchModel) 
+                { 
+                    return $searchModel->estadoExpediente->nombre;
+                } ],
+                'created_at:datetime',
+                //'fecha_cierre:datetime',
+                //'motivo_cierre_id',
+                //'estado_expediente_id',
+                'updated_at:datetime',
+            ],
+        ]) ?>
+
+    <?php
+    } else if ($model->estado_expediente_id == 2 || $model->estado_expediente_id == 3)
+    { ?>
+
+    <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    //'id',
+                    [ 'label' => 'Estado', 'value' => function ($searchModel) 
+                    { 
+                        return $searchModel->estadoExpediente->nombre;
+                    } ],
+                    'created_at:datetime',
+                    'fecha_cierre:datetime',
+                    //'motivo_cierre_id',
+                    [ 'label' => 'Motivo de cierre', 'value' => function ($searchModel) 
+                    { 
+                        return $searchModel->motivoCierre->nombre;
+                    } ],
+                    //'estado_expediente_id',
+                    'updated_at:datetime',
+                ],
+            ]) ?>
+
+    <?php
+    }
+    ?>
 
 <h2>Documentos Entregados</h2>
 
@@ -49,7 +120,11 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        'documento_id',
+        //'documento_id'
+        [ 'label' => 'Documento', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->documento->nombre; 
+            } ],
         //'expediente_id',
         [
             'attribute' => 'ruta',
@@ -62,7 +137,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'created_at:datetime',
         'updated_at:datetime',
         //'comentario:ntext',
-        ['class' => 'yii\grid\ActionColumn', 'controller' => 'documento-expediente'],
+        ['class' => 'yii\grid\ActionColumn', 'controller' => 'documento-expediente', 'template'=>'{view}'],
     ],
 ]); ?>
 

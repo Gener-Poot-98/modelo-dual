@@ -17,7 +17,7 @@ use yii\db\Expression;
  * @property int $ingenieria_id
  * @property string $kardex
  * @property string $constancia_ingles
- * @property string $constancia_servicio_social
+ * @property string $cv
  * @property string $constancia_creditos_complementarios
  * @property string $created_at
  * @property string $updated_at
@@ -29,7 +29,7 @@ use yii\db\Expression;
  */
 class Preregistro extends \yii\db\ActiveRecord
 {
-    public $archivoKardex, $archivoConstancia_ingles, $archivoConstancia_servicio_social, $archivoConstancia_creditos_complementarios;
+    public $archivoKardex, $archivoConstancia_ingles, $archivoCv, $archivoConstancia_creditos_complementarios, $terminos_condiciones;
     /**
      * {@inheritdoc}
      */
@@ -45,12 +45,13 @@ class Preregistro extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'matricula', 'email', 'ingenieria_id'], 'required'],
+            ['terminos_condiciones', 'required', 'on' => ['register']],
             [['ingenieria_id', 'estado_registro_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['comentario'], 'string'],
             [['nombre', 'matricula', 'email'], 'string', 'max' => 45],
             //[['kardex', 'constancia_ingles', 'constancia_servicio_social', 'constancia_creditos_complementarios'], 'string', 'max' => 2500],
-            [['archivoKardex', 'archivoConstancia_ingles', 'archivoConstancia_servicio_social', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf', 'maxFiles' => '1'],
+            [['archivoKardex', 'archivoConstancia_ingles', 'archivoCv', 'archivoConstancia_creditos_complementarios'], 'file', 'extensions' => 'pdf', 'maxFiles' => '1'],
             //[['email'], 'unique'],
             ['email', 'unique', 'targetClass' => '\common\models\Preregistro', 'message' => 'Este correo electronico ya esta en uso.'],
             //[['matricula'], 'unique'],
@@ -85,12 +86,22 @@ class Preregistro extends \yii\db\ActiveRecord
             'ingenieria_id' => 'Ingenieria',
             'archivoKardex' => 'Kardex',
             'archivoConstancia_ingles' => 'Constancia de Ingles',
-            'archivoConstancia_servicio_social' => 'Constancia de Servicio Social',
+            'constancia_ingles' => 'Constancia de Inglés',
+            'archivoCv' => 'Curriculum',
+            'cv' => 'Curriculum',
             'archivoConstancia_creditos_complementarios' => 'Constancia de Creditos Complementarios',
+            'constancia_creditos_complementarios' => 'Constancia de Creditos Complementarios',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Última actualización',
             'estado_registro_id' => 'Estado',
             'comentario' => 'Comentario',
+            'terminos_condiciones' => 
+            'He sido informado que deberé cumplir con los requisitos establecidos en el Modelo de Educación Dual del TecNM, el Convenio de Colaboración y las actividades del Proyecto Integral de Educación Dual que se determine con el objetivo de poder acreditar las asignaturas faltantes de mi plan de estudios.
+            
+            De igual forma deberé sujetarme a los lineamientos académico administrativos del ITSVA así como a las normas y políticas de operación de la propia empresa o institución donde realizaré las actividades de este programa. 
+            
+            Reconozco que el desempeño de mis actividades relacionadas con el Programa de Educación Dual queda bajo mi exclusiva responsabilidad, sin responsabilizar al Instituto Tecnológico Superior de Valladolid.
+            Estoy consciente que esta solicitud es el inicio del proceso de postulación y dependerá del cumplimiento de entrega de los documentos en tiempo y forma de mi parte, así también de la aceptación de parte de la empresa a la que me postule para que pueda considerarme un alumno dual.',
 
         ];
     }

@@ -83,6 +83,7 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
             'expedienteLink' => Yii::t('app', 'Expediente'),
             'expedienteId' => Yii::t('app', 'Expediente'),
             'expedienteIdLink' => Yii::t('app', 'Expediente'),
+            'estadoExpedienteLink' => Yii::t('app', 'Estado Expediente'),
         ];
     }
 
@@ -189,4 +190,34 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
         $opciones = [];
         return Html::a($this->expediente ? 'Expediente' : 'Sin expediente', $url, $opciones);
     }
+
+    public function getEstadoExpediente()
+    {
+        return $this->expediente->estado_expediente_id;
+    }
+
+    public function getEstadoExpedienteLink()
+    {
+        $url = Url::to(['expediente/view', 'id'=>$this->ExpedienteId]);
+        $opciones = [];
+        return $this->getEstadoNombre($this->getEstadoExpediente());
+    }
+
+    public static function getEstadoNombre($estado_expediente_id)
+    {
+        $estado = EstadoExpediente::find('nombre')
+            ->where(['id' => $estado_expediente_id])
+            ->one();
+        return isset($estado->nombre) ? $estado->nombre : false;
+    }
+
+    public function getEstadoExpedienteList()
+    {
+        $estadosExpedientes = EstadoExpediente::find()->all();
+
+        $estadosExpedientesList = ArrayHelper::map($estadosExpedientes, 'id', 'nombre');
+
+        return $estadosExpedientesList;
+    }
+
 }

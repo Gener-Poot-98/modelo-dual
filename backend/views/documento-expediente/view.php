@@ -6,9 +6,9 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\DocumentoExpediente $model */
 
-$this->title = $model->documento_id;
-$this->params['breadcrumbs'][] = ['label' => 'Documento Expedientes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Detalles del documento';
+//$this->params['breadcrumbs'][] = ['label' => 'Documento Expedientes', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="documento-expediente-view">
@@ -16,24 +16,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Añadir un comentario', ['update', 'documento_id' => $model->documento_id, 'expediente_id' => $model->expediente_id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'documento_id',
-            'expediente_id',
-            'ruta',
-            'created_at',
-            'updated_at',
+            [ 'label' => 'Documento', 'value' => function ($searchModel) 
+            { 
+                return $searchModel->documento->nombre; 
+            } ],
+            //'expediente_id',
+            [
+                'attribute' => 'ruta',
+                'format' => 'html',
+                'value' => function($model)
+                {
+                    return Html::a(basename($model->ruta), ['file', 'filename' => $model -> ruta]);
+                }
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
             'comentario:ntext',
         ],
     ]) ?>

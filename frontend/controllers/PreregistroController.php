@@ -111,11 +111,11 @@ class PreregistroController extends Controller
     {
         $model = $this->findModel($id);
 
-        if(file_exists($model->kardex) && file_exists($model->constancia_ingles) && file_exists($model->constancia_servicio_social) && file_exists($model->constancia_creditos_complementarios))
+        if(file_exists($model->kardex) && file_exists($model->constancia_ingles) && file_exists($model->cv) && file_exists($model->constancia_creditos_complementarios))
         {
             unlink($model->kardex);
             unlink($model->constancia_ingles);
-            unlink($model->constancia_servicio_social);
+            unlink($model->cv);
             unlink($model->constancia_creditos_complementarios);
         }
 
@@ -149,7 +149,7 @@ class PreregistroController extends Controller
 
                 $model->archivoKardex = UploadedFile::getInstance($model,'archivoKardex');
                 $model->archivoConstancia_ingles = UploadedFile::getInstance($model,'archivoConstancia_ingles');
-                $model->archivoConstancia_servicio_social = UploadedFile::getInstance($model,'archivoConstancia_servicio_social');
+                $model->archivoCv = UploadedFile::getInstance($model,'archivoCv');
                 $model->archivoConstancia_creditos_complementarios = UploadedFile::getInstance($model,'archivoConstancia_creditos_complementarios');
 
 
@@ -162,7 +162,7 @@ class PreregistroController extends Controller
                             unlink($model->kardex);
                         }
 
-                        $rutaArchivoKardex = "uploads/kardex/".time()."_".$model->archivoKardex->basename.".".$model->archivoKardex->extension;
+                        $rutaArchivoKardex = "uploads/preregistro/kardex/".time()."_".$model->archivoKardex->basename.".".$model->archivoKardex->extension;
 
                         if(($model->archivoKardex->saveAs($rutaArchivoKardex)))
                         {
@@ -177,7 +177,7 @@ class PreregistroController extends Controller
                             unlink($model->constancia_ingles);
                         }
 
-                        $rutaArchivoConstancia_ingles = "uploads/ingles/".time()."_".$model->archivoConstancia_ingles->basename.".".$model->archivoConstancia_ingles->extension;
+                        $rutaArchivoConstancia_ingles = "uploads/preregistro/ingles/".time()."_".$model->archivoConstancia_ingles->basename.".".$model->archivoConstancia_ingles->extension;
 
                         if(($model->archivoConstancia_ingles->saveAs($rutaArchivoConstancia_ingles)))
                         {
@@ -185,18 +185,18 @@ class PreregistroController extends Controller
                         }
                     }
 
-                    if(($model->archivoConstancia_servicio_social))
+                    if(($model->archivoCv))
                     {
-                        if(file_exists($model->constancia_servicio_social) )
+                        if(file_exists($model->cv) )
                         {
-                            unlink($model->constancia_servicio_social);
+                            unlink($model->cv);
                         }
 
-                        $rutaArchivoConstancia_servicio_social = "uploads/servicio_social/".time()."_".$model->archivoConstancia_servicio_social->basename.".".$model->archivoConstancia_servicio_social->extension;
+                        $rutaArchivoCv = "uploads/preregistro/cv/".time()."_".$model->archivoCv->basename.".".$model->archivoCv->extension;
 
-                        if(($model->archivoConstancia_servicio_social->saveAs($rutaArchivoConstancia_servicio_social)))
+                        if(($model->archivoCv->saveAs($rutaArchivoCv)))
                         {
-                            $model->constancia_servicio_social = $rutaArchivoConstancia_servicio_social;
+                            $model->cv = $rutaArchivoCv;
                         }
                     }
 
@@ -207,7 +207,7 @@ class PreregistroController extends Controller
                             unlink($model->constancia_creditos_complementarios);
                         }
                         
-                        $rutaArchivoConstancia_creditos_complementarios = "uploads/creditos_complementarios/".time()."_".$model->archivoConstancia_creditos_complementarios->basename.".".$model->archivoConstancia_creditos_complementarios->extension;
+                        $rutaArchivoConstancia_creditos_complementarios = "uploads/preregistro/creditos_complementarios/".time()."_".$model->archivoConstancia_creditos_complementarios->basename.".".$model->archivoConstancia_creditos_complementarios->extension;
 
                         if(($model->archivoConstancia_creditos_complementarios->saveAs($rutaArchivoConstancia_creditos_complementarios)))
                         {
@@ -219,7 +219,7 @@ class PreregistroController extends Controller
 
                 $model->archivoKardex = null;
                 $model->archivoConstancia_ingles = null;
-                $model->archivoConstancia_servicio_social = null;
+                $model->archivoCv = null;
                 $model->archivoConstancia_creditos_complementarios = null;
 
                 if($model->save())

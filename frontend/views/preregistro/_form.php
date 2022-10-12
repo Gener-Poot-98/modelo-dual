@@ -115,7 +115,7 @@ $this->registerCss("
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'archivoConstancia_servicio_social')->widget(FileInput::classname(), [
+            <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'file/*'],
                 'pluginOptions' => [
                     'allowedFileExtensions' => ['pdf'],
@@ -125,7 +125,7 @@ $this->registerCss("
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'archivoConstancia_creditos_complementarios')->widget(FileInput::classname(), [
+            <?= $form->field($model, 'archivoCv')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'file/*'],
                 'pluginOptions' => [
                     'allowedFileExtensions' => ['pdf'],
@@ -133,7 +133,20 @@ $this->registerCss("
                 ]
             ]) ?>
         </div>
+
     </div>
+
+    <br>
+
+    <div>
+        <?= $form->field($model, 'terminos_condiciones', 
+                    ['options' => ['tag' => 'span'], 
+                    'template' => "{input}",]
+                )->checkbox(['checked' => false, 'required' => true])
+        ?>
+    </div>
+
+    <br>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>

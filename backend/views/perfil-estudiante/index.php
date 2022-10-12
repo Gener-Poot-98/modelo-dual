@@ -54,23 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns' => [
         
         ['class' => 'kartik\grid\SerialColumn'],
-        'id',
+        //'id',
         //'user_id',
         'nombre',
         'matricula',
         [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
         ['attribute'=>'expedienteLink', 'format'=>'raw'],
+        ['attribute'=>'estadoExpedienteLink', 'format'=>'raw'],
         //'genero_id',
         //'especialidad_id',
         //'created_at',
         //'updated_at',
-
-        [
-            'class' => ActionColumn::className(),
-            'urlCreator' => function ($action, PerfilEstudiante $model, $key, $index, $column) {
-                return Url::toRoute([$action, 'id' => $model->id]);
-            }
-        ],
         
     ],
     

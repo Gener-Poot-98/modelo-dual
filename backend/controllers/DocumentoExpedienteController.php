@@ -7,6 +7,7 @@ use backend\models\search\DocumentoExpedienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * DocumentoExpedienteController implements the CRUD actions for DocumentoExpediente model.
@@ -142,6 +143,15 @@ class DocumentoExpedienteController extends Controller
         if(file_exists($path))
         {
             return Yii::$app->response->sendFile($path);
+        }
+    }
+
+    public function actionFile($filename)
+    {
+        $path = Yii::getAlias('@frontend') . '/web/' . $filename;
+        if(file_exists($path))
+        {
+            return $this->redirect(Yii::$app->urlManagerFrontEnd->baseUrl . '/' . $filename);
         }
     }
 }
