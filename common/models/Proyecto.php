@@ -62,6 +62,7 @@ class Proyecto extends \yii\db\ActiveRecord
             [['departamento_id','plan_estudios_id','asesor_interno_id','periodo_id','ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 2500],
+            ['nombre', 'unique', 'targetClass' => '\common\models\Proyecto', 'message' => Yii::t('app','Proyecto ya creado intente con otro nombre')],
             ['perfil_estudiante_id', 'unique', 'targetClass' => '\common\models\Proyecto', 'message' => 'Este alumno ya tiene asignado un proyecto.'],
             [['plan_estudios_id'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilEstudiante::class, 'targetAttribute' => ['plan_estudios_id' => 'id']],
             [['asesor_interno_id'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilEstudiante::class, 'targetAttribute' => ['asesor_interno_id' => 'id']],
