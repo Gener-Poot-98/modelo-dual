@@ -6,12 +6,16 @@
 /** @var Exception $exception*/
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 
 $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?= Html::encode($this->title) ?></h1> -->
+
+    <img style="width:60%; heigth:70%; padding:10px;" src=<?php echo Url::to('@web/archivos/error.png', true); ?> ALT="Imagen de referencia de documento">
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
