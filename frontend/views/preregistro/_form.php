@@ -156,20 +156,21 @@ $this->registerCss("
 
     </div>
 
-    <br>
-
-    <b>Leer terminos y condiciones</b>
-    <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
-    <br>
-    <div id="content" style="display: none;">
-        <?= $form->field($model, 'terminos_condiciones', 
-                    ['options' => ['tag' => 'span'], 
-                    'template' => "{input}",]
-                )->checkbox(['checked' => false, 'required' => true])
-        ?>
-    </div>
-
-    <br>
+    <?php if ($model->isNewRecord): ?>
+        <br>
+        <b>Leer terminos y condiciones</b>
+        <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
+        <br>
+        <div id="content" style="display: none;">
+            <?= $form->field($model, 'terminos_condiciones', 
+                        ['options' => ['tag' => 'span'], 
+                        'template' => "{input}",]
+                    )->checkbox(['checked' => false, 'required' => true])
+            ?>
+        </div>
+        <br>
+    <?php endif; ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>

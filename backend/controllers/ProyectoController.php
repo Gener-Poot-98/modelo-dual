@@ -142,13 +142,25 @@ class ProyectoController extends Controller
             $model->asesor_externo_id = $asesor_externo->id;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if($model->load(Yii::$app->request->post()))
+        {
+            $data = (new \yii\db\Query())
+                ->from('proyecto')
+                ->where(['perfil_estudiante_id' => $model->perfil_estudiante_id])
+                ->exists();
+
+            if($data > 0)
+            {
+                Yii::$app->session->setFlash('error', 'El alumno ya tiene un proyecto asignado');
+            }else{
+                    if ($model->save()) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
     /**
      * Updates an existing Proyecto model.

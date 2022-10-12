@@ -56,15 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(basename($model->constancia_ingles), ['download', 'filename' => $model -> constancia_ingles]);
                 }
             ],
-            //'constancia_servicio_social',
-            [
-                'attribute' => 'cv',
-                'format' => 'html',
-                'value' => function($model)
-                {
-                    return Html::a(basename($model->cv), ['download', 'filename' => $model -> cv]);
-                }
-            ],
             //'constancia_creditos_complementarios',
             [
                 'attribute' => 'constancia_creditos_complementarios',
@@ -72,6 +63,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model)
                 {
                     return Html::a(basename($model->constancia_creditos_complementarios), ['download', 'filename' => $model -> constancia_creditos_complementarios]);
+                }
+            ],
+            //'cv',
+            [
+                'attribute' => 'cv',
+                'format' => 'html',
+                'value' => function($model)
+                {
+                    return Html::a(basename($model->cv), ['download', 'filename' => $model -> cv]);
                 }
             ],
             //'estado_registro_id',

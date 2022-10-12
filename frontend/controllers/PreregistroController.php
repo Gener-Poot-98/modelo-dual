@@ -222,11 +222,15 @@ class PreregistroController extends Controller
                 $model->archivoCv = null;
                 $model->archivoConstancia_creditos_complementarios = null;
 
-                if($model->save())
+                if($model->kardex == NULL || $model->constancia_ingles == NULL || $model->cv == NULL || $model->constancia_creditos_complementarios == NULL)
                 {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    Yii::$app->session->setFlash('error', 'Debes cargar los documentos solicitados');
+                }else{
+                    if($model->save())
+                    {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
                 }
-                
             }
         } else {
             $model->loadDefaultValues();
