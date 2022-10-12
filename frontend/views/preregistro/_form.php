@@ -9,8 +9,6 @@ use kartik\file\FileInput;
 /** @var yii\widgets\ActiveForm $form */
 
 $this->registerCss("
-
-    
     .preregistro-form{
         width: 100%;
         display: flex;
@@ -49,6 +47,13 @@ $this->registerCss("
         border-bottom-right-radius: 0;
         font-size:12px;
     }
+
+    .custom-control-label {
+        position: relative;
+        margin-bottom: 0;
+        vertical-align: top;
+        text-align: justify;
+    }
     
     ");
 
@@ -71,6 +76,21 @@ $this->registerCss("
         <?= Yii::$app->session->getFlash('error'); ?>
     </div>
 <?php endif; ?>
+
+<head>
+    <script type="text/javascript">
+        function showContent() {
+            element = document.getElementById("content");
+            check = document.getElementById("check");
+            if (check.checked) {
+                element.style.display='block';
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+    </script>
+</head>
 
 <div class="preregistro-form">
 
@@ -138,7 +158,10 @@ $this->registerCss("
 
     <br>
 
-    <div>
+    <b>Leer terminos y condiciones</b>
+    <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
+    <br>
+    <div id="content" style="display: none;">
         <?= $form->field($model, 'terminos_condiciones', 
                     ['options' => ['tag' => 'span'], 
                     'template' => "{input}",]
