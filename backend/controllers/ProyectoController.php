@@ -44,7 +44,9 @@ class ProyectoController extends Controller
         
         $query->select('nombre')
         ->from('perfil_estudiante')
+            ->leftJoin('expediente', 'expediente.perfil_estudiante_id = perfil_estudiante.id')
             ->where('nombre LIKE "%' . $q .'%"')
+            ->andWhere('estado_expediente_id = 1')
         ->orderBy('nombre');
         $command = $query->createCommand();
         $data = $command->queryAll();
