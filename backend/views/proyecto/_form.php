@@ -3,7 +3,9 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use kartik\widgets\Typeahead;
+use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var common\models\Proyecto $model */
@@ -33,28 +35,24 @@ use yii\helpers\Url;
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'ingenieria_id')->dropDownList($model->getIngenieriasList(), ['prompt' => 'Seleccione la Ingeniería']) ?>
+            <?php $ingenieriaList=ArrayHelper::map(common\models\Ingenieria::find()->all(), 'id', 'nombre' ); ?> 
+            <?= $form->field($model, 'ingenieria_id')->dropDownList($ingenieriaList, ['prompt' => 'Seleccione la Ingeniería', 'id'=>'nombre']); ?>
         </div>
 
         <div class="col-md-6">
 
             <?php
-            echo $form->field($model, 'nombreEstudiante')->widget(Typeahead::classname(), [
-                'options' => ['placeholder' => 'Ingresa el nombre del estudiante...'],
-                'pluginOptions' => ['highlight' => true],
-                'dataset' => [
-                    [
-                        'datumTokenizer' =>
-                        "Bloodhound.tokenizers.obj.whitespace('value')",
-                        'display' => 'value',
-                        'remote' => [
-                            'url' => Url::to(['proyecto/nombre-list']),
-                            '?q=%QUERY',
-                            'wildcard' => '%QUERY'
-                        ]
-                    ]
+            echo $form->field($model, 'perfil_estudiante_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'perfil_estudiante_id'],
+                'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                'pluginOptions'=>[
+                'depends'=>['nombre'], // the id for cat attribute
+                'placeholder'=>'Seleccione un estudiante',
+                'url'=>  \yii\helpers\Url::to(['proyecto/estudiantes-list']),
+                'initialize' => $model->isNewRecord ? false : true,
                 ]
-            ]);
+                ]);
             ?>
         </div>
 

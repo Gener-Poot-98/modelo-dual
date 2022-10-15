@@ -145,6 +145,9 @@ $baseUrl = $asset->baseUrl;
     </div>
     </div>
 
+    <?php
+    if (Yii::$app->user->isGuest){ ?>
+
     <header class="bg-gradient-dark">
         <div class="page-header min-vh-75" style="background-image: url('<?= $baseUrl ?>./assets/img/office-dark.jpg');">
             <span class="mask bg-gradient-info opacity-8"></span>
@@ -181,6 +184,11 @@ $baseUrl = $asset->baseUrl;
             </div>
         </div>
     </header>
+
+    <?php } ?>
+
+    <br>
+
     <div class="container">
         <?= $content ?>
     </div>

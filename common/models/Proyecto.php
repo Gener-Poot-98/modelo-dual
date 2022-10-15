@@ -57,12 +57,12 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id', 'nombreEstudiante','perfil_estudiante_id', 'empresa_id', 'nombreEmpresa', 'asesor_externo_id', 'periodo_id','horas_totales','nombreAsesorExterno', 'estado_proyecto_id','descripcion'], 'required'],
+            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id','perfil_estudiante_id', 'empresa_id', 'nombreEmpresa', 'asesor_externo_id', 'periodo_id','horas_totales','nombreAsesorExterno', 'estado_proyecto_id','descripcion'], 'required'],
             [['nombreEstudiante'], 'string'],
             [['departamento_id','plan_estudios_id','asesor_interno_id','periodo_id','ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 2500],
-            ['nombre', 'unique', 'targetClass' => '\common\models\Proyecto', 'message' => Yii::t('app','Proyecto ya creado intente con otro nombre')],
+            ['nombre', 'unique', 'targetClass' => '\common\models\Proyecto', 'message' => Yii::t('app','Proyecto ya creado, intente con otro nombre')],
             ['perfil_estudiante_id', 'unique', 'targetClass' => '\common\models\Proyecto', 'message' => 'Este alumno ya tiene asignado un proyecto.'],
             [['plan_estudios_id'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilEstudiante::class, 'targetAttribute' => ['plan_estudios_id' => 'id']],
             [['asesor_interno_id'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilEstudiante::class, 'targetAttribute' => ['asesor_interno_id' => 'id']],
@@ -278,5 +278,13 @@ class Proyecto extends \yii\db\ActiveRecord
     public function getProyectoDocentes()
     {
         return $this->hasMany(ProyectoDocente::class, ['proyecto_id' => 'id']);
+    }
+
+    public static function getEstudiantes($ingenieria_id) {
+        $data=\common\models\PerfilEstudiante::find()
+        ->where(['ingenieria_id'=>$ingenieria_id])
+        ->select(['id','nombre AS name'])->asArray()->all();
+
+        return $data;
     }
 }

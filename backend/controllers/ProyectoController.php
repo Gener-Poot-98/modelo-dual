@@ -39,24 +39,6 @@ class ProyectoController extends Controller
         );
     }
 
-    public function actionNombreList($q = null) {
-        $query = new Query;
-        
-        $query->select('nombre')
-        ->from('perfil_estudiante')
-            ->leftJoin('expediente', 'expediente.perfil_estudiante_id = perfil_estudiante.id')
-            ->where('nombre LIKE "%' . $q .'%"')
-            ->andWhere('estado_expediente_id = 1')
-        ->orderBy('nombre');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out = [];
-        foreach ($data as $d) {
-            $out[] = ['value' => $d['nombre']];
-        }
-        echo Json::encode($out);
-    }
-
     public function actionEmpresaList($q = null) {
         $query = new Query;
         
@@ -89,6 +71,20 @@ class ProyectoController extends Controller
         echo Json::encode($out);
     }
 
+    public function actionEstudiantesList() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+
+        if ($parents != null) {
+        $ingenieria_id = $parents[0];
+        $out = \common\models\Proyecto::getEstudiantes($ingenieria_id);
+        echo Json::encode(['output'=>$out, 'selected'=>'']);
+        return;
+        }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }
     /**
      * Lists all Proyecto models.
      *
@@ -134,8 +130,6 @@ class ProyectoController extends Controller
         $model = new Proyecto();
 
         if ($model->load(Yii::$app->request->post())) {
-            $perfil_estudiante = PerfilEstudiante::findByNombre($model->nombreEstudiante);
-            $model->perfil_estudiante_id = $perfil_estudiante->id;
 
             $empresa = Empresa::findByNombre($model->nombreEmpresa);
             $model->empresa_id = $empresa->id;
@@ -176,8 +170,6 @@ class ProyectoController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $perfil_estudiante = PerfilEstudiante::findByNombre($model->nombreEstudiante);
-            $model->perfil_estudiante_id = $perfil_estudiante->id;
 
             $empresa = Empresa::findByNombre($model->nombreEmpresa);
             $model->empresa_id = $empresa->id;
