@@ -6,6 +6,11 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Documento $model */
 
+$this -> registerCss("
+.table td, .table th {
+    white-space: normal;
+}
+");
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Documentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
