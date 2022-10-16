@@ -148,6 +148,8 @@ class ProyectoController extends Controller
             if($data > 0)
             {
                 Yii::$app->session->setFlash('error', 'El alumno ya tiene un proyecto asignado');
+                $model->ingenieria_id = NULL;
+                $model->perfil_estudiante_id = NULL;
             }else{
                     if ($model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
