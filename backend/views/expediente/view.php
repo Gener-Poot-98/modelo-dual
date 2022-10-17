@@ -10,8 +10,8 @@ use yii\helpers\Url;
 /** @var common\models\Expediente $model */
 
 $this->title = 'Expediente: ' . $model->perfilEstudiante->nombre;
-//$this->params['breadcrumbs'][] = ['label' => 'Expedientes', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Estudiantes Duales', 'url' => ['perfil-estudiante/index']];
+$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="expediente-view">

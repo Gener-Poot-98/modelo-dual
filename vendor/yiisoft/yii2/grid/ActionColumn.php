@@ -54,12 +54,12 @@ class ActionColumn extends Column
      * As an example, to only have the view, and update button you can add the ActionColumn to your GridView columns as follows:
      *
      * ```php
-     * ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+     * ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update} {delete}'],
      * ```
      *
      * @see buttons
      */
-    public $template = '{view} {update}';
+    public $template = '{view} {update} {delete}';
     /**
      * @var array button rendering callbacks. The array keys are the button names (without curly brackets),
      * and the values are the corresponding button rendering callbacks. The callbacks should use the following

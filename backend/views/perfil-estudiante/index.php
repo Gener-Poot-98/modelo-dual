@@ -65,7 +65,12 @@ $this->params['breadcrumbs'][] = $this->title;
         //'especialidad_id',
         //'created_at',
         //'updated_at',
-        
+        [
+            'class' => ActionColumn::className(), 'template'=>'{view}',
+            'urlCreator' => function ($action, PerfilEstudiante $model, $key, $index, $column) {
+                return Url::toRoute([$action, 'id' => $model->id]);
+            }
+        ],
     ],
     
     'pjax' => true,

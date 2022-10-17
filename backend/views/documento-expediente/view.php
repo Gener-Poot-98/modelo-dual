@@ -7,6 +7,9 @@ use yii\widgets\DetailView;
 /** @var common\models\DocumentoExpediente $model */
 
 $this->title = 'Detalles del documento';
+$this->params['breadcrumbs'][] = ['label' => 'Estudiantes Duales', 'url' => ['perfil-estudiante/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Expediente', 'url' => ['expediente/view', 'id' => $model->expediente_id]];
+$this->params['breadcrumbs'][] = $this->title;
 //$this->params['breadcrumbs'][] = ['label' => 'Documento Expedientes', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

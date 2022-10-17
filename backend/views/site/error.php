@@ -15,7 +15,7 @@ $this->title = $name;
 
     <!--<h1><?= Html::encode($this->title) ?></h1> -->
 
-    <img style="width:60%; heigth:70%; padding:10px;" src=<?php echo Url::to('@web/archivos/error.png', true); ?> ALT="Imagen de referencia de documento">
+    <img style="width:30%;" src=<?php echo Url::to('@web/archivos/error403.png', true); ?> ALT="Imagen de referencia de documento">
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
