@@ -39,37 +39,6 @@ class ProyectoController extends Controller
         );
     }
 
-    public function actionEmpresaList($q = null) {
-        $query = new Query;
-        
-        $query->select('nombre')
-        ->from('empresa')
-            ->where('nombre LIKE "%' . $q .'%"')
-        ->orderBy('nombre');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out = [];
-        foreach ($data as $d) {
-            $out[] = ['value' => $d['nombre']];
-        }
-        echo Json::encode($out);
-    }
-
-    public function actionAsesorExternoList($q = null) {
-        $query = new Query;
-        
-        $query->select('nombre')
-        ->from('asesor_externo')
-            ->where('nombre LIKE "%' . $q .'%"')
-        ->orderBy('nombre');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out = [];
-        foreach ($data as $d) {
-            $out[] = ['value' => $d['nombre']];
-        }
-        echo Json::encode($out);
-    }
 
     public function actionEstudiantesList() {
         $out = [];
@@ -129,15 +98,6 @@ class ProyectoController extends Controller
 
         $model = new Proyecto();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $empresa = Empresa::findByNombre($model->nombreEmpresa);
-            $model->empresa_id = $empresa->id;
-
-            $asesor_externo = AsesorExterno::findByNombre($model->nombreAsesorExterno);
-            $model->asesor_externo_id = $asesor_externo->id;
-        }
-
         if($model->load(Yii::$app->request->post()))
         {
             $data = (new \yii\db\Query())
@@ -171,13 +131,23 @@ class ProyectoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
+        if($model->load(Yii::$app->request->post()))
+        {
+            $data = (new \yii\db\Query())
+                ->from('proyecto')
+                ->where(['perfil_estudiante_id' => $model->perfil_estudiante_id])
+                ->exists();
 
-            $empresa = Empresa::findByNombre($model->nombreEmpresa);
-            $model->empresa_id = $empresa->id;
-
-            $asesor_externo = AsesorExterno::findByNombre($model->nombreAsesorExterno);
-            $model->asesor_externo_id = $asesor_externo->id;
+            if($data > 0)
+            {
+                Yii::$app->session->setFlash('error', 'El alumno ya tiene un proyecto asignado');
+                $model->ingenieria_id = NULL;
+                $model->perfil_estudiante_id = NULL;
+            }else{
+                    if ($model->save()) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -187,7 +157,7 @@ class ProyectoController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }   
 
     /**
      * Deletes an existing Proyecto model.

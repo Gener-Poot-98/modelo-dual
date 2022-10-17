@@ -55,14 +55,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             
             ['class' => 'kartik\grid\SerialColumn'],
-            'id',
+            //'id',
+            //'perfil_estudiante_id',
+            ['label' => 'Matricula','attribute' => 'matriculaEstudiante', 'filter' => $searchModel->getMatriculasList() ],
             'nombre',
              //'departamento_id',
             ['label' => 'Departamento','attribute' => 'departamentoNombre', 'filter' => $searchModel->getDepartamentoList() ],
 
              //'ingenieria_id',
             [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
-            'perfil_estudiante_id',
+            //'perfil_estudiante_id',
             //'empresa_id',
             //'asesor_externo_id',
             //'estado_proyecto_id',

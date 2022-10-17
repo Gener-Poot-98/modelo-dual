@@ -42,7 +42,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Proyecto extends \yii\db\ActiveRecord
 {
-    public $nombreEstudiante, $nombreEmpresa, $nombreAsesorExterno;
+    public $nombreEstudiante;
     /**
      * {@inheritdoc}
      */
@@ -57,7 +57,7 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id','perfil_estudiante_id', 'empresa_id', 'nombreEmpresa', 'asesor_externo_id', 'periodo_id','horas_totales','nombreAsesorExterno', 'estado_proyecto_id','descripcion'], 'required'],
+            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id','perfil_estudiante_id', 'empresa_id','asesor_externo_id', 'periodo_id','horas_totales', 'estado_proyecto_id','descripcion'], 'required'],
             [['nombreEstudiante'], 'string'],
             [['departamento_id','plan_estudios_id','asesor_interno_id','periodo_id','ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -235,6 +235,19 @@ class Proyecto extends \yii\db\ActiveRecord
         return $this->hasOne(PerfilEstudiante::class, ['id' => 'perfil_estudiante_id']);
     }
 
+    public function getMatriculasList()
+    {
+        $matriculas = PerfilEstudiante::find()->all();
+
+        $matriculasList = ArrayHelper::map($matriculas, 'id', 'matricula');
+
+        return $matriculasList;
+    }
+
+    public function getMatriculaEstudiante() 
+    { 
+        return $this->perfilEstudiante->matricula; 
+    }
     /**
      * Gets query for [[PerfilEstudiante]].
      *
@@ -267,6 +280,20 @@ class Proyecto extends \yii\db\ActiveRecord
     public function getPeriodo()
     {
         return $this->hasOne(Periodo::class, ['id' => 'periodo_id']);
+    }
+
+    public function getPeriodoList()
+    {
+        $periodo = Periodo::find()->all();
+
+        $periodoList = ArrayHelper::map($periodo, 'id', 'nombre');
+
+        return $periodoList;
+    }
+
+    public function getPeriodoNombre() 
+    { 
+        return $this->periodo->nombre; 
     }
 
     

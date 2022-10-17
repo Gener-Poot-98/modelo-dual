@@ -1,11 +1,14 @@
 <?php
 
+use common\models\AsesorExterno;
+use common\models\Empresa;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use kartik\widgets\Typeahead;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /** @var yii\web\View $this */
 /** @var common\models\Proyecto $model */
@@ -57,49 +60,34 @@ use yii\helpers\ArrayHelper;
         </div>
 
         <div class="col-md-6">
-            <?php
-            echo $form->field($model, 'nombreEmpresa')->widget(Typeahead::classname(), [
-                'options' => ['placeholder' => 'Ingresa el nombre de la empresa...'],
-                'pluginOptions' => ['highlight' => true],
-                'dataset' => [
-                    [
-                        'datumTokenizer' =>
-                        "Bloodhound.tokenizers.obj.whitespace('value')",
-                        'display' => 'value',
-                        'remote' => [
-                            'url' => Url::to(['proyecto/empresa-list']),
-                            '?q=%QUERY',
-                            'wildcard' => '%QUERY'
-                        ]
-                    ]
-                ]
+            <?=  $form->field($model, 'empresa_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Empresa::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::MEDIUM,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar empresa')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
             ]);
             ?>
         </div>
 
         <div class="col-md-6">
-            <?php
-            echo $form->field($model, 'nombreAsesorExterno')->widget(Typeahead::classname(), [
-                'options' => ['placeholder' => 'Ingresa el nombre del asesor externo...'],
-                'pluginOptions' => ['highlight' => true],
-                'dataset' => [
-                    [
-                        'datumTokenizer' =>
-                        "Bloodhound.tokenizers.obj.whitespace('value')",
-                        'display' => 'value',
-                        'remote' => [
-                            'url' => Url::to(['proyecto/asesor-externo-list']),
-                            '?q=%QUERY',
-                            'wildcard' => '%QUERY'
-                        ]
-                    ]
-                ]
+        <?=  $form->field($model, 'asesor_externo_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(AsesorExterno::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::MEDIUM,
+                'options' => ['placeholder' => Yii::t('app', 'Seleccionar asesor externo')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
             ]);
             ?>
         </div>
 
         <div class="col-md-4">
-            <?= $form->field($model, 'periodo_id')->textInput() ?>
+        <?= $form->field($model, 'periodo_id')->dropDownList($model->getPeriodoList(), ['prompt' => 'Seleccione un periodo']) ?>
+
         </div>
 
         <div class="col-md-4">
