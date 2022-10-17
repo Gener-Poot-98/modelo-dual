@@ -60,11 +60,11 @@ class Asignatura extends \yii\db\ActiveRecord
             'clave' => 'Clave',
             'creditos' => 'Creditos',
             'competencia_disciplinar' => 'Competencia Disciplinar',
-            'docente_id' => 'Docente ID',
+            'docente_id' => 'Docente',
             'horas_dedicadas' => 'Horas',
             'periodo_desarrollo' => 'P. Desarrollo',
             'periodo_acreditacion' => 'P. Acreditacion',
-            'semestre_id' => 'Semestre ID',
+            'semestre_id' => 'Semestre',
         ];
     }
 

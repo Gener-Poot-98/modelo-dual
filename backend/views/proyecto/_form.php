@@ -4,7 +4,6 @@ use common\models\AsesorExterno;
 use common\models\Empresa;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
-use kartik\widgets\Typeahead;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;

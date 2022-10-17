@@ -1,7 +1,11 @@
 <?php
 
+use common\models\Docente;
+use common\models\Semestre;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /** @var yii\web\View $this */
 /** @var common\models\Asignatura $model */
@@ -31,7 +35,16 @@ use yii\bootstrap4\ActiveForm;
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'docente_id')->textInput() ?>
+        <?=  $form->field($model, 'docente_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Docente::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::MEDIUM,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar docente')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
         </div>
 
         <div class="col-md-6">
@@ -47,8 +60,17 @@ use yii\bootstrap4\ActiveForm;
         </div>
 
     </div>
-
-    <?= $form->field($model, 'semestre_id')->textInput() ?>
+    <?=  $form->field($model, 'semestre_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Semestre::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::MEDIUM,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar semestre')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-lg btn-block']) ?>
