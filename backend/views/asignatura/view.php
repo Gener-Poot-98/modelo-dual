@@ -42,11 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'horas_dedicadas',
             'periodo_desarrollo',
             'periodo_acreditacion',
-            //'semestre_id',
-            [ 'label' => 'Semestre', 'value' => function ($searchModel) 
-            { 
-                return $searchModel->semestre->nombre; 
-            } ],
+            'ingenieria_id',
+            
         ],
     ]) ?>
 

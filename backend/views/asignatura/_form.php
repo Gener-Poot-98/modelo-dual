@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Docente;
+use common\models\Ingenieria;
 use common\models\Semestre;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
@@ -60,11 +61,11 @@ use kartik\select2\Select2;
         </div>
 
     </div>
-    <?=  $form->field($model, 'semestre_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Semestre::find()->all(), 'id', 'nombre'),
+    <?=  $form->field($model, 'ingenieria_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Ingenieria::find()->all(), 'id', 'nombre'),
                 'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::MEDIUM,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar semestre')],
+                'size' => Select2::LARGE,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar ingeneria')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],

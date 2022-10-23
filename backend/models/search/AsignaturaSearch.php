@@ -17,7 +17,7 @@ class AsignaturaSearch extends Asignatura
     public function rules()
     {
         return [
-            [['id', 'docente_id', 'horas_dedicadas', 'semestre_id'], 'integer'],
+            [['id', 'docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
             [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docenteNombre','periodo_desarrollo', 'periodo_acreditacion'], 'safe'],
         ];
     }
@@ -72,7 +72,7 @@ class AsignaturaSearch extends Asignatura
             'id' => $this->id,
             'docente_id' => $this->docente_id,
             'horas_dedicadas' => $this->horas_dedicadas,
-            'semestre_id' => $this->semestre_id,
+            'ingenieria_id' => $this->ingenieria_id,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

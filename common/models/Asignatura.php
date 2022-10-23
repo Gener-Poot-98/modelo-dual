@@ -6,7 +6,6 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use common\models\Docente;
 
-
 /**
  * This is the model class for table "asignatura".
  *
@@ -19,10 +18,10 @@ use common\models\Docente;
  * @property int $horas_dedicadas
  * @property string $periodo_desarrollo
  * @property string $periodo_acreditacion
- * @property int $semestre_id
+ * @property int $ingenieria_id
  *
  * @property Docente $docente
- * @property Semestre $semestre
+ * @property Ingenieria $ingenieria
  */
 class Asignatura extends \yii\db\ActiveRecord
 {
@@ -40,12 +39,12 @@ class Asignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'clave', 'creditos','competencia_disciplinar', 'docente_id', 'horas_dedicadas', 'periodo_desarrollo', 'periodo_acreditacion', 'semestre_id'], 'required'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'horas_dedicadas', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id'], 'required'],
             [['competencia_disciplinar'], 'string'],
-            [['docente_id', 'horas_dedicadas', 'semestre_id'], 'integer'],
+            [['docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
             [['nombre', 'clave', 'creditos', 'periodo_desarrollo', 'periodo_acreditacion'], 'string', 'max' => 45],
             [['docente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Docente::class, 'targetAttribute' => ['docente_id' => 'id']],
-            [['semestre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semestre::class, 'targetAttribute' => ['semestre_id' => 'id']],
+            [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
         ];
     }
 
@@ -56,15 +55,15 @@ class Asignatura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Asignatura',
+            'nombre' => 'Nombre',
             'clave' => 'Clave',
             'creditos' => 'Creditos',
             'competencia_disciplinar' => 'Competencia Disciplinar',
-            'docente_id' => 'Docente',
-            'horas_dedicadas' => 'Horas',
-            'periodo_desarrollo' => 'P. Desarrollo',
-            'periodo_acreditacion' => 'P. Acreditacion',
-            'semestre_id' => 'Semestre',
+            'docente_id' => 'Docente ID',
+            'horas_dedicadas' => 'Horas Dedicadas',
+            'periodo_desarrollo' => 'Periodo Desarrollo',
+            'periodo_acreditacion' => 'Periodo Acreditacion',
+            'ingenieria_id' => 'Ingenieria ID',
         ];
     }
 
@@ -79,13 +78,13 @@ class Asignatura extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Semestre]].
+     * Gets query for [[Ingenieria]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getSemestre()
+    public function getIngenieria()
     {
-        return $this->hasOne(Semestre::class, ['id' => 'semestre_id']);
+        return $this->hasOne(Ingenieria::class, ['id' => 'ingenieria_id']);
     }
 
     public function getDocenteNombre() 

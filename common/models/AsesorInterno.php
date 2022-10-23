@@ -9,7 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $nombre
+ * @property int $ingenieria_id
  *
+ * @property Ingenieria $ingenieria
  * @property Proyecto[] $proyectos
  */
 class AsesorInterno extends \yii\db\ActiveRecord
@@ -28,8 +30,10 @@ class AsesorInterno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre'], 'required'],
+            [['nombre', 'ingenieria_id'], 'required'],
+            [['ingenieria_id'], 'integer'],
             [['nombre'], 'string', 'max' => 45],
+            [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
         ];
     }
 
@@ -41,7 +45,18 @@ class AsesorInterno extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
+            'ingenieria_id' => 'Ingenieria ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Ingenieria]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIngenieria()
+    {
+        return $this->hasOne(Ingenieria::class, ['id' => 'ingenieria_id']);
     }
 
     /**
@@ -52,10 +67,5 @@ class AsesorInterno extends \yii\db\ActiveRecord
     public function getProyectos()
     {
         return $this->hasMany(Proyecto::class, ['asesor_interno_id' => 'id']);
-    }
-
-    public static function findByNombre($nombre)
-    {
-        return static::findOne(['nombre' => $nombre]);
     }
 }

@@ -32,9 +32,6 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'departamento_id')->dropDownList($model->getDepartamentoList(), ['prompt' => 'Seleccione el departamento']) ?>
         </div>
 
-        <div class="col-md-6">
-            <?= $form->field($model, 'asesor_interno_id')->dropDownList($model->getAsesorInternoList(), ['prompt' => 'Seleccione el asesor interno']) ?>
-        </div>
 
         <div class="col-md-6">
             <?php $ingenieriaList=ArrayHelper::map(common\models\Ingenieria::find()->all(), 'id', 'nombre' ); ?> 
@@ -59,18 +56,21 @@ use kartik\select2\Select2;
         </div>
 
         <div class="col-md-6">
-            <?=  $form->field($model, 'empresa_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Empresa::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::MEDIUM,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar empresa')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
+        <?php
+            echo $form->field($model, 'asesor_interno_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'asesor_interno_id'],
+                'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                'pluginOptions'=>[
+                'depends'=>['nombre'], // the id for cat attribute
+                'placeholder'=>'Seleccione un asesor',
+                'url'=>  \yii\helpers\Url::to(['proyecto/asesores-internos-list']),
+                'initialize' => $model->isNewRecord ? false : true,
+                ]
+                ]);
             ?>
         </div>
-
+        
         <div class="col-md-6">
         <?=  $form->field($model, 'asesor_externo_id')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(AsesorExterno::find()->all(), 'id', 'nombre'),
@@ -83,6 +83,20 @@ use kartik\select2\Select2;
             ]);
             ?>
         </div>
+
+        <div class="col-md-6">
+            <?=  $form->field($model, 'empresa_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Empresa::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::MEDIUM,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar empresa')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
+        </div>
+
 
         <div class="col-md-4">
         <?= $form->field($model, 'periodo_id')->dropDownList($model->getPeriodoList(), ['prompt' => 'Seleccione un periodo']) ?>

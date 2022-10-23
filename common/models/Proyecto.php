@@ -314,4 +314,13 @@ class Proyecto extends \yii\db\ActiveRecord
 
         return $data;
     }
+
+    public static function getAsesoresInternos  ($ingenieria_id) {
+        $data=\common\models\AsesorInterno::find()
+        ->where(['ingenieria_id'=>$ingenieria_id])
+        ->select(['id','nombre AS name'])->asArray()->all();
+
+        return $data;
+    }
 }
+
