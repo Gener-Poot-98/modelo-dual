@@ -50,17 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
     { 
 
         echo '<div class="alert alert-success">Este expediente ha completado todo el proceso del Modelo Dual</div>';
-        ?>
-        <p>
-            <?= Html::a('Reabrir expediente', ['reabrir', 'id' => $model->id], [
-                'class' => 'btn btn-success',
-                'data' => [
-                    'confirm' => '¿Está seguro que desea volver a abrir el expediente?',
-                    'method' => 'post',
-                ],
-            ]) ?>
-        </p>
-        <?php
     }
 
     ?>

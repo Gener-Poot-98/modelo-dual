@@ -12,17 +12,30 @@ use yii\bootstrap4\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <div class="row">
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'ingenieria_id')->dropDownList($model->ingenieriaLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'ingenieria_id')->dropDownList($model->ingenieriaLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
+        </div>
 
-    <?= $form->field($model, 'genero_id')->dropDownList($model->generoLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'genero_id')->dropDownList($model->generoLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
+        </div>
 
-    <?= $form->field($model, 'especialidad_id')->dropDownList($model->especialidadLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
-
+        <div class="col-md-4">
+            <?= $form->field($model, 'especialidad_id')->dropDownList($model->especialidadLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
+        </div>
+        
+    </div>
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

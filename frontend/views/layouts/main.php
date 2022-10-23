@@ -155,7 +155,7 @@ $baseUrl = $asset->baseUrl;
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center mx-auto my-auto">
                         <h1 class="text-white">Sistema de Educación Dual</h1>
-                        <p class="lead mb-4 text-white opacity-8">Registrate y observa los documentos que te hacen falta!</p>
+                        <p class="lead mb-4 text-white opacity-8">Pre-registrate y forma parte del Modelo de Educación Dual</p>
 
                         <h6 class="text-white mb-2 mt-5">Encuentranos en</h6>
                         <div class="d-flex justify-content-center">

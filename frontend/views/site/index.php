@@ -117,9 +117,9 @@ if ( Yii::$app->user->can('estudiante')){ ?>
         <div class="row">
             <div class="row text-center my-sm-5 mt-5">
                 <div class="col-lg-6 mx-auto">
-                    <h2 class="text-primary text-gradient mb-0">Valoramos tu tiempo</h2>
-                    <h2 class="">Al Instante</h2>
-                    <p class="lead">Aprovecha el sistema de educación dual y trabaja con una empresa desde ahora!<br /> </p>
+                    <h2 class="text-primary text-gradient mb-0">Aprovecha el</h2>
+                    <h2 class="text-primary text-gradient mb-0">Modelo de Educación Dual</h2>
+                    <p class="lead">Adquiere experiencia laboral y trabaja con una empresa desde ahora.<br /> </p>
                 </div>
             </div>
         </div>
@@ -136,7 +136,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
                         </div>
                         <div class="mt-2 ms-2">
                             <a href="#">
-                                <h6 class="mb-0">Ing en Administración</h6>
+                                <h6 class="mb-0">Ing. en Administración</h6>
                             </a>
                         </div>
                     </div>
@@ -147,7 +147,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
                         </div>
                         <div class="mt-2 ms-2">
                             <a href="#">
-                                <h6 class="mb-0">Ing Industrial</h6>
+                                <h6 class="mb-0">Ing. Industrial</h6>
                             </a>
                         </div>
                     </div>
@@ -158,7 +158,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
                         </div>
                         <div class="mt-2 ms-2">
                             <h6>
-                                Ing en Sistemas Computacionales.
+                                Ing. en Sistemas Computacionales
                         </div>
                         </h6>
                     </div>
@@ -169,7 +169,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
                         </div>
                         <div class="mt-2 ms-2">
                             <h6>
-                                Ing Ambiental.
+                                Ing. Ambiental
                         </div>
                         </h6>
                     </div>
@@ -180,7 +180,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
                         </div>
                         <div class="mt-2 ms-2">
                             <h6>
-                                Ing Civil
+                                Ing. Civil
                             </h6>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ if ( Yii::$app->user->can('estudiante')){ ?>
             </div>
             <div class="col-md-3 mx-auto mt-md-0 mt-5">
                 <div class="position-sticky" style="top:100px !important">
-                    <h4 class="">Sistema de Eduación Dual</h4>
+                    <h4 class="">Modelo de Eduación Dual</h4>
                     <h6 class="text-secondary">Éstas son solo una pequeña prueba de alumnos trabajando en una empresa desde septimo semestre!</h6>
                 </div>
             </div>
