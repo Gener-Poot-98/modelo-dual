@@ -2,15 +2,18 @@
 
 use common\models\Docente;
 use common\models\Ingenieria;
-use common\models\Semestre;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 
+
+
 /** @var yii\web\View $this */
 /** @var common\models\Asignatura $model */
 /** @var yii\widgets\ActiveForm $form */
+
+
 ?>
 
 <div class="asignatura-form">
@@ -49,7 +52,16 @@ use kartik\select2\Select2;
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'horas_dedicadas')->textInput() ?>
+        <?=  $form->field($model, 'ingenieria_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Ingenieria::find()->all(), 'id', 'nombre'),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'size' => Select2::LARGE,
+                'options' => ['placeholder' => Yii::t('app', 'Selecionar ingeneria')],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
         </div>
 
         <div class="col-md-6">
@@ -61,16 +73,6 @@ use kartik\select2\Select2;
         </div>
 
     </div>
-    <?=  $form->field($model, 'ingenieria_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Ingenieria::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::LARGE,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar ingeneria')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
-            ?>
     
 
     <div class="form-group">

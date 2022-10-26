@@ -2,17 +2,16 @@
 
 namespace backend\controllers;
 
-use common\models\Asignatura;
-use backend\models\search\AsignaturaSearch;
 use common\models\Ajuste;
+use backend\models\search\AjusteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AsignaturaController implements the CRUD actions for Asignatura model.
+ * AjusteController implements the CRUD actions for Ajuste model.
  */
-class AsignaturaController extends Controller
+class AjusteController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Lists all Asignatura models.
+     * Lists all Ajuste models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AsignaturaSearch();
+        $searchModel = new AjusteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +48,7 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Displays a single Asignatura model.
+     * Displays a single Ajuste model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,19 +61,16 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Creates a new Asignatura model.
+     * Creates a new Ajuste model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Asignatura();
+        $model = new Ajuste();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $ajuste = $this->findAjuste(1);
-                $model->horas_dedicadas = $model->creditos * $ajuste -> num_semanas_semestre;
-                $model->save();
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -87,7 +83,7 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Updates an existing Asignatura model.
+     * Updates an existing Ajuste model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -97,10 +93,7 @@ class AsignaturaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) ) {
-            $ajuste = $this->findAjuste(1);
-            $model->horas_dedicadas = $model->creditos * $ajuste -> num_semanas_semestre;
-            $model->save();
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,7 +103,7 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Deletes an existing Asignatura model.
+     * Deletes an existing Ajuste model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -124,22 +117,13 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Finds the Asignatura model based on its primary key value.
+     * Finds the Ajuste model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Asignatura the loaded model
+     * @return Ajuste the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
-    {
-        if (($model = Asignatura::findOne(['id' => $id])) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function findAjuste($id)
     {
         if (($model = Ajuste::findOne(['id' => $id])) !== null) {
             return $model;
@@ -147,5 +131,4 @@ class AsignaturaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }

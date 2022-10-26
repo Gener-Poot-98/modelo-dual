@@ -39,7 +39,7 @@ class Asignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'horas_dedicadas', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id'], 'required'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id'], 'required'],
             [['competencia_disciplinar'], 'string'],
             [['docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
             [['nombre', 'clave', 'creditos', 'periodo_desarrollo', 'periodo_acreditacion'], 'string', 'max' => 45],

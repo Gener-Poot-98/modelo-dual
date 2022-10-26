@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use common\models\Asignatura;
-
+use Yii\web\NotFoundHttpException;
 /**
  * This is the model class for table "proyecto_asignatura".
  *
@@ -88,7 +88,7 @@ class ProyectoAsignatura extends \yii\db\ActiveRecord
                 $model->asignatura_id = $value;
                 $model->asignaturaArray = $this->asignaturaArray;
                 $asignatura = $this->findAsignatura($value);
-                $proyecto->horas_totales += $asignatura->creditos;
+                $proyecto->horas_totales += $asignatura->horas_dedicadas;
                 $proyecto->save();
                 if (!$model->save()) {
                     $this->addErrors($model->getErrors());
