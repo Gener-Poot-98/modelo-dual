@@ -98,16 +98,12 @@ use kartik\select2\Select2;
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-6">
         <?= $form->field($model, 'periodo_id')->dropDownList($model->getPeriodoList(), ['prompt' => 'Seleccione un periodo']) ?>
 
         </div>
 
-        <div class="col-md-4">
-            <?= $form->field($model, 'horas_totales')->textInput() ?>
-        </div>
-
-        <div class="col-md-4">
+        <div class="col-md-6">
             <?= $form->field($model, 'estado_proyecto_id')->dropDownList($model->getEstadoProyectosList(), ['prompt' => 'Seleccione el estado del proyecto']) ?>
         </div>
     </div>

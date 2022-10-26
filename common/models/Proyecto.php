@@ -57,7 +57,7 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id','perfil_estudiante_id', 'empresa_id','asesor_externo_id', 'periodo_id','horas_totales', 'estado_proyecto_id','descripcion'], 'required'],
+            [['nombre','plan_estudios_id','departamento_id', 'asesor_interno_id','ingenieria_id','perfil_estudiante_id', 'empresa_id','asesor_externo_id', 'periodo_id', 'estado_proyecto_id','descripcion'], 'required'],
             [['departamento_id','plan_estudios_id','asesor_interno_id','periodo_id','ingenieria_id', 'perfil_estudiante_id', 'empresa_id', 'asesor_externo_id', 'estado_proyecto_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 2500],

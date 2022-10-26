@@ -80,11 +80,16 @@ class ProyectoAsignatura extends \yii\db\ActiveRecord
     public function saveAsignaturaArray()
         {
             ProyectoAsignatura::deleteAll(['proyecto_id' => $this->proyecto_id]);
+            $proyecto = $this->findProyecto($this->proyecto_id);
+            $proyecto->horas_totales = 0;
             foreach ($this->asignaturaArray as $value) {
                 $model = new ProyectoAsignatura();
                 $model->proyecto_id = $this->proyecto_id;
                 $model->asignatura_id = $value;
                 $model->asignaturaArray = $this->asignaturaArray;
+                $asignatura = $this->findAsignatura($value);
+                $proyecto->horas_totales += $asignatura->creditos;
+                $proyecto->save();
                 if (!$model->save()) {
                     $this->addErrors($model->getErrors());
                     return false;
@@ -100,5 +105,23 @@ class ProyectoAsignatura extends \yii\db\ActiveRecord
                             WHERE proyecto_id = "'.$this->proyecto_id.'" 
                             ')
                             ->queryAll(),'asignatura_id');
+    }
+
+    public function findProyecto($id)
+    {
+        if (($model = Proyecto::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function findAsignatura($id)
+    {
+        if (($model = Asignatura::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
