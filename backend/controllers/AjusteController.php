@@ -38,12 +38,8 @@ class AjusteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AjusteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        return $this->render('view', [
+            'model' => $this->findModel(1),
         ]);
     }
 

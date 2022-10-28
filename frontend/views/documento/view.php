@@ -30,7 +30,7 @@ $fecha_cierre = date($model->fecha_cierre);
     </p>
 <?php }
 else {
-    echo '<div class="alert alert-danger">No es posible subir el documento, verifique la fecha de disponibilidad.</div>';
+    echo '<div class="alert alert-danger" style="color: white;">No es posible subir el documento, verifique la fecha de disponibilidad.</div>';
 }
 
 ?>

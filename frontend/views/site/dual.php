@@ -5,6 +5,14 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\RegistrosHelpers;
+
+/** @var common\models\Ajuste $model */
+date_default_timezone_set("America/Mexico_City");
+
+$fecha_actual= date('Y-m-d');
+$fecha_inicio = date($model->inicio_preregistro);
+$fecha_cierre = date($model->fin_preregistro);
 
 $this->title = 'Quiero ser Dual';
 ?>
@@ -40,7 +48,11 @@ $this->title = 'Quiero ser Dual';
             <p>
                 <?php
                     if (Yii::$app->user->isGuest) {
-                        echo Html::a('Pre-registrarme', ['preregistro/create'], ['class' => 'btn btn-outline-primary']);
+                        if (RegistrosHelpers::validarFecha($fecha_inicio, $fecha_cierre, $fecha_actual)){
+                            echo Html::a('Pre-registrarme', ['preregistro/create'], ['class' => 'btn btn-outline-primary']);
+                        }else{
+                            echo '<div class="alert alert-danger" style="color: white;">No es posible Pre-registrarse, verifique la fecha de disponibilidad.</div>';
+                        }
                     }
                 ?>
             </p>

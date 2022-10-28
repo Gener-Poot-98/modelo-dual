@@ -17,6 +17,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Ajuste;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
 
@@ -157,7 +158,17 @@ class SiteController extends Controller
      */
     public function actionDual()
     {
-        return $this->render('dual');
+        return $this->render('dual',
+            ['model' => $this->findAjuste(1)]);
+    }
+
+    public function findAjuste($id)
+    {
+        if (($model = Ajuste::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
