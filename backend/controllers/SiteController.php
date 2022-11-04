@@ -8,6 +8,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use frontend\models\SignupForm;
+
 
 /**
  * Site controller
@@ -24,7 +26,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error' , 'signup'],
                         'allow' => true,
                     ],
                     [
@@ -86,6 +88,24 @@ class SiteController extends Controller
         $model->password = '';
 
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Gracias por registrarse. Por favor revise su bandeja de entrada para el correo electrónico de verificación.');
+            return $this->goHome();
+        }
+
+        return $this->render('signup', [
             'model' => $model,
         ]);
     }
