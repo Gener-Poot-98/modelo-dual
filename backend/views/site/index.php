@@ -5,13 +5,49 @@ use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 
+$this->registerCss("
+body-content{
+    padding: 25px;
+}
 
+.text-gradient.text-primary {
+    background-image: linear-gradient(310deg, blue, black);
+}
+
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.text-primary {
+    color: #007bff;
+}
+
+.forma{
+    background-color: rgba(255, 255, 255, 0.95);
+    color: rgb(26, 24, 24);
+    padding: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0 rgba(44, 141, 226, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    padding: 25px;
+
+}
+
+");
 $this->title = 'Sistema Dual';
 ?>
 
-<head>
-    <link rel="stylesheet" href="web/css/index.css">
-</head>
 <form class="forma">
     <div class="site-index">
         <h1 style="text-align:center;" class="text-primary text-gradient mb-0">Administra las diferentes secciones</h2>
@@ -153,7 +189,7 @@ $this->title = 'Sistema Dual';
                                     <p style="text-align:center;">
                                         <?php
                                         if (!Yii::$app->user->isGuest) {
-                                            echo Html::a('Administrar', ['expediente/index'], ['class' => 'btn btn-outline-primary']);
+                                            echo Html::a('Administrar', ['perfil-estudiante/index'], ['class' => 'btn btn-outline-primary']);
                                         }
                                         ?>
                                     </p>
