@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap4\ActiveForm $form */
-/** @var \frontend\models\SignupForm $model */
+/** @var \backend\models\SignupForm $model */
 
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
@@ -10,6 +10,105 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Registro';
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss("
+
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1b396a;
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#1845ad,
+            #23a2f6);
+    left: -80px;
+    top: -80px;
+}
+
+.shape:last-child {
+    background: linear-gradient(to right,
+            #ff512f,
+            #f09819);
+    right: -30px;
+    bottom: -80px;
+}
+
+form {
+    height: auto;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    margin: 0 auto 1rem;
+
+}
+
+form * {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
 
 label, .form-signup{
     font-size:20px;
@@ -28,27 +127,36 @@ label, .form-signup{
 ");
 ?>
 
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
 
-<div class="site-signup">
-    <h1 style="text-align:center;"><?= Html::encode($this->title) ?></h1>
 
-    <p style="text-align:center;">Por favor llene los siguientes campos para registrarse:</p>
-
-    <div class="row1">
-        <div class="col-lg-5">
+<body>
+    <div class="site-signup">
+            <div class="background">
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <form>
 
-            <?= $form->field($model, 'email') ?>
+                <h3><?= Html::encode($this->title) ?></h3>
+                <p>Complete los siguientes campos para registrarte:</p>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-            <div class="form-group">
-                <?= Html::submitButton('Registrarse', ['class' => 'btn bg-gradient-info btn-lg btn-block', 'name' => 'signup-button']) ?>
-            </div>
+                <?= $form->field($model, 'email') ?>
+
+                <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <?= Html::submitButton('Registrarse', ['class' => 'btn btn-primary btn-block', 'name' => 'signup-button']) ?>
+            </form>
 
             <?php ActiveForm::end(); ?>
-        </div>
+        
     </div>
-</div>
+</body>

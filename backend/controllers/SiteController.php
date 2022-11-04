@@ -104,6 +104,8 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', 'Gracias por registrarse. Por favor revise su bandeja de entrada para el correo electrónico de verificación.');
             return $this->goHome();
         }
+        
+        $this->layout = 'blank';
 
         return $this->render('signup', [
             'model' => $model,

@@ -14,7 +14,7 @@ $this->registerCss("
 }
 
 body {
-    background-color: #080710;
+    background-color: #1b396a;
 }
 
 .background {
@@ -137,6 +137,9 @@ $this->title = 'Login';
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                <br> 
+                <p>¿No tienes una cuenta?  <?= Html::a('Registrate', ['site/signup']) ?></p>
+                
             </form>
 
             <?php ActiveForm::end(); ?>
