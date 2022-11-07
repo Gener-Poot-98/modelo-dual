@@ -134,7 +134,7 @@ $this->title = 'Sistema Dual';
 
                             <!-- Card image -->
                             <div class="view overlay">
-                                <img class="card-img-top" src=<?php echo Url::to('@web/archivos/asignatur.png', true); ?> alt="Card image cap">
+                                <img class="card-img-top" src=<?php echo Url::to('@web/archivos/asignaturas.jpg', true); ?> alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
