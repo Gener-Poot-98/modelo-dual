@@ -27,8 +27,10 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
-<header align = "center">
-<img id="banner" src=<?php echo Url::to('@web/archivos/cabecera.png', true); ?> alt="">
+<header>
+<center>
+    <img style="display: block; max-width:100%; height:auto;" src=<?php echo Url::to('@web/archivos/cabecera.png', true); ?> alt="">
+</center>
 </header>
 <header>
     <?php
