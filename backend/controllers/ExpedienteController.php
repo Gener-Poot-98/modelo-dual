@@ -118,6 +118,7 @@ class ExpedienteController extends Controller
         $model->estado_expediente_id = 1;
         $model->fecha_cierre = NULL;
         $model->motivo_cierre_id = NULL;
+        $model->comentario = NULL;
 
         return $model->save() && $this->redirect(['view', 'id' => $model->id]);
     }

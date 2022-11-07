@@ -8,7 +8,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
-use frontend\models\SignupForm;
+use backend\models\SignupForm;
+use backend\models\VerifyEmailForm;
 
 
 /**
@@ -26,7 +27,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error' , 'signup'],
+                        'actions' => ['login', 'error' , 'signup', 'verify-email'],
                         'allow' => true,
                     ],
                     [
@@ -102,7 +103,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Gracias por registrarse. Por favor revise su bandeja de entrada para el correo electrónico de verificación.');
-            return $this->goHome();
+            return $this->render('index');
         }
         
         $this->layout = 'blank';
@@ -110,6 +111,29 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Verify email address
+     *
+     * @param string $token
+     * @throws BadRequestHttpException
+     * @return yii\web\Response
+     */
+    public function actionVerifyEmail($token)
+    {
+        try {
+            $model = new VerifyEmailForm($token);
+        } catch (InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+        if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
+            Yii::$app->session->setFlash('success', '¡Tu correo ha sido confirmado! En breve el administrador te asignará un rol...');
+            return $this->render('index');
+        }
+
+        Yii::$app->session->setFlash('error', 'Lo sentimos, no podemos verificar su cuenta con el token proporcionado.');
+        return $this->render('index');
     }
 
     /**

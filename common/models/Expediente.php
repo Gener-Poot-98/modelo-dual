@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property string|null $fecha_cierre
  * @property int $estado_expediente_id
  * @property int $motivo_cierre_id
+ * @property string|null $comentario
  *
  * @property EstadoExpediente $estadoExpediente
  * @property PerfilEstudiante $perfilEstudiante
@@ -38,6 +39,7 @@ class Expediente extends \yii\db\ActiveRecord
     {
         return [
             [['perfil_estudiante_id', 'estado_expediente_id', 'motivo_cierre_id'], 'integer'],
+            [['comentario'], 'string'],
             [['created_at', 'updated_at', 'fecha_cierre'], 'safe'],
             [['perfil_estudiante_id'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilEstudiante::class, 'targetAttribute' => ['perfil_estudiante_id' => 'id']],
             [['estado_expediente_id'], 'exist', 'skipOnError' => true, 'targetClass' => EstadoExpediente::class, 'targetAttribute' => ['estado_expediente_id' => 'id']],
@@ -69,6 +71,7 @@ class Expediente extends \yii\db\ActiveRecord
             'fecha_cierre' => 'Fecha Cierre',
             'estado_expediente_id' => 'Estado',
             'motivo_cierre_id' => 'Motivo de cierre',
+            'comentario' => 'Comentario (Opcional)'
         ];
     }
 

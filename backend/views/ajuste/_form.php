@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use kartik\widgets\DatePicker;
 
 /** @var yii\web\View $this */
@@ -12,6 +12,8 @@ use kartik\widgets\DatePicker;
 <div class="ajuste-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'email_admin')->textInput() ?>
 
     <?= $form->field($model, 'num_semanas_semestre')->textInput() ?>
 

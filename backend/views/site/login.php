@@ -111,6 +111,24 @@ use yii\bootstrap4\Html;
 $this->title = 'Login';
 ?>
 
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success">
+        <?= Yii::$app->session->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash('warning')) : ?>
+    <div class="alert alert-warning">
+        <?= Yii::$app->session->getFlash('warning'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger">
+        <?= Yii::$app->session->getFlash('error'); ?>
+    </div>
+<?php endif; ?>
+
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

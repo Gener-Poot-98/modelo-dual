@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
+            'email_admin',
             'num_semanas_semestre',
             'inicio_preregistro:date',
             'fin_preregistro:date',

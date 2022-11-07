@@ -92,6 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     { 
                         return $searchModel->motivoCierre->nombre;
                     } ],
+                    'comentario',
                     //'estado_expediente_id',
                     'updated_at:datetime',
                 ],
