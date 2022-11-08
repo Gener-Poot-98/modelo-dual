@@ -51,7 +51,7 @@ $this->title = 'Quiero ser Dual';
                         if (RegistrosHelpers::validarFecha($fecha_inicio, $fecha_cierre, $fecha_actual)){
                             echo Html::a('Pre-registrarme', ['preregistro/create'], ['class' => 'btn btn-outline-primary']);
                         }else{
-                            echo '<div class="alert alert-danger" style="color: white;">No es posible Pre-registrarse, verifique la fecha de disponibilidad.</div>';
+                            echo '<div class="alert alert-danger" style="color: white;">No es posible Pre-registrarse en este momento, verifique la fecha de disponibilidad.</div>';
                         }
                     }
                 ?>

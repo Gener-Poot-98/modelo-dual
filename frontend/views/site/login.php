@@ -44,12 +44,10 @@ label, .login-form{
 
                 <div style="color:#999;margin:1em 0">
                 Si olvidaste tu contraseña puedes <?= Html::a('reestablecerlo', ['site/request-password-reset']) ?>.
-                    <br>
-                    ¿Necesita un nuevo correo de verificación? <?= Html::a('Reenviar', ['site/resend-verification-email']) ?>
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn bg-gradient-info btn-lg btn-block', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Iniciar Sesión', ['class' => 'btn bg-gradient-info btn-lg btn-block', 'name' => 'login-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

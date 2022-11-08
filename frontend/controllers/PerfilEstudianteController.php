@@ -4,12 +4,14 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\PerfilEstudiante;
+use common\models\Especialidades;
 use frontend\models\search\PerfilEstudianteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\PermisosHelpers;
 use common\models\RegistrosHelpers;
+use yii\helpers\Json;
 
 /**
  * PerfilEstudianteController implements the CRUD actions for PerfilEstudiante model.
@@ -21,26 +23,17 @@ class PerfilEstudianteController extends Controller
      */
     public function behaviors()
     {
-            return [
-                'access' => [
-                    'class' => \yii\filters\AccessControl::className(),
-                    'only' => ['index', 'view','create', 'update', 'delete'],
-                    'rules' => [
-                            [
-                            'actions' => ['index', 'view','create', 'update', 'delete'],
-                            'allow' => true,
-                            'roles' => ['@'],
-                            ],
-                        
-                        ],
-                    ],
+        return array_merge(
+            parent::behaviors(),
+            [
                 'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                        ],
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
                     ],
-            ];
+                ],
+            ]
+        );
     }
 
     /**
@@ -172,5 +165,20 @@ class PerfilEstudianteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionEspecialidadesList() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+
+        if ($parents != null) {
+        $ingenieria_id = $parents[0];
+        $out = \common\models\PerfilEstudiante::getEspecialidades($ingenieria_id);
+        echo Json::encode(['output'=>$out, 'selected'=>'']);
+        return;
+        }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
     }
 }

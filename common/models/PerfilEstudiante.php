@@ -44,6 +44,7 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['nombre','matricula','ingenieria_id'], 'required'],
             [['user_id', 'ingenieria_id', 'genero_id', 'especialidad_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre', 'matricula'], 'string', 'max' => 45],
@@ -220,4 +221,11 @@ class PerfilEstudiante extends \yii\db\ActiveRecord
         return $estadosExpedientesList;
     }
 
+    public static function getEspecialidades($ingenieria_id) {
+        $data=\common\models\Especialidad::find()
+        ->where(['ingenieria_id'=>$ingenieria_id])
+        ->select(['id','nombre AS name'])->asArray()->all();
+
+        return $data;
+    }
 }
