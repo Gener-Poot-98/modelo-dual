@@ -38,10 +38,12 @@ class AsignaturaSearch extends Asignatura
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $proyecto_id = null)
+    public function search($params, $proyecto_id = null, $ingenieria_id = null)
     {
         if ($proyecto_id) 
         $query = Asignatura::find() ->leftJoin('proyecto_asignatura', 'proyecto_asignatura.asignatura_id = asignatura.id') ->where(['proyecto_asignatura.proyecto_id' => $proyecto_id]);
+        else if ($ingenieria_id) 
+        $query = Asignatura::find() ->where(['ingenieria_id' => $ingenieria_id]);
         else 
             $query = Asignatura::find();
 

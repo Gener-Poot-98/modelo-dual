@@ -64,7 +64,7 @@ AppAsset::register($this);
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(
                 'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout', 'style' => 'margin-left:550px;']
+                ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
             . '</li>';

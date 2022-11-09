@@ -7,6 +7,7 @@ use backend\models\search\IngenieriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\search\AsignaturaSearch;
 
 /**
  * IngenieriaController implements the CRUD actions for Ingenieria model.
@@ -55,8 +56,12 @@ class IngenieriaController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new AsignaturaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams, null, $id);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

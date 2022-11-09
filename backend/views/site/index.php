@@ -144,16 +144,16 @@ $this->title = 'Sistema Dual';
                             <div class="card-body">
 
                                 <!-- Title -->
-                                <h4 class="card-title">Asignaturas</h4>
+                                <h4 class="card-title">Ingenierías y Asignaturas</h4>
                                 <!-- Text -->
-                                <p style="text-align:justify;" class="card-text">Administra las diferentes asignaturas que contiene el sistema de
+                                <p style="text-align:justify;" class="card-text">Administra las Ingenierías y asignaturas del sistema de
                                     Educación Dual.
                                 </p>
                                 <!-- Button -->
                                 <p style="text-align:center;">
                                     <?php
                                     if (!Yii::$app->user->isGuest) {
-                                        echo Html::a('Administrar', ['asignatura/index'], ['class' => 'btn btn-outline-primary']);
+                                        echo Html::a('Administrar', ['ingenieria/index'], ['class' => 'btn btn-outline-primary']);
                                     }
                                     ?>
                                 </p>

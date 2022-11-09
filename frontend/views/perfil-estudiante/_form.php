@@ -75,12 +75,12 @@ $this->registerCss("
             <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <?php $ingenieriaList=ArrayHelper::map(common\models\Ingenieria::find()->all(), 'id', 'nombre' ); ?> 
             <?= $form->field($model, 'ingenieria_id')->dropDownList($ingenieriaList, ['prompt' => 'Seleccione la Ingeniería', 'id'=>'nombre']); ?>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
         <?php
             echo $form->field($model, 'especialidad_id')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
@@ -96,7 +96,7 @@ $this->registerCss("
             ?>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <?= $form->field($model, 'genero_id')->dropDownList($model->generoLista, ['prompt' => 'Por favor Seleccione Uno' ]);?>
         </div>
         
