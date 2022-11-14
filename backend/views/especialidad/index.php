@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Ingenieria;
+use common\models\Especialidad;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
-/** @var backend\models\search\IngenieriaSearch $searchModel */
+/** @var backend\models\search\EspecialidadSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this -> registerCss("
@@ -39,37 +39,31 @@ td.kv-group-even {
 
 ");
 
-$this->title = 'Ingenierias';
+$this->title = 'Especialidades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ingenieria-index">
+<div class="especialidad-index">
 
-
-<?php Pjax::begin();?>
-
-
-    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider'=> $dataProvider,
+        'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            
             ['class' => 'kartik\grid\SerialColumn'],
+
             //'id',
             'nombre',
-
+            [ 'label' => 'Ingenieria','attribute' => 'ingenieriaNombre', 'filter' => $searchModel->getIngenieriasList() ],
             [
                 'class' => ActionColumn::className(),
                 'template'=>'{view} {update}',
-                'urlCreator' => function ($action, Ingenieria $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Especialidad $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
             ],
-            
         ],
-        
+
         'pjax' => true,
         'responsive' => true,
         'hover' => true,
@@ -84,12 +78,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading'=>$this->title,
             'type'=>'info',
-            'before'=>Html::a(Yii::t('app', 'Crear Ingenieria'), ['create'], ['class' => 'btn btn-outline-success']),
+            'before'=>Html::a(Yii::t('app', 'Crear Especialidad'), ['create'], ['class' => 'btn btn-outline-success']),
             'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
             'footer'=>false
         ],
 
-        ]); ?>
+    ]); ?>
 
 
 </div>

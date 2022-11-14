@@ -103,7 +103,7 @@ $this->registerCss("
     </div>
     
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn bg-gradient-info btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

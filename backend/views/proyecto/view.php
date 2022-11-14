@@ -73,8 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
             { 
                 return $searchModel->estadoProyecto->nombre; 
             } ],
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'descripcion',
         ],
     ]) ?>

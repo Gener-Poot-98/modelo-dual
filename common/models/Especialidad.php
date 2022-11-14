@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "especialidad".
@@ -45,7 +46,7 @@ class Especialidad extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Especialidad',
-            'ingenieria_id' => 'Ingenieria ID',
+            'ingenieria_id' => 'Ingenieria',
         ];
     }
 
@@ -67,5 +68,19 @@ class Especialidad extends \yii\db\ActiveRecord
     public function getPerfilEstudiantes()
     {
         return $this->hasMany(PerfilEstudiante::class, ['especialidad_id' => 'id']);
+    }
+
+    public function getIngenieriasList()
+    {
+        $ingenierias = Ingenieria::find()->all();
+
+        $ingenieriasList = ArrayHelper::map($ingenierias, 'id', 'nombre');
+
+        return $ingenieriasList;
+    }
+
+    public function getIngenieriaNombre() 
+    { 
+        return $this->ingenieria->nombre; 
     }
 }

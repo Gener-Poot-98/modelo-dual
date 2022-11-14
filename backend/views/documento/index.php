@@ -57,13 +57,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'kartik\grid\SerialColumn'],
         //'id',
         'nombre',
-        'fecha_inicio',
-        'fecha_cierre',
+        'fecha_inicio:date',
+        'fecha_cierre:date',
         //'created_at',
         //'updated_at',,
 
         [
             'class' => ActionColumn::className(),
+            'template'=>'{view} {update}',
             'urlCreator' => function ($action, Documento $model, $key, $index, $column) {
                 return Url::toRoute([$action, 'id' => $model->id]);
             }

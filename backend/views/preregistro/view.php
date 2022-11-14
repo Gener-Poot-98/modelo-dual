@@ -83,8 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
             { 
                 return $searchModel->estadoRegistro->nombre; 
             } ],
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'comentario:ntext',
         ],
     ]) ?>

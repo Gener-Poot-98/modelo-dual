@@ -8,14 +8,14 @@ use common\models\Genero;
 /** @var yii\web\View $this */
 /** @var common\models\PerfilEstudiante $model */
 
-$this->title = $model->matricula;
+$this->title = 'Perfil: ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Perfil Estudiantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="perfil-estudiante-view">
 
-    <h1>Perfil</h1>
+<h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?Php

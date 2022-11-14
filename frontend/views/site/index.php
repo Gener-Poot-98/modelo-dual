@@ -188,7 +188,7 @@ if (Yii::$app->user->can('estudiante')) { ?>
                 <div class="col-md-3 mx-auto mt-md-0 mt-5">
                     <div class="position-sticky" style="top:100px !important">
                         <h4 class="">Modelo de Eduación Dual</h4>
-                        <h6 class="text-secondary">Éstas son solo una pequeña prueba de alumnos trabajando en una empresa desde septimo semestre!</h6>
+                        <h6 class="text-secondary">Éstas son solo una pequeña prueba de alumnos trabajando en una empresa!</h6>
                     </div>
                 </div>
             </div>
@@ -199,8 +199,8 @@ if (Yii::$app->user->can('estudiante')) { ?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 ms-auto">
-                    <h4 class="mb-1">¡Gracias por tu apoyo!</h4>
-                    <p class="lead mb-0">Encontraras mas informacion en el Tecnologico Superior de Valladolid</p>
+                    <h4 class="mb-1">¡Gracias por tu visita!</h4>
+                    <p class="lead mb-0">Encontrarás mas informacion en el Tecnologico Superior de Valladolid</p>
                 </div>
                 <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
                     <a href="https://twitter.com" class="btn btn-info mb-0 me-2" target="_blank">
