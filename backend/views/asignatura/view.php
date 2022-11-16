@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'horas_dedicadas',
             'periodo_desarrollo',
             'periodo_acreditacion',
-            'ingenieria_id',
+            'ingenieria.nombre',
             
         ],
     ]) ?>

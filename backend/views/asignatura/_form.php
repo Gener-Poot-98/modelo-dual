@@ -35,7 +35,7 @@ use kartik\select2\Select2;
         </div>
         
         <div class="col-md-6">
-            <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 1]) ?>
+            <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 3]) ?>
         </div>
 
         <div class="col-md-6">
