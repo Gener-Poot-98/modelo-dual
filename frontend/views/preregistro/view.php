@@ -16,7 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Modificar información', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        if($model->estado_registro_id == 2){ ?>
+            <?= Html::a('Modificar información', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php }
+        if($model->estado_registro_id != 3 && $model->estado_registro_id != 4){ ?>
         <?= Html::a('Eliminar Pre-registro', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -24,7 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php } ?>
     </p>
+
+    <?php
+    if($model->estado_registro_id == 4){
+        echo '<div class="alert alert-success" style="color: white;">¡Felicidades! Tu registro al Modelo Dual fue aprobado.</div>';
+    } ?>
+
+<?php
+    if($model->estado_registro_id == 3){
+        echo '<div class="alert alert-danger" style="color: white;">Desafortunadamente tu registro al Modelo Dual NO fue aprobado.</div>';
+    } ?>
 
     <?= DetailView::widget([
         'model' => $model,
