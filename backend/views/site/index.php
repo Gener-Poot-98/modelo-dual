@@ -128,7 +128,7 @@ $this->title = 'Sistema Dual';
                         <!-- Card -->
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="padding: 20px;">
                         <!-- Card -->
                         <div class="card">
 
@@ -164,77 +164,111 @@ $this->title = 'Sistema Dual';
                         <!-- Card -->
                     </div>
 
-                    <div class="row justify-content-center" style="padding:20px;">
-                        <div class="col-md-4">
-                            <!-- Card -->
-                            <div class="card">
+                    <div class="col-md-4" style="padding: 20px;">
+                        <!-- Card -->
+                        <div class="card">
 
-                                <!-- Card image -->
-                                <div class="view overlay">
-                                    <img class="card-img-top" src=<?php echo Url::to('@web/archivos/expediente.png', true); ?> alt="Card image cap">
-                                    <a href="#!">
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
+                            <!-- Card image -->
+                            <div class="view overlay">
+                                <img class="card-img-top" src=<?php echo Url::to('@web/archivos/empresa.png', true); ?> alt="Card image cap">
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
 
-                                <!-- Card content -->
-                                <div class="card-body">
+                            <!-- Card content -->
+                            <div class="card-body">
 
-                                    <!-- Title -->
-                                    <h4 class="card-title">Expediente</h4>
-                                    <!-- Text -->
-                                    <p style="text-align:justify;" class="card-text">Administra los expedientes de los alumnos duales.
-                                    </p>
-                                    <!-- Button -->
-                                    <p style="text-align:center;">
-                                        <?php
-                                        if (!Yii::$app->user->isGuest) {
-                                            echo Html::a('Administrar', ['perfil-estudiante/index'], ['class' => 'btn btn-outline-primary']);
-                                        }
-                                        ?>
-                                    </p>
-
-                                </div>
+                                <!-- Title -->
+                                <h4 class="card-title">Empresa</h4>
+                                <!-- Text -->
+                                <p style="text-align:justify;" class="card-text">Administra las empresas que estan en el sistema de modelo dual.
+                                </p>
+                                <!-- Button -->
+                                <p style="text-align:center;">
+                                    <?php
+                                    if (!Yii::$app->user->isGuest) {
+                                        echo Html::a('Administrar', ['empresa/index'], ['class' => 'btn btn-outline-primary']);
+                                    }
+                                    ?>
+                                </p>
 
                             </div>
-                            <!-- Card -->
+
                         </div>
+                        <!-- Card -->
+                    </div>
 
-                        <div class="col-md-4">
-                            <!-- Card -->
-                            <div class="card">
 
-                                <!-- Card image -->
-                                <div class="view overlay">
-                                    <img class="card-img-top" src=<?php echo Url::to('@web/archivos/doc.jpg', true); ?> alt="Card image cap">
-                                    <a href="#!">
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
+                    <div class="col-md-4" style="padding: 20px;">
+                        <!-- Card -->
+                        <div class="card">
 
-                                <!-- Card content -->
-                                <div class="card-body">
+                            <!-- Card image -->
+                            <div class="view overlay">
+                                <img class="card-img-top" src=<?php echo Url::to('@web/archivos/expediente.png', true); ?> alt="Card image cap">
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
 
-                                    <!-- Title -->
-                                    <h4 class="card-title">Documentos</h4>
-                                    <!-- Text -->
-                                    <p style="text-align:justify;" class="card-text">Administra los documentos que contiene el sistema de
-                                        Educación Dual.
-                                    </p>
-                                    <!-- Button -->
-                                    <p style="text-align:center;">
-                                        <?php
-                                        if (!Yii::$app->user->isGuest) {
-                                            echo Html::a('Administrar', ['documento/index'], ['class' => 'btn btn-outline-primary']);
-                                        }
-                                        ?>
-                                    </p>
+                            <!-- Card content -->
+                            <div class="card-body">
 
-                                </div>
+                                <!-- Title -->
+                                <h4 class="card-title">Expediente</h4>
+                                <!-- Text -->
+                                <p style="text-align:justify;" class="card-text">Administra los expedientes de los alumnos duales.
+                                </p>
+                                <!-- Button -->
+                                <p style="text-align:center;">
+                                    <?php
+                                    if (!Yii::$app->user->isGuest) {
+                                        echo Html::a('Administrar', ['perfil-estudiante/index'], ['class' => 'btn btn-outline-primary']);
+                                    }
+                                    ?>
+                                </p>
 
                             </div>
-                            <!-- Card -->
+
                         </div>
+                        <!-- Card -->
+                    </div>
+
+                    <div class="col-md-4"style="padding: 20px;">
+                        <!-- Card -->
+                        <div class="card">
+
+                            <!-- Card image -->
+                            <div class="view overlay">
+                                <img class="card-img-top" src=<?php echo Url::to('@web/archivos/doc.jpg', true); ?> alt="Card image cap">
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                            <!-- Card content -->
+                            <div class="card-body">
+
+                                <!-- Title -->
+                                <h4 class="card-title">Documentos</h4>
+                                <!-- Text -->
+                                <p style="text-align:justify;" class="card-text">Administra los documentos que contiene el sistema de
+                                    Educación Dual.
+                                </p>
+                                <!-- Button -->
+                                <p style="text-align:center;">
+                                    <?php
+                                    if (!Yii::$app->user->isGuest) {
+                                        echo Html::a('Administrar', ['documento/index'], ['class' => 'btn btn-outline-primary']);
+                                    }
+                                    ?>
+                                </p>
+
+                            </div>
+
+                        </div>
+                        <!-- Card -->
                     </div>
                 </div>
             </div>

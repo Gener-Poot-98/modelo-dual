@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\Asignatura $model */
+/** @var common\models\Empresa $model */
 
-$this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Asignaturas', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Empresas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="asignatura-view">
+<div class="empresa-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,19 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
-            'clave',
-            'creditos',
-            'competencia_disciplinar:ntext',
-            //'docente_id',
-            [ 'label' => 'Docente', 'value' => function ($searchModel) 
-            { 
-                return $searchModel->docente->nombre; 
-            } ],
-            'horas_dedicadas',
-            'periodo_desarrollo',
-            'periodo_acreditacion',
-            'ingenieria.nombre',
-            
         ],
     ]) ?>
 
