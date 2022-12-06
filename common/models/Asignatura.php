@@ -25,6 +25,7 @@ use common\models\Docente;
  */
 class Asignatura extends \yii\db\ActiveRecord
 {
+    public $mes_inicio, $anio_inicio, $mes_final, $anio_final;
     /**
      * {@inheritdoc}
      */
@@ -39,7 +40,7 @@ class Asignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id'], 'required'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id','mes_inicio','anio_inicio','mes_final','anio_final'], 'required'],
             [['competencia_disciplinar'], 'string'],
             [['docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
             [['nombre', 'clave', 'creditos', 'periodo_desarrollo', 'periodo_acreditacion'], 'string', 'max' => 45],
@@ -59,11 +60,16 @@ class Asignatura extends \yii\db\ActiveRecord
             'clave' => 'Clave',
             'creditos' => 'Creditos',
             'competencia_disciplinar' => 'Competencia Disciplinar',
-            'docente_id' => 'Docente ID',
+            'docente_id' => 'Docente ',
             'horas_dedicadas' => 'Horas Dedicadas',
             'periodo_desarrollo' => 'Periodo Desarrollo',
             'periodo_acreditacion' => 'Periodo Acreditacion',
-            'ingenieria_id' => 'Ingenieria ID',
+            'ingenieria_id' => 'Ingenieria',
+            'mes_inicio' => 'Mes',
+            'anio_inicio' => 'Año',
+            'mes_final' => 'Mes',
+            'anio_final' => 'Año',
+
         ];
     }
 

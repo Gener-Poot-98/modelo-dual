@@ -48,7 +48,7 @@ use kartik\widgets\DatePicker;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -111,7 +111,7 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
     
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-lg btn-block']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-lg btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
