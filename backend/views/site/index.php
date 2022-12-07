@@ -109,9 +109,9 @@ $this->title = 'Sistema Dual';
                             <div class="card-body">
 
                                 <!-- Title -->
-                                <h4 class="card-title">Pre-Registro</h4>
+                                <h4 class="card-title">Pre-Registros</h4>
                                 <!-- Text -->
-                                <p style="text-align:justify;" class="card-text">Administra los estudiantes que han hecho su preregistro el sistema.
+                                <p style="text-align:justify;" class="card-text">Administra los estudiantes que han hecho su preregistro en el sistema.
                                 </p>
                                 <!-- Button -->
                                 <p style="text-align:center;">
@@ -180,7 +180,7 @@ $this->title = 'Sistema Dual';
                             <div class="card-body">
 
                                 <!-- Title -->
-                                <h4 class="card-title">Empresa</h4>
+                                <h4 class="card-title">Empresas</h4>
                                 <!-- Text -->
                                 <p style="text-align:justify;" class="card-text">Administra las empresas que estan en el sistema de modelo dual.
                                 </p>
@@ -216,7 +216,7 @@ $this->title = 'Sistema Dual';
                             <div class="card-body">
 
                                 <!-- Title -->
-                                <h4 class="card-title">Expediente</h4>
+                                <h4 class="card-title">Expedientes</h4>
                                 <!-- Text -->
                                 <p style="text-align:justify;" class="card-text">Administra los expedientes de los alumnos duales.
                                 </p>
