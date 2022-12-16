@@ -4,9 +4,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=modelo-dual',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=modelodual',
+            'username' => 'modelodual',
+            'password' => 'abc123$$',
             'charset' => 'utf8',
         ],
         'mailer' => [
