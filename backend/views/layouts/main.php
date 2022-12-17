@@ -51,6 +51,7 @@ AppAsset::register($this);
                 ['label' => 'Ajustes', 'url' => ['/ajuste']],  
                 ['label' => 'Gestión de usuarios', 'url' => ['/admin']],
                 ['label' => 'Docentes', 'url' => ['/docente']],
+                ['label' => 'Asesores Internos', 'url' => ['/asesor-interno']],
                 ]  
             ];
     }

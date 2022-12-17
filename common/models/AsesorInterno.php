@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+use yii\helpers\ArrayHelper;
+
 
 use Yii;
 
@@ -67,5 +69,19 @@ class AsesorInterno extends \yii\db\ActiveRecord
     public function getProyectos()
     {
         return $this->hasMany(Proyecto::class, ['asesor_interno_id' => 'id']);
+    }
+
+    public function getIngenieriasList()
+    {
+        $ingenierias = Ingenieria::find()->all();
+
+        $ingenieriasList = ArrayHelper::map($ingenierias, 'id', 'nombre');
+
+        return $ingenieriasList;
+    }
+
+    public function getIngenieriaNombre() 
+    { 
+        return $this->ingenieria->nombre; 
     }
 }
