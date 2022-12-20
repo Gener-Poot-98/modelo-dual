@@ -47,7 +47,7 @@ class AsesorInterno extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'ingenieria_id' => 'Ingenieria ID',
+            'ingenieria_id' => 'Ingenieria',
         ];
     }
 

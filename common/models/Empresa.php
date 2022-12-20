@@ -9,7 +9,11 @@ use Yii;
  *
  * @property int $id
  * @property string $nombre
+ * @property string $domicilio
+ * @property string $correo
+ * @property string $telefono
  *
+ * @property AsesorExterno[] $asesorExternos
  * @property Proyecto[] $proyectos
  */
 class Empresa extends \yii\db\ActiveRecord
@@ -28,8 +32,11 @@ class Empresa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre'], 'required'],
+            [['nombre', 'domicilio', 'correo', 'telefono'], 'required'],
             [['nombre'], 'string', 'max' => 45],
+            [['domicilio'], 'string', 'max' => 255],
+            [['correo'], 'string', 'max' => 100],
+            [['telefono'], 'string', 'max' => 15],
         ];
     }
 
@@ -41,7 +48,20 @@ class Empresa extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
+            'domicilio' => 'Domicilio',
+            'correo' => 'Correo',
+            'telefono' => 'Telefono',
         ];
+    }
+
+    /**
+     * Gets query for [[AsesorExternos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAsesorExternos()
+    {
+        return $this->hasMany(AsesorExterno::class, ['empresa_id' => 'id']);
     }
 
     /**
@@ -58,4 +78,5 @@ class Empresa extends \yii\db\ActiveRecord
     {
         return static::findOne(['nombre' => $nombre]);
     }
+
 }

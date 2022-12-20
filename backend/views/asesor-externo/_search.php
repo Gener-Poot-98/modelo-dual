@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var backend\models\search\EmpresaSearch $model */
+/** @var backend\models\search\AsesorExternoSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="empresa-search">
+<div class="asesor-externo-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,11 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?= $form->field($model, 'domicilio') ?>
-
-    <?= $form->field($model, 'correo') ?>
-
-    <?= $form->field($model, 'telefono') ?>
+    <?= $form->field($model, 'empresa_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

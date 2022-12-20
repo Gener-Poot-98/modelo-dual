@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Empresa;
+use common\models\AsesorExterno;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
-/** @var backend\models\search\EmpresaSearch $searchModel */
+/** @var backend\models\search\AsesorExternoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this -> registerCss("
@@ -38,10 +38,11 @@ td.kv-group-even {
 }
 ");
 
-$this->title = 'Empresas';
+$this->title = 'Asesores Externos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="empresa-index">
+<div class="asesor-externo-index">
+
 <?php Pjax::begin();?>
 
 
@@ -55,14 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'kartik\grid\SerialColumn'],
             //'id',
             'nombre',
-            'domicilio',
-            'correo',
-            'telefono', 
-
+            [ 'label' => 'Empresa','attribute' => 'empresaNombre', 'filter' => $searchModel->getEmpresasList() ],
+        
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Empresa $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);}
+                'urlCreator' => function ($action, AsesorExterno $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
             ],
             
         ],
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading'=>$this->title,
             'type'=>'info',
-            'before'=>Html::a(Yii::t('app', 'Crear Empresa'), ['create'], ['class' => 'btn btn-outline-success']),
+            'before'=>Html::a(Yii::t('app', 'Crear Asesor Externo'), ['create'], ['class' => 'btn btn-outline-success']),
             'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
             'footer'=>false
         ],

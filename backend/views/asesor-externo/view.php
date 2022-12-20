@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\Empresa $model */
+/** @var common\models\AsesorExterno $model */
 
 $this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Empresas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Asesor Externos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="empresa-view">
+<div class="asesor-externo-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,9 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
-            'domicilio',
-            'correo',
-            'telefono',
+            'empresa.nombre',
         ],
     ]) ?>
 

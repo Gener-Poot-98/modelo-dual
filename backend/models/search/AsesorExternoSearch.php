@@ -4,21 +4,23 @@ namespace backend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Empresa;
+use common\models\AsesorExterno;
 
 /**
- * EmpresaSearch represents the model behind the search form of `common\models\Empresa`.
+ * AsesorExternoSearch represents the model behind the search form of `common\models\AsesorExterno`.
  */
-class EmpresaSearch extends Empresa
+class AsesorExternoSearch extends AsesorExterno
 {
+    public $empresaNombre;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nombre', 'domicilio', 'correo', 'telefono'], 'safe'],
+            [['id', 'empresa_id'], 'integer'],
+            [['nombre', 'empresaNombre'], 'safe'],
         ];
     }
 
@@ -40,13 +42,21 @@ class EmpresaSearch extends Empresa
      */
     public function search($params)
     {
-        $query = Empresa::find();
+        $query = AsesorExterno::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->setSort([ 
+            'attributes' => [ 
+                'nombre', 
+                'empresaNombre' => [ 
+                    'asc' => ['empresa.nombre' => SORT_ASC], 
+                    'desc' => ['empresa.nombre' => SORT_DESC], 
+                    'label' => 'Empresa' ], 
+                                            ] ]);
 
         $this->load($params);
 
@@ -59,12 +69,14 @@ class EmpresaSearch extends Empresa
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'empresa_id' => $this->empresa_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'domicilio', $this->domicilio])
-            ->andFilterWhere(['like', 'correo', $this->correo])
-            ->andFilterWhere(['like', 'telefono', $this->telefono]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+
+        $query->joinWith(['empresa' => function ($q) {
+            $q->andFilterWhere(['=', 'empresa.id', $this->empresaNombre]);
+            }]);
 
         return $dataProvider;
     }
