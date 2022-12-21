@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'competencia_disciplinar') ?>
 
-    <?php // echo $form->field($model, 'docente_id') ?>
+    <?php // echo $form->field($model, 'asesor_interno_id') ?>
 
     <?php // echo $form->field($model, 'horas_dedicadas') ?>
 

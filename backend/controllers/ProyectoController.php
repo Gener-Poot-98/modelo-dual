@@ -68,6 +68,22 @@ class ProyectoController extends Controller
         }
         echo Json::encode(['output'=>'', 'selected'=>'']);
     }
+
+    public function actionAsesoresExternosList() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+
+        if ($parents != null) {
+        $empresa_id = $parents[0];
+        $out = \common\models\Proyecto::getAsesoresExternos($empresa_id);
+        echo Json::encode(['output'=>$out, 'selected'=>'']);
+        return;
+        }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }
+
     /**
      * Lists all Proyecto models.
      *

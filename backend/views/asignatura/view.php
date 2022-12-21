@@ -35,10 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'creditos',
             'competencia_disciplinar:ntext',
             //'docente_id',
-            [ 'label' => 'Docente', 'value' => function ($searchModel) 
-            { 
-                return $searchModel->docente->nombre; 
-            } ],
+            'asesorInterno.nombre',
             'horas_dedicadas',
             'periodo_desarrollo',
             'periodo_acreditacion',

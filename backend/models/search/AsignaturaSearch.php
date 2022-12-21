@@ -10,15 +10,16 @@ use common\models\Asignatura;
  * AsignaturaSearch represents the model behind the search form of `common\models\Asignatura`.
  */
 class AsignaturaSearch extends Asignatura
-{  public $docenteNombre;
+{
+    public $asesorInternoNombre;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docenteNombre','periodo_desarrollo', 'periodo_acreditacion'], 'safe'],
+            [['id', 'asesor_interno_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'periodo_desarrollo', 'periodo_acreditacion', 'asesorInternoNombre'], 'safe'],
         ];
     }
 
@@ -43,7 +44,7 @@ class AsignaturaSearch extends Asignatura
         if ($proyecto_id) 
         $query = Asignatura::find() ->leftJoin('proyecto_asignatura', 'proyecto_asignatura.asignatura_id = asignatura.id') ->where(['proyecto_asignatura.proyecto_id' => $proyecto_id]);
         else if ($ingenieria_id) 
-        $query = Asignatura::find() ->where(['ingenieria_id' => $ingenieria_id]);
+        $query = Asignatura::find() ->where(['asignatura.ingenieria_id' => $ingenieria_id]);
         else 
             $query = Asignatura::find();
 
@@ -64,28 +65,28 @@ class AsignaturaSearch extends Asignatura
         $dataProvider->setSort([ 
             'attributes' => [ 
                 'nombre', 
-                'docenteNombre' => [
-                    'asc' => ['docente.nombre' => SORT_ASC],
-                    'desc' => ['docente.nombre' => SORT_DESC],
+                'asesorInternoNombre' => [
+                    'asc' => ['asesor_interno.nombre' => SORT_ASC],
+                    'desc' => ['asesor_interno.nombre' => SORT_DESC],
                     'label' => 'Docente'], ] ]);
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'docente_id' => $this->docente_id,
+            'asesor_interno_id' => $this->asesor_interno_id,
             'horas_dedicadas' => $this->horas_dedicadas,
             'ingenieria_id' => $this->ingenieria_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+        $query->andFilterWhere(['like', 'asignatura.nombre', $this->nombre])
             ->andFilterWhere(['like', 'clave', $this->clave])
             ->andFilterWhere(['like', 'creditos', $this->creditos])
             ->andFilterWhere(['like', 'competencia_disciplinar', $this->competencia_disciplinar])
             ->andFilterWhere(['like', 'periodo_desarrollo', $this->periodo_desarrollo])
             ->andFilterWhere(['like', 'periodo_acreditacion', $this->periodo_acreditacion]);
 
-        $query->joinWith(['docente' => function ($q) {
-            $q->andFilterWhere(['=', 'docente.id', $this->docenteNombre]);
+        $query->joinWith(['asesorInterno' => function ($q) {
+            $q->andFilterWhere(['=', 'asesor_interno.id', $this->asesorInternoNombre]);
             }]);
 
         return $dataProvider;

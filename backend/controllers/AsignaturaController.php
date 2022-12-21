@@ -8,6 +8,8 @@ use common\models\Ajuste;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * AsignaturaController implements the CRUD actions for Asignatura model.
@@ -74,6 +76,8 @@ class AsignaturaController extends Controller
             if ($model->load($this->request->post())) {
                 $ajuste = $this->findAjuste(1);
                 $model->horas_dedicadas = $model->creditos * $ajuste -> num_semanas_semestre;
+                $model -> periodo_desarrollo = $model-> mes_inicio .'-'. $model-> anio_inicio; 
+                $model -> periodo_acreditacion = $model-> mes_final .'-'. $model-> anio_final;
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -148,6 +152,21 @@ class AsignaturaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionAsesoresList() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+
+        if ($parents != null) {
+        $ingenieria_id = $parents[0];
+        $out = \common\models\Asignatura::getAsesores($ingenieria_id);
+        echo Json::encode(['output'=>$out, 'selected'=>'']);
+        return;
+        }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
     }
 
 }

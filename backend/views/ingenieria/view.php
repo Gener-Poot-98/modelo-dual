@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'creditos',
         'competencia_disciplinar:ntext',
            //'docente_id',
-        ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
+        ['label' => 'Docente','attribute' => 'asesorInternoNombre', 'filter' => $searchModel->getAsesorInternoList() ],
            //'horas_dedicadas',
            //'periodo_desarrollo',
            //'periodo_acreditacion',
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'heading'=>"Asignaturas de " . $this->title,
         'type'=>'info',
         'before'=>Html::a(Yii::t('app', 'Crear Asignatura'), ['asignatura/create'], ['class' => 'btn btn-outline-success']),
-        'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+        'after'=>Html::a('<i class="fas fa-redo"></i> Reset Grid', ['asignatura/index'], ['class' => 'btn btn-info']),
         'footer'=>false
     ],
 

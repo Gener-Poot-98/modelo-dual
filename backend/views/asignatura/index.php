@@ -14,24 +14,20 @@ $this -> registerCss("
 .text-dark {
     color: white !important;
 }
-
 td.kv-group-even {
     background-color: #f0f1ff !important;
     font-size: 20px;
     text-align: justify;
     font-weight: bold; 
 }
-
 .btn-warning {
     color: white;
     background-color: #C0392B !important;
     border-color: #922B21;
 }
-
 .bg-info {
     background-color: #212F3C !important;
 }
-
 .border-info {
     border-color: black !important;
 }
@@ -59,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'creditos',
             'competencia_disciplinar:ntext',
                //'docente_id',
-            ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
+            ['label' => 'Docente','attribute' => 'asesorInternoNombre', 'filter' => $searchModel->getAsesorInternoList() ],
                //'horas_dedicadas',
                //'periodo_desarrollo',
                //'periodo_acreditacion',

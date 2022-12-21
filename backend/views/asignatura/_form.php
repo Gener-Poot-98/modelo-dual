@@ -1,11 +1,13 @@
 <?php
 
-use common\models\Docente;
+use common\models\AsesorInterno;
 use common\models\Ingenieria;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use kartik\depdrop\DepDrop;
+use yii\helpers\Url;
 
 
 
@@ -67,30 +69,26 @@ use kartik\select2\Select2;
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'docente_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Docente::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::LARGE,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar docente')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
-            ?>
+        <?php $ingenieriaList=ArrayHelper::map(common\models\Ingenieria::find()->all(), 'id', 'nombre' ); ?> 
+            <?= $form->field($model, 'ingenieria_id')->dropDownList($ingenieriaList, ['prompt' => 'Seleccione la Ingeniería', 'id'=>'nombre']); ?>
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'ingenieria_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Ingenieria::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::LARGE,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar ingeneria')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
+        <?php
+            echo $form->field($model, 'asesor_interno_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'asesor_interno_id'],
+                'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                'pluginOptions'=>[
+                'depends'=>['nombre'], // the id for cat attribute
+                'placeholder'=>'Seleccione un docente',
+                'url'=>  \yii\helpers\Url::to(['asignatura/asesores-list']),
+                'initialize' => $model->isNewRecord ? false : true,
+                ]
+                ]);
             ?>
         </div>
+
         <div class="col-md-6">
 
         <h5>Periodo de Desarrollo</h5>

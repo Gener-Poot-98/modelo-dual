@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre',
             //'plan_estudios_id',
-            [ 'label' => 'PlanEstudios', 'value' => function ($searchModel) 
+            [ 'label' => 'Plan de Estudios', 'value' => function ($searchModel) 
             { 
                 return $searchModel->planEstudios->nombre; 
             } ],
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->departamento->nombre; 
             } ],
             //'asesor_interno_id',
-            [ 'label' => 'AsesorInterno', 'value' => function ($searchModel) 
+            [ 'label' => 'Asesor Interno', 'value' => function ($searchModel) 
             { 
                 return $searchModel->asesorInterno->nombre; 
             } ],
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->ingenieria->nombre; 
             } ],
             //'ingenieria_id',
-            [ 'label' => 'PerfilEstudiante', 'value' => function ($searchModel) 
+            [ 'label' => 'Estudiante', 'value' => function ($searchModel) 
             { 
                 return $searchModel->perfilEstudiante->nombre; 
             } ],
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->empresa->nombre; 
             } ],
             //'empresa_id',
-            [ 'label' => 'AsesorExterno', 'value' => function ($searchModel) 
+            [ 'label' => 'Asesor Externo', 'value' => function ($searchModel) 
             { 
                 return $searchModel->asesorExterno->nombre; 
             } ],
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $searchModel->periodo->nombre; 
             } ],
             'horas_totales',
-            [ 'label' => 'EstadoProyecto', 'value' => function ($searchModel) 
+            [ 'label' => 'Estado del Proyecto', 'value' => function ($searchModel) 
             { 
                 return $searchModel->estadoProyecto->nombre; 
             } ],
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'creditos',
             'competencia_disciplinar:ntext',
             //'docente_id',
-            ['label' => 'Docente','attribute' => 'docenteNombre', 'filter' => $searchModel->getDocenteList() ],
+            'asesorInterno.nombre',
             'horas_dedicadas',
             'periodo_desarrollo',
             'periodo_acreditacion',

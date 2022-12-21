@@ -70,33 +70,27 @@ use kartik\select2\Select2;
                 ]);
             ?>
         </div>
+
+        <div class="col-md-6">
+            <?php $empresaList=ArrayHelper::map(common\models\Empresa::find()->all(), 'id', 'nombre' ); ?> 
+            <?= $form->field($model, 'empresa_id')->dropDownList($empresaList, ['prompt' => 'Seleccione la empresa', 'id'=>'nombre2']); ?>
+        </div>
         
         <div class="col-md-6">
-        <?=  $form->field($model, 'asesor_externo_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(AsesorExterno::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::MEDIUM,
-                'options' => ['placeholder' => Yii::t('app', 'Seleccionar asesor externo')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
+        <?php
+            echo $form->field($model, 'asesor_externo_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'asesor_externo_id'],
+                'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                'pluginOptions'=>[
+                'depends'=>['nombre2'], // the id for cat attribute
+                'placeholder'=>'Seleccione un asesor externo',
+                'url'=>  \yii\helpers\Url::to(['proyecto/asesores-externos-list']),
+                'initialize' => $model->isNewRecord ? false : true,
+                ]
+                ]);
             ?>
         </div>
-
-        <div class="col-md-6">
-            <?=  $form->field($model, 'empresa_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Empresa::find()->all(), 'id', 'nombre'),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'size' => Select2::MEDIUM,
-                'options' => ['placeholder' => Yii::t('app', 'Selecionar empresa')],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
-            ?>
-        </div>
-
 
         <div class="col-md-6">
         <?= $form->field($model, 'periodo_id')->dropDownList($model->getPeriodoList(), ['prompt' => 'Seleccione un periodo']) ?>

@@ -106,9 +106,9 @@ class Proyecto extends \yii\db\ActiveRecord
             'periodo_id' => 'Periodo',
             'horas_totales' => 'Horas Totales',
             'estado_proyecto_id' => 'Estado del Proyecto',
-            'created_at' => 'Fecha de Creacion',
-            'updated_at' => 'Ultima actualizacion',
-            'descripcion' => 'Descripcion',
+            'created_at' => 'Fecha de Creación',
+            'updated_at' => 'Ultima actualización',
+            'descripcion' => 'Descripción',
         ];
     }
 
@@ -317,6 +317,14 @@ class Proyecto extends \yii\db\ActiveRecord
     public static function getAsesoresInternos($ingenieria_id) {
         $data=\common\models\AsesorInterno::find()
         ->where(['ingenieria_id'=>$ingenieria_id])
+        ->select(['id','nombre AS name'])->asArray()->all();
+
+        return $data;
+    }
+
+    public static function getAsesoresExternos($empresa_id) {
+        $data=\common\models\AsesorExterno::find()
+        ->where(['empresa_id'=>$empresa_id])
         ->select(['id','nombre AS name'])->asArray()->all();
 
         return $data;

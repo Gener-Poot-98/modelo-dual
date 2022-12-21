@@ -1,10 +1,9 @@
 <?php
 
 namespace common\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
-use yii\helpers\ArrayHelper;
-use common\models\Docente;
 
 /**
  * This is the model class for table "asignatura".
@@ -14,13 +13,13 @@ use common\models\Docente;
  * @property string $clave
  * @property string $creditos
  * @property string $competencia_disciplinar
- * @property int $docente_id
+ * @property int $asesor_interno_id
  * @property int $horas_dedicadas
  * @property string $periodo_desarrollo
  * @property string $periodo_acreditacion
  * @property int $ingenieria_id
  *
- * @property Docente $docente
+ * @property AsesorInterno $asesorInterno
  * @property Ingenieria $ingenieria
  */
 class Asignatura extends \yii\db\ActiveRecord
@@ -40,12 +39,12 @@ class Asignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'docente_id', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id','mes_inicio','anio_inicio','mes_final','anio_final'], 'required'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'asesor_interno_id', 'periodo_desarrollo', 'periodo_acreditacion', 'ingenieria_id', 'mes_inicio','anio_inicio','mes_final','anio_final'], 'required'],
             [['competencia_disciplinar'], 'string'],
-            [['docente_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
+            [['asesor_interno_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
             [['nombre', 'clave', 'creditos', 'periodo_desarrollo', 'periodo_acreditacion'], 'string', 'max' => 45],
-            [['docente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Docente::class, 'targetAttribute' => ['docente_id' => 'id']],
             [['ingenieria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ingenieria::class, 'targetAttribute' => ['ingenieria_id' => 'id']],
+            [['asesor_interno_id'], 'exist', 'skipOnError' => true, 'targetClass' => AsesorInterno::class, 'targetAttribute' => ['asesor_interno_id' => 'id']],
         ];
     }
 
@@ -60,7 +59,7 @@ class Asignatura extends \yii\db\ActiveRecord
             'clave' => 'Clave',
             'creditos' => 'Creditos',
             'competencia_disciplinar' => 'Competencia Disciplinar',
-            'docente_id' => 'Docente ',
+            'asesor_interno_id' => 'Docente ',
             'horas_dedicadas' => 'Horas Dedicadas',
             'periodo_desarrollo' => 'Periodo Desarrollo',
             'periodo_acreditacion' => 'Periodo Acreditacion',
@@ -69,18 +68,17 @@ class Asignatura extends \yii\db\ActiveRecord
             'anio_inicio' => 'Año',
             'mes_final' => 'Mes',
             'anio_final' => 'Año',
-
         ];
     }
 
     /**
-     * Gets query for [[Docente]].
+     * Gets query for [[AsesorInterno]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDocente()
+    public function getAsesorInterno()
     {
-        return $this->hasOne(Docente::class, ['id' => 'docente_id']);
+        return $this->hasOne(AsesorInterno::class, ['id' => 'asesor_interno_id']);
     }
 
     /**
@@ -93,17 +91,25 @@ class Asignatura extends \yii\db\ActiveRecord
         return $this->hasOne(Ingenieria::class, ['id' => 'ingenieria_id']);
     }
 
-    public function getDocenteNombre() 
+    public function getAsesorInternoNombre() 
     { 
-        return $this->docente->nombre; 
+        return $this->asesorInterno->nombre; 
     }
 
-    public function getDocenteList()
+    public function getAsesorInternoList()
     {
-        $docente = Docente::find()->all();
+        $asesorInterno = AsesorInterno::find()->all();
 
-        $docentesList = ArrayHelper::map($docente, 'id', 'nombre');
+        $asesorInternoList = ArrayHelper::map($asesorInterno, 'id', 'nombre');
 
-        return $docentesList;
+        return $asesorInternoList;
+    }
+
+    public static function getAsesores($ingenieria_id) {
+        $data=\common\models\AsesorInterno::find()
+        ->where(['ingenieria_id'=>$ingenieria_id])
+        ->select(['id','nombre AS name'])->asArray()->all();
+
+        return $data;
     }
 }
