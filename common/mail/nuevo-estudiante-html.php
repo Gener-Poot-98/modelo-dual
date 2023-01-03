@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\User $user */
 /** @var common\models\Preregistro $preregistro */
 /** @var common\models\Preregistro $pass */
-$frontendUrl= Yii::$app->urlManagerFrontEnd->baseUrl . '/index.php?r=site%2Flogin'
+$frontendUrl= Yii::$app->urlManagerFrontEnd->baseUrl . '/site/login'
 
 ?>
 <div class="verify-email">

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var common\models\Preregistro $preregistro */
 
-$frontendUrl= Yii::$app->urlManagerFrontEnd->baseUrl . '/index.php?r=preregistro%2Fconsulta'
+$frontendUrl= Yii::$app->urlManagerFrontEnd->baseUrl . '/preregistro/consulta'
 
 ?>
 <div class="verify-email">

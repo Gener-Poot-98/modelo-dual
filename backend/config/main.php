@@ -74,9 +74,9 @@ return [
 
 			'showScriptName'=>false,
 
-			'hostInfo' => 'http://localhost/',
+			'hostInfo' => 'http://modelodual.valladolid.tecnm.mx/',
 
-			'baseUrl' => 'http://localhost/modelo-dual/frontend/web',
+			'baseUrl' => 'http://modelodual.valladolid.tecnm.mx',
         ],
     ],
 
@@ -89,6 +89,7 @@ return [
             'site/signup',
             'site/logout',
             'site/verify-email',
+            'site/nuevo-usuario',
             //'some-controller/some-action',
             // The actions listed here will be allowed to everyone including guests.
             // So, 'admin/*' should not appear here in the production, of course.

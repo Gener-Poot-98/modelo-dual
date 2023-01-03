@@ -27,7 +27,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error' , 'signup', 'verify-email'],
+                        'actions' => ['login', 'error' , 'signup', 'verify-email', 'nuevo-usuario'],
                         'allow' => true,
                     ],
                     [
@@ -68,6 +68,11 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionNuevoUsuario()
+    {
+        return $this->render('nuevo-usuario');
+    }
+
     /**
      * Login action.
      *
@@ -103,7 +108,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Gracias por registrarse. Por favor revise su bandeja de entrada para el correo electrónico de verificación.');
-            return $this->render('index');
+            return $this->render('nuevo-usuario');
         }
         
         $this->layout = 'blank';
@@ -129,11 +134,11 @@ class SiteController extends Controller
         }
         if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
             Yii::$app->session->setFlash('success', '¡Tu correo ha sido confirmado! En breve el administrador te asignará un rol...');
-            return $this->render('index');
+            return $this->render('nuevo-usuario');
         }
 
         Yii::$app->session->setFlash('error', 'Lo sentimos, no podemos verificar su cuenta con el token proporcionado.');
-        return $this->render('index');
+        return $this->render('nuevo-usuario');
     }
 
     /**
