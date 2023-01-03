@@ -11,7 +11,7 @@ use common\models\Asignatura;
  */
 class AsignaturaSearch extends Asignatura
 {
-    public $asesorInternoNombre;
+    public $asesorInternoNombre, $semestreNombre;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +19,7 @@ class AsignaturaSearch extends Asignatura
     {
         return [
             [['id', 'asesor_interno_id', 'horas_dedicadas', 'ingenieria_id'], 'integer'],
-            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'periodo_desarrollo', 'periodo_acreditacion', 'asesorInternoNombre'], 'safe'],
+            [['nombre', 'clave', 'creditos', 'competencia_disciplinar', 'periodo_desarrollo', 'periodo_acreditacion', 'asesorInternoNombre', 'semestreNombre'], 'safe'],
         ];
     }
 
@@ -64,7 +64,11 @@ class AsignaturaSearch extends Asignatura
 
         $dataProvider->setSort([ 
             'attributes' => [ 
-                'nombre', 
+                'nombre',
+                'semestreNombre' => [
+                    'asc' => ['semestre.nombre' => SORT_ASC],
+                    'desc' => ['semestre.nombre' => SORT_DESC],
+                    'label' => 'Semestre'], 
                 'asesorInternoNombre' => [
                     'asc' => ['asesor_interno.nombre' => SORT_ASC],
                     'desc' => ['asesor_interno.nombre' => SORT_DESC],
@@ -87,6 +91,10 @@ class AsignaturaSearch extends Asignatura
 
         $query->joinWith(['asesorInterno' => function ($q) {
             $q->andFilterWhere(['=', 'asesor_interno.id', $this->asesorInternoNombre]);
+            }]);
+
+        $query->joinWith(['semestre' => function ($q) {
+            $q->andFilterWhere(['=', 'semestre.id', $this->semestreNombre]);
             }]);
 
         return $dataProvider;

@@ -60,12 +60,16 @@ use yii\helpers\Url;
             <?= $form->field($model, 'clave')->textInput(['maxlength' => true]) ?>
         </div>
 
+        <div class="col-md-12">
+            <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 3]) ?>
+        </div>
+
         <div class="col-md-6">
             <?= $form->field($model, 'creditos')->textInput(['maxlength' => true]) ?>
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'competencia_disciplinar')->textarea(['rows' => 3]) ?>
+        <?= $form->field($model, 'semestre_id')->dropDownList($model->getSemestresList(), ['prompt' => 'Seleccione el semestre']) ?>
         </div>
 
         <div class="col-md-6">

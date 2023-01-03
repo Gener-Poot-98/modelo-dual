@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'periodo_desarrollo',
             'periodo_acreditacion',
             'ingenieria.nombre',
+            'semestre.nombre',
             
         ],
     ]) ?>
